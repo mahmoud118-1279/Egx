@@ -1,0 +1,192 @@
+{
+    "predictions": [
+        {
+            "date": "2026-06-28",
+            "symbol": "COMI",
+            "current_price": 132.5,
+            "predicted_close": 132.50734760915907,
+            "suggested_entry": 129.30714285714288,
+            "suggested_exit": 132.5,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-06-28",
+            "symbol": "SKPC",
+            "current_price": 15.9,
+            "predicted_close": 16.069768677189284,
+            "suggested_entry": 15.3225,
+            "suggested_exit": 15.9,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-06-28",
+            "symbol": "ELEC",
+            "current_price": 2.1,
+            "predicted_close": 2.1094571215920097,
+            "suggested_entry": 2.0410714285714286,
+            "suggested_exit": 2.1,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-06-28",
+            "symbol": "GBCO",
+            "current_price": 28.4,
+            "predicted_close": 28.238423825536902,
+            "suggested_entry": 27.203214285714285,
+            "suggested_exit": 28.4,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-06-28",
+            "symbol": "CANA",
+            "current_price": 34.9,
+            "predicted_close": 34.99433821347215,
+            "suggested_entry": 32.39714285714285,
+            "suggested_exit": 34.9,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-06-28",
+            "symbol": "ORWE",
+            "current_price": 22.15,
+            "predicted_close": 21.90285360172667,
+            "suggested_entry": 21.425714285714285,
+            "suggested_exit": 22.15,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-06-29",
+            "symbol": "ELEC",
+            "current_price": 2.06,
+            "predicted_close": 2.1012,
+            "suggested_entry": 2.06,
+            "suggested_exit": 2.12,
+            "direction": "شراء مضاربي لقطة 🟢",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-06-29",
+            "symbol": "SKPC",
+            "current_price": 15.89,
+            "predicted_close": 16.207800000000002,
+            "suggested_entry": 15.89,
+            "suggested_exit": 16.46,
+            "direction": "شراء مضاربي لقطة 🟢",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-06-29",
+            "symbol": "COMI",
+            "current_price": 126.89,
+            "predicted_close": 133.90629222626944,
+            "suggested_entry": 126.89,
+            "suggested_exit": 126.89,
+            "direction": "❌ السهم لا يصلح للاستثمار طويل المدى حالياً",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-06-29",
+            "symbol": "CANA",
+            "current_price": 35.28,
+            "predicted_close": 37.15590026949482,
+            "suggested_entry": 35.28,
+            "suggested_exit": 35.28,
+            "direction": "❌ السهم لا يصلح للاستثمار طويل المدى حالياً",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-06-29",
+            "symbol": "SWDY",
+            "current_price": 85.01,
+            "predicted_close": 86.87505887654626,
+            "suggested_entry": 85.01,
+            "suggested_exit": 85.01,
+            "direction": "❌ السهم لا يصلح للاستثمار طويل المدى حالياً",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-06-30",
+            "symbol": "SKPC",
+            "current_price": 15.89,
+            "predicted_close": 16.14509865652722,
+            "suggested_entry": 15.89,
+            "suggested_exit": 15.89,
+            "direction": "📉 المسار الاستثماري ضعيف أو جني أرباح حالي",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-06-30",
+            "symbol": "COMI",
+            "current_price": 126.89,
+            "predicted_close": 133.710248519461,
+            "suggested_entry": 126.89,
+            "suggested_exit": 126.89,
+            "direction": "❌ السهم لا يصلح للاستثمار طويل المدى حالياً",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-07-01",
+            "symbol": "SKPC",
+            "current_price": 15.89,
+            "predicted_close": 16.55131554901252,
+            "suggested_entry": 15.89,
+            "suggested_exit": 15.89,
+            "direction": "❌ السهم لا يصلح للاستثمار طويل المدى حالياً",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-07-01",
+            "symbol": "MFPC",
+            "current_price": 36.0,
+            "predicted_close": 28.666645675538668,
+            "suggested_entry": 36.0,
+            "suggested_exit": 36.0,
+            "direction": "❌ السهم لا يصلح للاستثمار طويل المدى حالياً",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-07-01",
+            "symbol": "SKPC",
+            "current_price": 15.859999656677246,
+            "predicted_close": 16.065665218347768,
+            "suggested_entry": 15.859999656677246,
+            "suggested_exit": 15.859999656677246,
+            "direction": "❌ السهم لا يصلح للاستثمار طويل المدى حالياً",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-07-01",
+            "symbol": "COMI",
+            "current_price": 127.5,
+            "predicted_close": 128.31431513269072,
+            "suggested_entry": 127.5,
+            "suggested_exit": 127.5,
+            "direction": "❌ السهم لا يصلح للاستثمار طويل المدى حالياً",
+            "actual_max_reached": null,
+            "status": "Pending ⏳"
+        }
+    ],
+    "success_rate": 0.0
+}
