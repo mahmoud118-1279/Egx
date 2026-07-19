@@ -10,12 +10,6 @@ from config import LEARNING_DATA_FILE
 class SelfLearningAIAnalyst:
     """
     نظام التعليم العميق والتطور الذاتي الحركي لتحليل الأخطاء وإعادة توزين الاستراتيجيات كمياً
-    
-    المميزات:
-    - تسجيل جميع الصفقات مع بصمة المؤشرات الفنية
-    - تقييم تلقائي للصفقات ومقارنتها بالنتائج الفعلية
-    - تطور ذاتي للأوزان بناءً على أنماط النجاح والفشل
-    - تحليل إحصائي لأداء النموذج
     """
 
     def __init__(self):
@@ -28,7 +22,6 @@ class SelfLearningAIAnalyst:
             try:
                 with open(self.learning_file, 'r', encoding='utf-8') as f:
                     data = json.load(f)
-                    # التأكد من وجود جميع المفاتيح
                     if "failure_patterns" not in data: 
                         data["failure_patterns"] = []
                     if "success_patterns" not in data: 
@@ -79,26 +72,7 @@ class SelfLearningAIAnalyst:
 
     def record_prediction(self, symbol, current_price, predicted_close, suggested_entry, suggested_exit, direction,
                           current_indicators=None):
-        """
-        تسجيل البصمة الفنية المؤشرية الكاملة لحظة اتخاذ القرار
-        
-        Parameters:
-        -----------
-        symbol : str
-            رمز السهم
-        current_price : float
-            السعر الحالي
-        predicted_close : float
-            السعر المتوقع
-        suggested_entry : float
-            سعر الدخول المقترح
-        suggested_exit : float
-            سعر الخروج المقترح
-        direction : str
-            اتجاه التوصية
-        current_indicators : dict, optional
-            المؤشرات الفنية الحالية
-        """
+        """تسجيل البصمة الفنية المؤشرية الكاملة لحظة اتخاذ القرار"""
         new_pred = {
             "date": datetime.now().strftime("%Y-%m-%d %H:%M"),
             "symbol": symbol,
@@ -133,18 +107,7 @@ class SelfLearningAIAnalyst:
         return True
 
     def evaluate_pending_predictions(self, fetch_stock_data_func):
-        """
-        تحديث الصفقات وتشغيل محرك التفكير المقارن
-        
-        Parameters:
-        -----------
-        fetch_stock_data_func : callable
-            دالة لجلب بيانات السهم
-        
-        Returns:
-        --------
-        bool: تم التحديث أم لا
-        """
+        """تحديث الصفقات وتشغيل محرك التفكير المقارن"""
         updated = False
         evaluated_count = 0
 
@@ -162,19 +125,15 @@ class SelfLearningAIAnalyst:
                 recent_close = float(df['Close'].iloc[-1])
                 entry_price = pred["suggested_entry"]
                 exit_target = pred["suggested_exit"]
-                current_price = pred["current_price"]
 
-                # تحديث أعلى سعر
                 if recent_high > pred["actual_max_reached"]:
                     pred["actual_max_reached"] = recent_high
                     updated = True
 
-                # حساب عدد أيام الاحتفاظ
                 entry_date = datetime.strptime(pred["entry_date"], "%Y-%m-%d")
                 days_held = (datetime.now() - entry_date).days
                 pred["holding_days"] = days_held
 
-                # شروط النجاح
                 if pred["actual_max_reached"] >= exit_target:
                     profit_pct = ((exit_target - entry_price) / entry_price) * 100
                     pred["status"] = f"نجاح 🎯 (ربح {profit_pct:.1f}%)"
@@ -197,7 +156,6 @@ class SelfLearningAIAnalyst:
                     updated = True
                     evaluated_count += 1
 
-                # شروط الفشل - ضرب وقف الخسارة
                 elif recent_close < entry_price * 0.95:
                     loss_pct = ((recent_close - entry_price) / entry_price) * 100
                     pred["status"] = f"فشل ❌ (خسارة {loss_pct:.1f}%)"
@@ -220,7 +178,6 @@ class SelfLearningAIAnalyst:
                     updated = True
                     evaluated_count += 1
 
-                # إذا مر وقت طويل ولم يتم تحقيق الهدف ولا وقف الخسارة
                 elif days_held > 30:
                     profit_pct = ((recent_close - entry_price) / entry_price) * 100
                     if profit_pct > 0:
@@ -249,7 +206,6 @@ class SelfLearningAIAnalyst:
         now = datetime.now()
         month_key = now.strftime("%Y-%m")
         
-        # البحث عن الشهر الحالي في السجل
         found = False
         for entry in self.learning_data.get("performance_history", []):
             if entry["month"] == month_key:
@@ -270,17 +226,13 @@ class SelfLearningAIAnalyst:
             })
 
     def _evolve_voting_weights(self):
-        """
-        محرك التطور الذاتي المتقدم
-        يحلل الأنماط الناجحة والفاشلة ويعدل الأوزان ديناميكياً
-        """
+        """محرك التطور الذاتي المتقدم"""
         success_list = self.learning_data.get("success_patterns", [])
         failure_list = self.learning_data.get("failure_patterns", [])
 
         if len(success_list) < 3 or len(failure_list) < 2:
             return
 
-        # تحليل أنماط النجاح
         success_indicators = {
             "news": [p["indicators"].get("News_Sentiment", 0.0) for p in success_list],
             "cmf": [p["indicators"].get("CMF", 0.0) for p in success_list],
@@ -293,7 +245,6 @@ class SelfLearningAIAnalyst:
             "rsi": [p["indicators"].get("RSI", 50.0) for p in failure_list]
         }
 
-        # حساب المتوسطات
         avg_success_news = np.mean(success_indicators["news"])
         avg_failed_news = np.mean(failure_indicators["news"])
         avg_success_cmf = np.mean(success_indicators["cmf"])
@@ -301,25 +252,20 @@ class SelfLearningAIAnalyst:
 
         current_weights = self.learning_data["dynamic_weights"]
 
-        # تعديل وزن الأخبار
         news_diff = avg_success_news - avg_failed_news
         if news_diff > 0.2:
-            # الأخبار مؤثر جداً
             current_weights["news"] = min(current_weights["news"] + 0.05, 0.5)
             current_weights["cmf"] = max(current_weights["cmf"] - 0.025, 0.15)
             current_weights["expected_gain"] = max(current_weights["expected_gain"] - 0.025, 0.2)
         elif news_diff < -0.1:
-            # الأخبار غير موثوقة
             current_weights["news"] = max(current_weights["news"] - 0.03, 0.1)
             current_weights["cmf"] = min(current_weights["cmf"] + 0.015, 0.4)
 
-        # تعديل وزن CMF
         cmf_diff = avg_success_cmf - avg_failed_cmf
         if cmf_diff > 0.1:
             current_weights["cmf"] = min(current_weights["cmf"] + 0.03, 0.4)
             current_weights["news"] = max(current_weights["news"] - 0.015, 0.15)
 
-        # التأكد من أن مجموع الأوزان = 1
         total = sum(current_weights.values())
         if total > 0:
             for key in current_weights:
@@ -342,17 +288,10 @@ class SelfLearningAIAnalyst:
         if total_evaluated > 0:
             self.learning_data["success_rate"] = total_correct / total_evaluated
         
-        # تحديث إحصائيات إضافية
         self.learning_data["total_evaluated"] = total_evaluated
 
     def get_learning_stats(self):
-        """
-        الحصول على إحصائيات التعلم
-        
-        Returns:
-        --------
-        dict: إحصائيات التعلم
-        """
+        """الحصول على إحصائيات التعلم"""
         total = len(self.learning_data.get("predictions", []))
         pending = sum(1 for p in self.learning_data.get("predictions", []) if p["status"] == "Pending ⏳")
         success_rate = self.learning_data.get("success_rate", 0.0)
@@ -361,7 +300,6 @@ class SelfLearningAIAnalyst:
         avg_profit = self.learning_data.get("average_profit", 0.0)
         avg_loss = self.learning_data.get("average_loss", 0.0)
         
-        # حساب الـ Profit Factor
         profit_factor = (winning_trades * avg_profit) / (losing_trades * avg_loss + 1e-10) if losing_trades > 0 else float('inf')
         
         history = []
@@ -412,12 +350,34 @@ class SelfLearningAIAnalyst:
         patterns = {}
         for p in success_patterns:
             ind = p.get("indicators", {})
-            key = f"RSI_{int(ind.get('RSI', 50)/10)*10}_CMF_{'pos' if ind.get('CMF', 0) > 0 else 'neg'}_News_{'pos' if ind.get('News_Sentiment', 0) > 0 else 'neg'}"
+            rsi = ind.get('RSI', 50)
+            cmf = ind.get('CMF', 0)
+            news = ind.get('News_Sentiment', 0)
+            
+            # تصنيف المؤشرات
+            rsi_bucket = int(rsi / 10) * 10
+            cmf_bucket = 'pos' if cmf > 0 else 'neg'
+            news_bucket = 'pos' if news > 0 else 'neg'
+            
+            key = f"RSI_{rsi_bucket}_CMF_{cmf_bucket}_News_{news_bucket}"
             
             if key not in patterns:
-                patterns[key] = {"count": 0, "profits": [], "indicators": ind}
+                patterns[key] = {
+                    "count": 0, 
+                    "profits": [], 
+                    "indicators": ind,
+                    "rsi_range": f"{rsi_bucket}-{rsi_bucket+10}",
+                    "cmf_type": "إيجابي" if cmf > 0 else "سلبي",
+                    "news_type": "إيجابي" if news > 0 else "سلبي",
+                    "avg_rsi": 0,
+                    "avg_cmf": 0,
+                    "avg_news": 0
+                }
             patterns[key]["count"] += 1
             patterns[key]["profits"].append(p.get("profit", 0))
+            patterns[key]["avg_rsi"] = (patterns[key]["avg_rsi"] * (patterns[key]["count"] - 1) + rsi) / patterns[key]["count"]
+            patterns[key]["avg_cmf"] = (patterns[key]["avg_cmf"] * (patterns[key]["count"] - 1) + cmf) / patterns[key]["count"]
+            patterns[key]["avg_news"] = (patterns[key]["avg_news"] * (patterns[key]["count"] - 1) + news) / patterns[key]["count"]
         
         # ترتيب الأنماط حسب التكرار
         sorted_patterns = sorted(patterns.items(), key=lambda x: x[1]["count"], reverse=True)
@@ -425,23 +385,25 @@ class SelfLearningAIAnalyst:
         result = []
         for key, data in sorted_patterns[:top_n]:
             avg_profit = np.mean(data["profits"]) if data["profits"] else 0
+            win_rate = sum(1 for p in data["profits"] if p > 0) / len(data["profits"]) if data["profits"] else 0
+            
             result.append({
                 "pattern": key,
                 "count": data["count"],
                 "avg_profit": avg_profit,
-                "indicators": data["indicators"]
+                "win_rate": win_rate,
+                "rsi_range": data["rsi_range"],
+                "cmf_type": data["cmf_type"],
+                "news_type": data["news_type"],
+                "avg_rsi": round(data["avg_rsi"], 1),
+                "avg_cmf": round(data["avg_cmf"], 3),
+                "avg_news": round(data["avg_news"], 2)
             })
         
         return result
 
     def get_learning_summary(self):
-        """
-        الحصول على ملخص التعلم
-        
-        Returns:
-        --------
-        str: ملخص التعلم
-        """
+        """الحصول على ملخص التعلم"""
         stats = self.get_learning_stats()
         
         summary = f"""
