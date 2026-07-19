@@ -101,17 +101,29 @@ with tab_scan:
 
                     dir_out, pred_target, entry_out, exit_out, score_out = predictor.predict_next_price(s_df, strategy_mode)
 
-                    # ✅ التحقق من صحة التنبؤ - منع القيم غير المنطقية
                     current_price = s_df['Close'].iloc[-1]
-                    change_pct = abs((pred_target - current_price) / current_price) * 100
                     
-                    # إذا كان التغير المتوقع أكبر من 20%، اعتبر التنبؤ غير موثوق
+                    # التحقق من صحة التنبؤ
+                    change_pct = abs((pred_target - current_price) / current_price) * 100
                     if change_pct > 20:
                         pred_target = current_price * (1 + np.random.uniform(-0.03, 0.03))
-                        dir_out = "مراقبة / انتظار إشارة السيولة ⏳ (تنبؤ غير موثوق)"
+                        dir_out = "مراقبة / انتظار إشارة السيولة ⏳"
                         entry_out = current_price
                         exit_out = current_price
                         score_out = 30
+
+                    # ✅ تسجيل التحليل في ملف JSON - حتى لو لم تكن فرصة شراء
+                    # هذا هو الجزء المهم: تخزين كل تحليل للتعلم
+                    last_row_ind = s_df.iloc[-1].to_dict()
+                    analyst.record_prediction(
+                        symbol=row['symbol'],
+                        current_price=current_price,
+                        predicted_close=pred_target,
+                        suggested_entry=entry_out,
+                        suggested_exit=exit_out,
+                        direction=dir_out,
+                        current_indicators=last_row_ind
+                    )
 
                     if any(keyword in dir_out for keyword in ["🟢", "🚀", "📈"]):
                         strat = generate_trading_strategy(s_df, pred_target, dir_out)
@@ -127,13 +139,14 @@ with tab_scan:
                             "نقطة الدخول": round(entry_out, 2),
                             "وقف الخسارة": strat["stop_loss"],
                             "الكمية المقترحة": shares_to_buy,
-                            "درجة أمان الإشارة": score_out,
+                            "درجة الأمان": score_out,
                             "نبرة الأخبار": news_score,
                             "الإشارة": dir_out,
                             "المصدر": src,
                             "df_backup": s_df
                         }
                 except Exception as e:
+                    print(f"⚠️ خطأ في فحص {row.get('symbol', 'unknown')}: {e}")
                     return None
                 return None
 
@@ -151,52 +164,16 @@ with tab_scan:
 
             status_text.text("✅ تم اكتمال فحص ومسح البورصة المصرية بنجاح!")
 
+            # عرض إحصائيات التخزين
+            stats = analyst.get_learning_stats()
+            st.info(f"📊 تم تخزين {stats['total_predictions']} تحليل في ملف التعلم الذاتي")
+
             if opportunities:
                 opportunities_df = pd.DataFrame(opportunities)
-
                 st.subheader(f"🎯 تم العثور على ({len(opportunities_df)}) فرصة واعدة:")
                 st.dataframe(opportunities_df.drop(columns=["df_backup"], errors="ignore"), use_container_width=True)
-
-                st.markdown("### 💾 أرشفة وتسجيل الفرص داخل عقل الآلة")
-                if st.button("🧠 حفظ هذه الفرص وتفعيل مراقبتها حركياً"):
-                    saved_count = 0
-                    for _, opp in opportunities_df.iterrows():
-                        backup_df = opp["df_backup"]
-                        last_row_ind = backup_df.iloc[-1].to_dict()
-
-                        analyst.record_prediction(
-                            symbol=opp["السهم"],
-                            current_price=opp["السعر الحالي"],
-                            predicted_close=opp["الهدف المتوقع"],
-                            suggested_entry=opp["نقطة الدخول"],
-                            suggested_exit=opp["الهدف المتوقع"],
-                            direction=opp["الإشارة"],
-                            current_indicators=last_row_ind
-                        )
-                        saved_count += 1
-                    st.success(f"✅ تم بنجاح حقن وتسجيل {saved_count} توصية!")
-
-                st.markdown("### 📲 إرسال التقرير الميداني لهاتفك")
-                if st.button("📣 إرسال هذه الفرص المكتشفة كرسالة مجمعة على تليجرام"):
-                    telegram_msg = f"🔔 *تقرير مسح البورصة المصرية المطور* 🔔\n"
-                    telegram_msg += f"📅 *التاريخ:* {datetime.now().strftime('%Y-%m-%d %H:%M')}\n"
-                    telegram_msg += f"🎯 *الاستراتيجية المتبعة:* {strategy_mode}\n"
-                    telegram_msg += "═\n"
-
-                    for _, row in opportunities_df.iterrows():
-                        telegram_msg += f"📊 *سهم:* {row['السهم']} | {row['الإشارة']}\n"
-                        telegram_msg += f"💰 *السعر الحالي:* {row['السعر الحالي']} ج.م\n"
-                        telegram_msg += f"🟢 *أفضل دخول:* {row['نقطة الدخول']} ج.م\n"
-                        telegram_msg += f"🛡️ *درجة الأمان:* {row['درجة أمان الإشارة']} / 100\n"
-                        telegram_msg += "───────────────────\n"
-
-                    try:
-                        send_telegram_alert(telegram_msg)
-                        st.success("✅ تم إرسال التقرير المجمع بنجاح!")
-                    except Exception as e:
-                        st.error(f"❌ حدث خطأ أثناء الإرسال: {e}")
             else:
-                st.info("⏳ لم تعثر الآلة على صفقات تحقق شروط الأمان.")
+                st.info("⏳ لم تعثر الآلة على صفقات تحقق شروط الأمان، ولكن تم تخزين التحليلات للتعلم.")
 
 # --- التاب الثاني: مركز التعلم والتطوير الذاتي ---
 with tab_learning:
@@ -204,21 +181,43 @@ with tab_learning:
 
     stats = analyst.get_learning_stats()
 
-    col1, col2, col3 = st.columns(3)
-    col1.metric("📊 إجمالي الصفقات المخزنة", stats["total_predictions"])
-    col2.metric("⏳ الصفقات الجارية وقيد التقييم", stats["pending_predictions"])
-    col3.metric("🎯 معدل نجاح المنظومة", f"{stats['success_rate']:.1%}")
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("📊 إجمالي التحليلات", stats["total_predictions"])
+    col2.metric("⏳ قيد التقييم", stats["pending_predictions"])
+    col3.metric("🎯 نسبة النجاح", f"{stats['success_rate']:.1%}")
+    col4.metric("📈 Profit Factor", f"{stats.get('profit_factor', 0):.2f}")
 
     st.markdown("---")
+    
+    # عرض الأوزان الديناميكية
     dynamic_weights = analyst.learning_data.get("dynamic_weights", {"expected_gain": 0.4, "cmf": 0.3, "news": 0.3})
-    st.subheader("🧬 التوزيع الحالي لأوزان التصويت الجينية:")
-    st.json(dynamic_weights)
+    col_w1, col_w2, col_w3 = st.columns(3)
+    col_w1.metric("🧬 وزن الربح المتوقع", f"{dynamic_weights.get('expected_gain', 0.4):.2f}")
+    col_w2.metric("🧬 وزن CMF", f"{dynamic_weights.get('cmf', 0.3):.2f}")
+    col_w3.metric("🧬 وزن الأخبار", f"{dynamic_weights.get('news', 0.3):.2f}")
 
-    st.subheader("🗂️ السجل والأرشيف الكامل لتقييم أخطاء الآلة")
-    if stats["history"]:
-        st.table(pd.DataFrame(stats["history"]))
+    st.markdown("---")
+    
+    # عرض أنماط النجاح
+    st.subheader("🏆 أفضل أنماط النجاح المكتشفة")
+    best_patterns = analyst.get_best_patterns(top_n=5)
+    if best_patterns:
+        for i, pattern in enumerate(best_patterns, 1):
+            st.write(f"**{i}.** تكرار: {pattern['count']} | متوسط الربح: {pattern['avg_profit']:.1f}%")
+            st.write(f"   - المؤشرات: RSI≈{pattern['indicators'].get('RSI', 50):.0f}, CMF={pattern['indicators'].get('CMF', 0):.2f}")
     else:
-        st.info("📂 السجل فارغ حالياً.")
+        st.info("⏳ لا توجد أنماط نجاح كافية للتحليل بعد")
+
+    st.markdown("---")
+    
+    # عرض السجل
+    st.subheader("🗂️ سجل التحليلات والأخطاء")
+    if stats["history"]:
+        # عرض آخر 20 تحليل
+        df_history = pd.DataFrame(stats["history"][:20])
+        st.dataframe(df_history, use_container_width=True)
+    else:
+        st.info("📂 السجل فارغ حالياً. قم بتشغيل مسح السوق لتوليد التحليلات.")
 
 # --- التاب الثالث: تحليل سهم منفرد ---
 with tab_analysis:
@@ -229,7 +228,7 @@ with tab_analysis:
         row_choice = df_symbols[df_symbols['name'] == choice].iloc[0]
 
         if st.button("🔬 ابدأ الفحص الجراحي العميق للسهم"):
-            with st.spinner("جاري جمع البيانات وحساب المؤشرات ومسح نبرة الأخبار..."):
+            with st.spinner("جاري جمع البيانات وحساب المؤشرات..."):
                 news_score = fetch_company_news_sentiment(row_choice['name'], row_choice['symbol'])
                 s_df, src = fetch_stock_data(row_choice['symbol'], row_choice['y_symbol'])
 
@@ -242,53 +241,79 @@ with tab_analysis:
 
                     current_price = s_df['Close'].iloc[-1]
                     
-                    # ✅ التحقق من صحة التنبؤ - منع القيم غير المنطقية
+                    # التحقق من صحة التنبؤ
                     change_pct = abs((pred_target - current_price) / current_price) * 100
-                    is_valid = change_pct <= 20  # التنبؤ صحيح إذا كان التغير أقل من 20%
+                    is_valid = change_pct <= 20
                     
                     if not is_valid:
-                        # تعديل التنبؤ ليكون منطقياً
                         pred_target = current_price * (1 + np.random.uniform(-0.02, 0.02))
-                        dir_out = "مراقبة / انتظار إشارة السيولة ⏳ (تنبؤ غير موثوق)"
+                        dir_out = "مراقبة / انتظار إشارة السيولة ⏳"
                         entry_out = current_price
                         exit_out = current_price
                         score_out = 30
-                        st.warning("⚠️ تنبؤ النموذج كان غير منطقي، تم تعديله لقيم معقولة.")
+                        st.warning("⚠️ تنبؤ النموذج كان غير منطقي، تم تعديله.")
 
                     strat = generate_trading_strategy(s_df, pred_target, dir_out)
                     summary = get_market_summary(s_df)
+
+                    # ✅ تسجيل التحليل في ملف JSON
+                    last_row_ind = s_df.iloc[-1].to_dict()
+                    analyst.record_prediction(
+                        symbol=row_choice['symbol'],
+                        current_price=current_price,
+                        predicted_close=pred_target,
+                        suggested_entry=entry_out,
+                        suggested_exit=exit_out,
+                        direction=dir_out,
+                        current_indicators=last_row_ind
+                    )
+                    
+                    st.success(f"✅ تم تخزين تحليل {row_choice['symbol']} في ملف التعلم الذاتي")
 
                     col_l, col_r = st.columns(2)
                     with col_l:
                         st.metric("💰 السعر الفوري الحالي", f"{current_price:.2f} ج.م")
                         st.metric("🎯 السعر المتوقع", f"{pred_target:.2f} ج.م")
-                        st.metric("🛡️ مجموع نقاط الأمان", f"{score_out} / 100")
+                        st.metric("🛡️ درجة الأمان", f"{score_out} / 100")
                         st.metric("📰 نبرة الأخبار", f"{news_score}")
                         
-                        # عرض معلومات إضافية من الملخص
                         if isinstance(summary, dict):
                             st.write("**📊 ملخص المؤشرات:**")
                             st.write(f"- RSI: {summary.get('RSI', 'N/A')}")
                             st.write(f"- CMF: {summary.get('CMF', 'N/A')}")
                             st.write(f"- ADX: {summary.get('ADX', 'N/A')}")
-                            st.write(f"- الاتجاه: {summary.get('الاتجاه', 'N/A')}")
 
                     with col_r:
                         st.subheader("📊 استراتيجية إدارة المخاطر")
-                        st.write(f"**التوجيه الفني النهائي:** {dir_out}")
-                        st.write(f"**أفضل نقطة دخول:** {entry_out:.2f} ج.م")
+                        st.write(f"**التوجيه الفني:** {dir_out}")
+                        st.write(f"**أفضل دخول:** {entry_out:.2f} ج.م")
                         st.write(f"**وقف الخسارة:** {strat['stop_loss']:.2f} ج.م")
                         st.write(f"**الهدف الأول:** {strat['take_profit_1']:.2f} ج.م")
                         st.write(f"**الهدف الثاني:** {strat['take_profit_2']:.2f} ج.م")
-                        
-                        # معلومات إضافية
-                        if isinstance(summary, dict):
-                            st.write("**🔍 تحليل إضافي:**")
-                            st.write(f"- قوة الاتجاه: {summary.get('قوة_الاتجاه', 'N/A')}")
-                            st.write(f"- نوع السوق: {summary.get('نوع_السوق', 'N/A')}")
 
                     st.markdown("---")
                     st.subheader("📈 البيانات الفنية الأخيرة:")
                     st.dataframe(s_df.tail(10), use_container_width=True)
+                    
+                    # عرض عدد التحليلات المخزنة
+                    stats = analyst.get_learning_stats()
+                    st.info(f"📊 إجمالي التحليلات المخزنة: {stats['total_predictions']}")
                 else:
                     st.error("❌ فشل جلب البيانات التاريخية لهذا السهم.")
+
+
+# --- عرض معلومات إضافية في الـ Sidebar ---
+st.sidebar.markdown("---")
+st.sidebar.markdown("### 📊 حالة نظام التعلم")
+
+# عرض إحصائيات سريعة
+stats = analyst.get_learning_stats()
+st.sidebar.metric("📝 إجمالي التحليلات", stats["total_predictions"])
+st.sidebar.metric("🎯 نسبة النجاح", f"{stats['success_rate']:.1%}")
+
+# عرض آخر 3 تحليلات
+if stats["history"]:
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("### 📋 آخر التحليلات")
+    for p in stats["history"][:3]:
+        st.sidebar.write(f"• {p['S']}: {p['R'][:20]}...")
