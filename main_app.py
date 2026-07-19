@@ -145,8 +145,7 @@ class EGXQuantumDesktopApp(ctk.CTk):
 
         # 5. تدريب محرك المضاربة واستخراج الأهداف الحالية لشمعة الغد
         self.predictor.train_all(df_indicators)
-        predicted_close, best_entry, best_exit, direction = self.predictor.predict_next_price(df_indicators)
-
+        direction, predicted_close, best_entry, best_exit, score = self.predictor.predict_next_price(df_indicators)
         # 6. تسجيل التوصية الحالية في ملف الـ JSON لكي يقيمها البرنامج بنفسه في المرات القادمة
         self.analyst.record_prediction(selected_symbol, df_indicators['Close'].iloc[-1], predicted_close, best_entry,
                                        best_exit, direction)
