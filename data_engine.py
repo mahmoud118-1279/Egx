@@ -1,13 +1,19 @@
 import pandas as pd
 import requests
-import yfinance as yf
 import urllib.parse
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
+import warnings
+warnings.filterwarnings('ignore')
 
-from config import API_KEY, DEFAULT_TIME_FRAME, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
+from config import API_KEY, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
+
+# ============================================================
+# استيراد من data_manager
+# ============================================================
+from data_manager import data_manager, get_stock_data_with_cache
 
 
 def send_telegram_alert(message):
@@ -38,78 +44,47 @@ def send_telegram_alert(message):
     return False
 
 
-def fetch_from_investing(symbol):
+# ============================================================
+# ✅ دالة fetch_stock_data المعدلة - تستخدم data_manager أولاً
+# ============================================================
+def fetch_stock_data(symbol, yahoo_symbol=None):
     """
-    جلب البيانات التاريخية من Investing.com
-    المصدر الأكثر دقة للبورصة المصرية
+    المحرك المتطور لجلب البيانات:
+    1. data_manager (Investing.com + Local Cache) - الأولوية القصوى
+    2. Yahoo Finance (آخر حل - ضعيف)
     """
+    
+    # ✅ 1. المحاولة الأولى: data_manager (Investing.com + Local Cache)
     try:
-        import investingpy as ip
-        
-        print(f"📡 جلب بيانات {symbol} من Investing.com...")
-        
-        # محاولة جلب البيانات
-        df = ip.get_stock_historical_data(
-            symbol=symbol,
-            country='egypt',
-            from_date=datetime.now() - timedelta(days=365),
-            to_date=datetime.now()
-        )
-        
-        if not df.empty:
-            df = df.reset_index()
-            df.rename(columns={
-                'date': 'Date',
-                'open': 'Open',
-                'high': 'High',
-                'low': 'Low',
-                'close': 'Close',
-                'volume': 'Volume'
-            }, inplace=True)
-            
-            df['Date'] = pd.to_datetime(df['Date'])
-            df.set_index('Date', inplace=True)
-            
-            print(f"✅ تم جلب {len(df)} يوم من Investing.com لـ {symbol}")
-            return df[['Open', 'High', 'Low', 'Close', 'Volume']]
-            
-    except ImportError:
-        print("⚠️ مكتبة investingpy غير مثبتة، جارٍ التثبيت...")
-        import subprocess
-        subprocess.check_call(['pip', 'install', 'investingpy'])
-        # محاولة مرة أخرى
+        df, source = get_stock_data_with_cache(symbol)
+        if not df.empty and len(df) > 30:
+            print(f"✅ {symbol}: {source}")
+            return df, source
+    except Exception as e:
+        print(f"⚠️ data_manager فشل لـ {symbol}: {e}")
+    
+    # ❌ 2. المحاولة الأخيرة: Yahoo Finance (ضعيف جداً - استخدام محدود)
+    if yahoo_symbol:
         try:
-            import investingpy as ip
-            df = ip.get_stock_historical_data(
-                symbol=symbol,
-                country='egypt',
-                from_date=datetime.now() - timedelta(days=365),
-                to_date=datetime.now()
-            )
-            if not df.empty:
-                df = df.reset_index()
-                df.rename(columns={
-                    'date': 'Date',
-                    'open': 'Open',
-                    'high': 'High',
-                    'low': 'Low',
-                    'close': 'Close',
-                    'volume': 'Volume'
-                }, inplace=True)
-                df['Date'] = pd.to_datetime(df['Date'])
-                df.set_index('Date', inplace=True)
-                return df[['Open', 'High', 'Low', 'Close', 'Volume']]
+            import yfinance as yf
+            ticker = yf.Ticker(yahoo_symbol)
+            df = ticker.history(period="1y")
+            if not df.empty and len(df) > 30:
+                print(f"⚠️ {symbol}: Yahoo Finance (ضعيف)")
+                return df, "Yahoo Finance ❌ (ضعيف)"
         except:
             pass
-            
-    except Exception as e:
-        print(f"⚠️ فشل جلب {symbol} من Investing.com: {e}")
     
-    return pd.DataFrame()
+    return pd.DataFrame(), "No Source Available ❌"
 
 
+# ============================================================
+# ✅ دالة fetch_from_eodhd للاستخدام المباشر (نسخة احتياطية)
+# ============================================================
 def fetch_from_eodhd(symbol):
-    """جلب البيانات من EODHD (نسخة احتياطية)"""
+    """
+    جلب البيانات من EODHD مباشرة
+    """
     try:
         clean_symbol = symbol.split('.')[0].strip().upper()
         url = f"https://eodhd.com/api/eod/{clean_symbol}.EGX?api_token={API_KEY}&fmt=json"
@@ -133,7 +108,6 @@ def fetch_from_eodhd(symbol):
                     if col not in df.columns:
                         df[col] = 0.0
                 df = df.sort_index()
-                print(f"✅ تم جلب {len(df)} يوم من EODHD لـ {clean_symbol}")
                 return df[required_cols]
     except Exception as e:
         print(f"⚠️ EODHD فشل لـ {symbol}: {e}")
@@ -141,44 +115,9 @@ def fetch_from_eodhd(symbol):
     return pd.DataFrame()
 
 
-def fetch_stock_data(symbol, yahoo_symbol=None):
-    """
-    المحرك المتطور لجلب البيانات:
-    1. Investing.com (الأولوية القصوى - الأكثر دقة)
-    2. EODHD (نسخة احتياطية)
-    3. Yahoo Finance (آخر حل - ضعيف)
-    """
-    
-    # ✅ 1. المحاولة الأولى: Investing.com
-    try:
-        df = fetch_from_investing(symbol)
-        if not df.empty and len(df) > 30:
-            return df, "Investing.com ✅ (مصدر رئيسي)"
-    except Exception as e:
-        print(f"⚠️ Investing.com فشل لـ {symbol}: {e}")
-    
-    # ✅ 2. المحاولة الثانية: EODHD
-    try:
-        df = fetch_from_eodhd(symbol)
-        if not df.empty and len(df) > 30:
-            return df, "EODHD ✅ (نسخة احتياطية)"
-    except Exception as e:
-        print(f"⚠️ EODHD فشل لـ {symbol}: {e}")
-    
-    # ❌ 3. المحاولة الأخيرة: Yahoo Finance (ضعيف جداً)
-    if yahoo_symbol:
-        try:
-            import yfinance as yf
-            ticker = yf.Ticker(yahoo_symbol)
-            df = ticker.history(period="1y")
-            if not df.empty and len(df) > 30:
-                return df, "Yahoo Finance ❌ (ضعيف - استخدم Investing)"
-        except:
-            pass
-    
-    return pd.DataFrame(), "No Source Available ❌"
-
-
+# ============================================================
+# ✅ دالة fetch_company_news_sentiment (تحليل الأخبار)
+# ============================================================
 def fetch_company_news_sentiment(company_name, symbol):
     """تحليل نبرة الأخبار من مصادر متعددة"""
     
@@ -217,13 +156,16 @@ def fetch_company_news_sentiment(company_name, symbol):
     return 0.0
 
 
+# ============================================================
+# ✅ دالة run_market_scanner (ماسح السوق)
+# ============================================================
 def run_market_scanner(df_symbols, add_indicators_func, predictor_instance, 
                        strategy_mode="مضاربة سريعة", max_workers=8):
     """ماسح السوق الشامل والمتوازي"""
     buy_opportunities = []
     scanned_count = 0
     failed_count = 0
-    source_stats = {"Investing.com": 0, "EODHD": 0, "Yahoo Finance": 0, "No Source": 0}
+    source_stats = {"Investing.com": 0, "Local Cache": 0, "EODHD": 0, "Yahoo Finance": 0, "No Source": 0}
 
     def scan_core(row):
         nonlocal scanned_count, failed_count
@@ -243,7 +185,7 @@ def run_market_scanner(df_symbols, add_indicators_func, predictor_instance,
             scanned_count += 1
             
             # تسجيل مصدر البيانات
-            if "Investing" in src:
+            if "Investing" in src or "Local Cache" in src:
                 source_stats["Investing.com"] += 1
             elif "EODHD" in src:
                 source_stats["EODHD"] += 1
@@ -285,27 +227,40 @@ def run_market_scanner(df_symbols, add_indicators_func, predictor_instance,
     return pd.DataFrame(buy_opportunities)
 
 
-# دالة لاختبار المصادر
+# ============================================================
+# ✅ دالة update_all_stocks (لتحديث البيانات)
+# ============================================================
+def update_all_stocks(symbols_list, max_stocks=10):
+    """
+    تحديث جميع الأسهم (يتم تنفيذها مرة واحدة يومياً)
+    """
+    return data_manager.update_all_stocks(symbols_list, max_stocks)
+
+
+# ============================================================
+# ✅ دالة get_live_price (للأسعار اللحظية)
+# ============================================================
+def get_live_price(symbol):
+    """
+    الحصول على السعر اللحظي
+    """
+    return data_manager.get_live_price(symbol)
+
+
+# ============================================================
+# ✅ دالة test_data_source (لاختبار المصادر)
+# ============================================================
 def test_data_source(symbol):
     """اختبار أي مصدر بيانات يعمل لسهم معين"""
     print(f"\n🔍 اختبار مصادر البيانات لـ {symbol}...")
     print("-" * 40)
     
-    # اختبار Investing.com
-    df1, src1 = fetch_from_investing(symbol)
-    print(f"Investing.com: {'✅' if not df1.empty else '❌'} ({len(df1)} يوم)")
+    # اختبار data_manager
+    df, src = get_stock_data_with_cache(symbol)
+    print(f"data_manager (Investing.com): {'✅' if not df.empty else '❌'} ({len(df)} يوم)")
     
-    # اختبار EODHD
-    df2, src2 = fetch_from_eodhd(symbol)
+    # اختبار EODHD مباشرة
+    df2 = fetch_from_eodhd(symbol)
     print(f"EODHD: {'✅' if not df2.empty else '❌'} ({len(df2)} يوم)")
-    
-    # اختبار Yahoo
-    try:
-        import yfinance as yf
-        ticker = yf.Ticker(f"{symbol}.CA")
-        df3 = ticker.history(period="1y")
-        print(f"Yahoo Finance: {'✅' if not df3.empty else '❌'} ({len(df3)} يوم)")
-    except:
-        print(f"Yahoo Finance: ❌")
     
     print("-" * 40)
