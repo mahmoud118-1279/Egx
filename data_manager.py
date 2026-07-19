@@ -89,6 +89,43 @@ class DataManager:
         
         return pd.DataFrame()
     
+    # ============================================================
+    # ✅ دالة fetch_from_eodhd مضافة داخل الكلاس
+    # ============================================================
+    def fetch_from_eodhd(self, symbol):
+        """
+        جلب البيانات التاريخية من EODHD (نسخة احتياطية)
+        """
+        try:
+            clean_symbol = symbol.split('.')[0].strip().upper()
+            url = f"https://eodhd.com/api/eod/{clean_symbol}.EGX?api_token={API_KEY}&fmt=json"
+            
+            response = requests.get(url, timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                if data and len(data) > 10:
+                    df = pd.DataFrame(data)
+                    df['date'] = pd.to_datetime(df['date'])
+                    df.set_index('date', inplace=True)
+                    df.rename(columns={
+                        'open': 'Open',
+                        'high': 'High',
+                        'low': 'Low',
+                        'close': 'Close',
+                        'volume': 'Volume'
+                    }, inplace=True)
+                    required_cols = ['Open', 'High', 'Low', 'Close', 'Volume']
+                    for col in required_cols:
+                        if col not in df.columns:
+                            df[col] = 0.0
+                    df = df.sort_index()
+                    print(f"✅ تم جلب {len(df)} يوم من EODHD لـ {clean_symbol}")
+                    return df[required_cols]
+        except Exception as e:
+            print(f"⚠️ EODHD فشل لـ {symbol}: {e}")
+        
+        return pd.DataFrame()
+    
     def fetch_from_eodhd_live(self, symbol):
         """
         جلب آخر سعر من EODHD (استخدام محدود)
@@ -176,15 +213,11 @@ class DataManager:
             self.save_historical_data(symbol, df)
             return df, "Investing.com ✅"
         
-        # 3. جلب من EODHD (نسخة احتياطية)
-        try:
-            from data_engine import fetch_from_eodhd
-            df = fetch_from_eodhd(symbol)
-            if not df.empty:
-                self.save_historical_data(symbol, df)
-                return df, "EODHD ✅ (نسخة احتياطية)"
-        except:
-            pass
+        # 3. جلب من EODHD (نسخة احتياطية) - ✅ مباشرة من نفس الكلاس
+        df = self.fetch_from_eodhd(symbol)
+        if not df.empty:
+            self.save_historical_data(symbol, df)
+            return df, "EODHD ✅ (نسخة احتياطية)"
         
         return pd.DataFrame(), "No Source ❌"
     
@@ -204,8 +237,10 @@ class DataManager:
                 
                 if not df.empty:
                     updated.append(symbol)
+                    print(f"    ✅ تم تحديث {symbol} من {source}")
                 else:
                     failed.append(symbol)
+                    print(f"    ❌ فشل تحديث {symbol}")
                 
                 # تأخير بسيط لتجنب حظر الـ API
                 time.sleep(0.5)
@@ -216,7 +251,7 @@ class DataManager:
         
         print(f"\n✅ تم تحديث {len(updated)} سهماً")
         if failed:
-            print(f"⚠️ فشل تحديث {len(failed)} سهماً: {failed}")
+            print(f"⚠️ فشل تحديث {len(failed)} سهماً: {failed[:10]}...")
         
         return updated, failed
     
@@ -263,10 +298,15 @@ class DataManager:
         return info
 
 
-# إنشاء مدير البيانات
+# ============================================================
+# ✅ إنشاء مدير البيانات
+# ============================================================
 data_manager = DataManager()
 
 
+# ============================================================
+# ✅ دوال مساعدة للاستخدام من خارج الملف
+# ============================================================
 def get_stock_data_with_cache(symbol):
     """
     دالة مساعدة لجلب البيانات باستخدام التخزين المؤقت
@@ -280,3 +320,10 @@ def update_all_stocks(symbols):
     دالة مساعدة لتحديث جميع الأسهم
     """
     return data_manager.update_all_stocks(symbols)
+
+
+def get_live_price(symbol):
+    """
+    دالة مساعدة للحصول على السعر اللحظي
+    """
+    return data_manager.get_live_price(symbol)
