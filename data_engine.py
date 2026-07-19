@@ -1,17 +1,14 @@
 import pandas as pd
 import requests
-import yfinance as yf
-import urllib.parse
-import xml.etree.ElementTree as ET
-from datetime import datetime, timedelta
+from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from config import API_KEY, DEFAULT_TIME_FRAME, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
-import time
-import json
+
+from config import API_KEY, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
+from data_manager import data_manager, get_stock_data_with_cache
 
 
 def send_telegram_alert(message):
-    """إرسال تقرير مجمع أو إشعار فوري إلى هاتف المستخدم عبر تليجرام"""
+    """إرسال إشعار تليجرام"""
     token = str(TELEGRAM_TOKEN).strip()
     chat_id = str(TELEGRAM_CHAT_ID).strip()
 
@@ -38,160 +35,70 @@ def send_telegram_alert(message):
     return False
 
 
-def fetch_from_eodhd(symbol, days=365):
-    """
-    جلب البيانات التاريخية من EODHD - المصدر الأكثر دقة للسوق المصري
-    
-    EODHD يوفر:
-    - بيانات دقيقة للبورصة المصرية (.EGX)
-    - تحديثات يومية موثوقة
-    - بيانات تاريخية كاملة
-    - مؤشرات فنية مدمجة
-    """
+def fetch_from_eodhd_live(symbol):
+    """جلب السعر اللحظي من EODHD"""
     try:
         clean_symbol = symbol.split('.')[0].strip().upper()
+        url = f"https://eodhd.com/api/real-time/{clean_symbol}.EGX?api_token={API_KEY}&fmt=json"
         
-        # استخدام EODHD API مع .EGX
-        url = f"https://eodhd.com/api/eod/{clean_symbol}.EGX?api_token={API_KEY}&fmt=json&order=d"
-        
-        print(f"📡 جلب بيانات {clean_symbol} من EODHD...")
-        response = requests.get(url, timeout=15)
-        
+        response = requests.get(url, timeout=10)
         if response.status_code == 200:
             data = response.json()
-            if data and len(data) > 10:
-                df = pd.DataFrame(data)
-                df['date'] = pd.to_datetime(df['date'])
-                df.set_index('date', inplace=True)
-                df.rename(columns={
-                    'open': 'Open',
-                    'high': 'High',
-                    'low': 'Low',
-                    'close': 'Close',
-                    'volume': 'Volume'
-                }, inplace=True)
-                
-                # التأكد من وجود جميع الأعمدة المطلوبة
-                required_cols = ['Open', 'High', 'Low', 'Close', 'Volume']
-                for col in required_cols:
-                    if col not in df.columns:
-                        df[col] = 0.0
-                
-                # ترتيب البيانات من الأقدم للأحدث
-                df = df.sort_index()
-                
-                print(f"✅ تم جلب {len(df)} يوم من EODHD لـ {clean_symbol}")
-                return df[required_cols]
-            else:
-                print(f"⚠️ بيانات EODHD غير كافية لـ {clean_symbol}")
-        else:
-            print(f"⚠️ EODHD فشل لـ {clean_symbol}: {response.status_code}")
-            
+            if data:
+                return {
+                    'price': data.get('close', 0),
+                    'high': data.get('high', 0),
+                    'low': data.get('low', 0),
+                    'volume': data.get('volume', 0),
+                    'change': data.get('change', 0),
+                    'change_pct': data.get('change_pct', 0)
+                }
     except Exception as e:
-        print(f"❌ خطأ في EODHD لـ {symbol}: {e}")
+        print(f"⚠️ فشل جلب السعر اللحظي لـ {symbol}: {e}")
     
-    return pd.DataFrame()
+    return None
 
 
-def fetch_from_investing(symbol):
+def fetch_stock_data(symbol, yahoo_symbol=None):
     """
-    مصدر بديل: Investing.com (مجاني جزئياً)
+    جلب بيانات السهم باستخدام المدير الذكي
     """
-    try:
-        # Investing.com API (تحتاج إلى مكتبة investingpy)
-        import investingpy as ip
-        df = ip.get_stock_historical_data(
-            symbol=symbol,
-            country='egypt',
-            from_date=datetime.now() - timedelta(days=365),
-            to_date=datetime.now()
-        )
-        if not df.empty:
-            df.rename(columns={
-                'open': 'Open',
-                'high': 'High',
-                'low': 'Low',
-                'close': 'Close',
-                'volume': 'Volume'
-            }, inplace=True)
-            return df[['Open', 'High', 'Low', 'Close', 'Volume']]
-    except:
-        pass
-    return pd.DataFrame()
-
-
-def fetch_from_egx_official(symbol):
-    """
-    مصدر رسمي: البورصة المصرية (محدود)
-    """
-    try:
-        # البورصة المصرية توفر ملفات CSV يومية
-        url = f"https://www.egx.com/data/companies/{symbol}.csv"
-        df = pd.read_csv(url)
-        if not df.empty:
-            # تنظيف البيانات حسب تنسيق البورصة
-            return df
-    except:
-        pass
-    return pd.DataFrame()
-
-
-def fetch_stock_data(symbol, yahoo_symbol=None, force_eodhd=True):
-    """
-    المحرك المتطور لجلب البيانات:
-    1. EODHD (الأولوية القصوى - الدقة المطلوبة)
-    2. Investing.com (بديل مجاني)
-    3. Yahoo Finance (آخر حل)
-    """
+    df, source = get_stock_data_with_cache(symbol)
     
-    # 1. المحاولة الأولى: EODHD (الأكثر دقة)
-    if force_eodhd or API_KEY:
-        df = fetch_from_eodhd(symbol)
-        if not df.empty and len(df) > 30:
-            return df, "EODHD ✅ (بيانات دقيقة)"
+    if df.empty:
+        # محاولة Yahoo كحل أخير
+        if yahoo_symbol:
+            try:
+                import yfinance as yf
+                ticker = yf.Ticker(yahoo_symbol)
+                df = ticker.history(period="1y")
+                if not df.empty:
+                    df.rename(columns={
+                        'Open': 'Open',
+                        'High': 'High',
+                        'Low': 'Low',
+                        'Close': 'Close',
+                        'Volume': 'Volume'
+                    }, inplace=True)
+                    return df, "Yahoo Finance ❌ (نسخة احتياطية)"
+            except:
+                pass
     
-    # 2. المحاولة الثانية: Investing.com
-    try:
-        df = fetch_from_investing(symbol)
-        if not df.empty and len(df) > 30:
-            return df, "Investing.com ⚠️ (بديل مجاني)"
-    except:
-        pass
-    
-    # 3. المحاولة الثالثة: البورصة المصرية
-    try:
-        df = fetch_from_egx_official(symbol)
-        if not df.empty and len(df) > 30:
-            return df, "EGX Official ⚠️ (محدود)"
-    except:
-        pass
-    
-    # 4. المحاولة الأخيرة: Yahoo Finance (ضعيف جداً للمصري)
-    if yahoo_symbol:
-        try:
-            ticker = yf.Ticker(yahoo_symbol)
-            df = ticker.history(period="1y")
-            if not df.empty and len(df) > 30:
-                return df, "Yahoo Finance ❌ (ضعيف)"
-        except:
-            pass
-    
-    return pd.DataFrame(), "No Source Available ❌"
+    return df, source
 
 
 def fetch_company_news_sentiment(company_name, symbol):
-    """تحليل نبرة الأخبار من مصادر متعددة"""
-    
-    positive_words = ['أرباح', 'نمو', 'صعود', 'ارتفاع', 'إيجابي', 'استحواذ', 'شراء', 
-                      'توسع', 'قفزة', 'تفوق', 'توزيعات', 'أرباح', 'مضاعفة']
-    negative_words = ['خسائر', 'تراجع', 'هبوط', 'انخفاض', 'سلبي', 'غرامة', 'نزاع', 
-                      'بيع', 'انهيار', 'انكماش', 'تجميد', 'شطب', 'تحذير']
+    """تحليل نبرة الأخبار"""
+    positive_words = ['أرباح', 'نمو', 'صعود', 'ارتفاع', 'إيجابي', 'استحواذ', 'شراء', 'توسع']
+    negative_words = ['خسائر', 'تراجع', 'هبوط', 'انخفاض', 'سلبي', 'غرامة', 'نزاع', 'بيع']
     
     sentiment_score = 0.0
     articles_count = 0
     
-    # 1. محاولة جلب الأخبار من Google News
     try:
+        import urllib.parse
+        import xml.etree.ElementTree as ET
+        
         search_query = f'"{company_name}" أخبار البورصة المصرية'
         encoded_query = urllib.parse.quote(search_query)
         url = f"https://news.google.com/rss/search?q={encoded_query}&hl=ar&gl=EG&ceid=EG:ar"
@@ -212,76 +119,60 @@ def fetch_company_news_sentiment(company_name, symbol):
     except:
         pass
     
-    # 2. محاولة جلب الأخبار من مصادر أخرى
-    try:
-        # استخدام API بديل للأخبار
-        news_api_url = f"https://newsapi.org/v2/everything?q={company_name}&language=ar&apiKey=YOUR_NEWS_API_KEY"
-        # (يحتاج إلى مفتاح API من newsapi.org)
-    except:
-        pass
-    
     if articles_count > 0:
         return round(max(min(sentiment_score / articles_count, 1.0), -1.0), 2)
     
     return 0.0
 
 
-def get_market_status():
-    """
-    التحقق من حالة السوق (مفتوح/مغلق)
-    """
-    now = datetime.now()
-    # البورصة المصرية تعمل من الأحد للخميس 10:00 صباحاً - 2:30 ظهراً
-    is_weekday = now.weekday() < 5  # الأحد=0, الخميس=4
-    is_trading_hours = 10 <= now.hour < 14 or (now.hour == 14 and now.minute <= 30)
-    
-    if is_weekday and is_trading_hours:
-        return "🟢 السوق مفتوح"
-    elif is_weekday:
-        return "🟡 خارج ساعات التداول"
-    else:
-        return "🔴 السوق مغلق (عطلة نهاية الأسبوع)"
-
-
-def run_market_scanner(df_symbols, add_indicators_func, predictor_instance, strategy_mode="مضاربة سريعة",
-                       max_workers=8):
-    """ماسح السوق الشامل والمتوازي"""
+def run_market_scanner(df_symbols, add_indicators_func, predictor_instance, 
+                       strategy_mode="مضاربة سريعة", max_workers=8):
+    """ماسح السوق باستخدام البيانات المخزنة محلياً"""
     buy_opportunities = []
     scanned_count = 0
-    failed_count = 0
 
     def scan_core(row):
-        nonlocal scanned_count, failed_count
+        nonlocal scanned_count
         try:
-            news_score = fetch_company_news_sentiment(row['name'], row['symbol'])
-            s_df, src = fetch_stock_data(row['symbol'], row['y_symbol'])
-
+            # استخدام البيانات المخزنة محلياً
+            s_df, src = fetch_stock_data(row['symbol'], row.get('y_symbol'))
+            
             if s_df.empty or len(s_df) < 30:
-                failed_count += 1
                 return None
-
+            
+            # جلب نبرة الأخبار
+            news_score = fetch_company_news_sentiment(row['name'], row['symbol'])
+            
+            # حساب المؤشرات
             s_df = add_indicators_func(s_df)
             s_df['News_Sentiment'] = news_score
-
-            dir_out, pred_target, entry_out, exit_out, score_out = predictor_instance.predict_next_price(s_df, strategy_mode)
-
+            
+            # التنبؤ
+            dir_out, pred_target, entry_out, exit_out, score_out = predictor_instance.predict_next_price(
+                s_df, strategy_mode
+            )
+            
             scanned_count += 1
-
+            
             if any(keyword in dir_out for keyword in ["🟢", "🚀", "📈"]):
+                # جلب السعر اللحظي من EODHD (استخدام محدود)
+                live_price = fetch_from_eodhd_live(row['symbol'])
+                current_price = live_price['price'] if live_price else s_df['Close'].iloc[-1]
+                
                 return {
                     "السهم": row['symbol'],
-                    "السعر الحالي": round(s_df['Close'].iloc[-1], 2),
+                    "السعر الحالي": round(current_price, 2),
                     "السعر المتوقع": round(pred_target, 2),
                     "أفضل دخول": round(entry_out, 2),
                     "المستهدف": round(exit_out, 2),
                     "نبرة الأخبار": news_score,
                     "الإشارة": dir_out,
                     "المصدر": src,
-                    "درجة الأمان": score_out
+                    "درجة الأمان": score_out,
+                    "الحالة": "✅ بيانات محدثة" if data_manager.is_data_fresh(row['symbol']) else "⚠️ بيانات قديمة"
                 }
         except Exception as e:
             print(f"⚠️ خطأ في {row.get('symbol', 'unknown')}: {e}")
-            failed_count += 1
         return None
 
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
@@ -291,5 +182,4 @@ def run_market_scanner(df_symbols, add_indicators_func, predictor_instance, stra
             if res:
                 buy_opportunities.append(res)
 
-    print(f"📊 ملخص الفحص: {scanned_count} نجاح, {failed_count} فشل")
     return pd.DataFrame(buy_opportunities)
