@@ -6,3 +6,4 @@ xgboost
 matplotlib
 requests
 yfinance
+investingpy
