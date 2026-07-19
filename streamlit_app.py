@@ -70,7 +70,9 @@ st.title("📈 منظومة اتخاذ القرار والتعلم الذاتي 
 tab_scan, tab_learning, tab_analysis = st.tabs(
     ["🔍 ماسح السوق الفوري", "🧠 مركز التعلم والتطوير الذاتي", "📊 تحليل سهم منفرد"])
 
-# --- التاب الأول: ماسح السوق الفوري ---
+# ================================================================
+# التاب الأول: ماسح السوق الفوري
+# ================================================================
 with tab_scan:
     st.header("⚡ الفحص الشامل واصطياد الفرص الكمية")
 
@@ -90,7 +92,7 @@ with tab_scan:
             def scan_single_stock(row):
                 try:
                     news_score = fetch_company_news_sentiment(row['name'], row['symbol'])
-                    s_df, src = fetch_stock_data(row['symbol'], row['y_symbol'])
+                    s_df, src = fetch_stock_data(row['symbol'], row.get('y_symbol'))
 
                     if s_df.empty or len(s_df) < 30:
                         return None
@@ -112,8 +114,7 @@ with tab_scan:
                         exit_out = current_price
                         score_out = 30
 
-                    # ✅ تسجيل التحليل في ملف JSON - حتى لو لم تكن فرصة شراء
-                    # هذا هو الجزء المهم: تخزين كل تحليل للتعلم
+                    # تسجيل التحليل في ملف JSON
                     last_row_ind = s_df.iloc[-1].to_dict()
                     analyst.record_prediction(
                         symbol=row['symbol'],
@@ -175,7 +176,9 @@ with tab_scan:
             else:
                 st.info("⏳ لم تعثر الآلة على صفقات تحقق شروط الأمان، ولكن تم تخزين التحليلات للتعلم.")
 
-# --- التاب الثاني: مركز التعلم والتطوير الذاتي ---
+# ================================================================
+# التاب الثاني: مركز التعلم والتطوير الذاتي
+# ================================================================
 with tab_learning:
     st.header("🧠 لوحة التحكم الذاتي والنمو المعرفي للمضارب الكمي")
 
@@ -185,7 +188,10 @@ with tab_learning:
     col1.metric("📊 إجمالي التحليلات", stats["total_predictions"])
     col2.metric("⏳ قيد التقييم", stats["pending_predictions"])
     col3.metric("🎯 نسبة النجاح", f"{stats['success_rate']:.1%}")
-    col4.metric("📈 Profit Factor", f"{stats.get('profit_factor', 0):.2f}")
+    
+    # حساب Profit Factor
+    profit_factor = stats.get('profit_factor', 0)
+    col4.metric("📈 Profit Factor", f"{profit_factor:.2f}")
 
     st.markdown("---")
     
@@ -198,28 +204,43 @@ with tab_learning:
 
     st.markdown("---")
     
-    # عرض أنماط النجاح
+    # عرض أنماط النجاح - مع معالجة الخطأ
     st.subheader("🏆 أفضل أنماط النجاح المكتشفة")
-    best_patterns = analyst.get_best_patterns(top_n=5)
-    if best_patterns:
-        for i, pattern in enumerate(best_patterns, 1):
-            st.write(f"**{i}.** تكرار: {pattern['count']} | متوسط الربح: {pattern['avg_profit']:.1f}%")
-            st.write(f"   - المؤشرات: RSI≈{pattern['indicators'].get('RSI', 50):.0f}, CMF={pattern['indicators'].get('CMF', 0):.2f}")
-    else:
-        st.info("⏳ لا توجد أنماط نجاح كافية للتحليل بعد")
+    try:
+        best_patterns = analyst.get_best_patterns(top_n=5)
+        if best_patterns:
+            for i, pattern in enumerate(best_patterns, 1):
+                with st.expander(f"📊 النمط #{i} - تكرار: {pattern['count']} مرة"):
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        st.write(f"**نطاق RSI:** {pattern.get('rsi_range', 'غير متوفر')}")
+                        st.write(f"**اتجاه CMF:** {pattern.get('cmf_type', 'غير متوفر')}")
+                        st.write(f"**اتجاه الأخبار:** {pattern.get('news_type', 'غير متوفر')}")
+                    with col2:
+                        st.write(f"**متوسط الربح:** {pattern.get('avg_profit', 0):.1f}%")
+                        st.write(f"**نسبة النجاح:** {pattern.get('win_rate', 0):.1f}%")
+                        st.write(f"**عدد الصفقات:** {pattern.get('count', 0)}")
+        else:
+            st.info("⏳ لا توجد أنماط نجاح كافية للتحليل بعد (يحتاج إلى 3 صفقات على الأقل)")
+    except AttributeError as e:
+        st.warning("⚠️ نظام أنماط النجاح قيد التحديث، سيظهر قريباً")
+        print(f"⚠️ خطأ في get_best_patterns: {e}")
+    except Exception as e:
+        st.warning(f"⚠️ حدث خطأ غير متوقع: {str(e)[:100]}")
 
     st.markdown("---")
     
     # عرض السجل
     st.subheader("🗂️ سجل التحليلات والأخطاء")
     if stats["history"]:
-        # عرض آخر 20 تحليل
         df_history = pd.DataFrame(stats["history"][:20])
         st.dataframe(df_history, use_container_width=True)
     else:
         st.info("📂 السجل فارغ حالياً. قم بتشغيل مسح السوق لتوليد التحليلات.")
 
-# --- التاب الثالث: تحليل سهم منفرد ---
+# ================================================================
+# التاب الثالث: تحليل سهم منفرد
+# ================================================================
 with tab_analysis:
     st.header("🔍 فحص جراحي مخصص لسهم محدد")
 
@@ -230,7 +251,7 @@ with tab_analysis:
         if st.button("🔬 ابدأ الفحص الجراحي العميق للسهم"):
             with st.spinner("جاري جمع البيانات وحساب المؤشرات..."):
                 news_score = fetch_company_news_sentiment(row_choice['name'], row_choice['symbol'])
-                s_df, src = fetch_stock_data(row_choice['symbol'], row_choice['y_symbol'])
+                s_df, src = fetch_stock_data(row_choice['symbol'], row_choice.get('y_symbol'))
 
                 if not s_df.empty and len(s_df) >= 30:
                     s_df = add_all_indicators(s_df)
@@ -256,7 +277,7 @@ with tab_analysis:
                     strat = generate_trading_strategy(s_df, pred_target, dir_out)
                     summary = get_market_summary(s_df)
 
-                    # ✅ تسجيل التحليل في ملف JSON
+                    # تسجيل التحليل في ملف JSON
                     last_row_ind = s_df.iloc[-1].to_dict()
                     analyst.record_prediction(
                         symbol=row_choice['symbol'],
@@ -301,8 +322,9 @@ with tab_analysis:
                 else:
                     st.error("❌ فشل جلب البيانات التاريخية لهذا السهم.")
 
-
-# --- عرض معلومات إضافية في الـ Sidebar ---
+# ================================================================
+# معلومات إضافية في الـ Sidebar
+# ================================================================
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 📊 حالة نظام التعلم")
 
@@ -316,4 +338,4 @@ if stats["history"]:
     st.sidebar.markdown("---")
     st.sidebar.markdown("### 📋 آخر التحليلات")
     for p in stats["history"][:3]:
-        st.sidebar.write(f"• {p['S']}: {p['R'][:20]}...")
+        st.sidebar.write(f"• {p.get('S', 'Unknown')}: {p.get('R', 'N/A')[:25]}...")
