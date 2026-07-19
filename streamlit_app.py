@@ -173,6 +173,30 @@ with tab_scan:
                 opportunities_df = pd.DataFrame(opportunities)
                 st.subheader(f"🎯 تم العثور على ({len(opportunities_df)}) فرصة واعدة:")
                 st.dataframe(opportunities_df.drop(columns=["df_backup"], errors="ignore"), use_container_width=True)
+                
+                # ============================================================
+                # ✅ إرسال تقرير التليجرام (ماسح السوق)
+                # ============================================================
+                try:
+                    telegram_msg = f"🔔 *تقرير مسح البورصة المصرية* 🔔\n"
+                    telegram_msg += f"📅 {datetime.now().strftime('%Y-%m-%d %H:%M')}\n"
+                    telegram_msg += f"🎯 الاستراتيجية: {strategy_mode}\n"
+                    telegram_msg += f"📊 عدد الفرص: {len(opportunities_df)}\n"
+                    telegram_msg += "═\n"
+                    
+                    for opp in opportunities_df.head(5).to_dict('records'):
+                        telegram_msg += f"📊 {opp['السهم']}: {opp['الإشارة']}\n"
+                        telegram_msg += f"💰 السعر: {opp['السعر الحالي']} ج.م | الهدف: {opp['الهدف المتوقع']} ج.م\n"
+                        telegram_msg += f"🛡️ درجة الأمان: {opp['درجة الأمان']}/100\n"
+                        telegram_msg += "───────────────────\n"
+                    
+                    if len(opportunities_df) > 5:
+                        telegram_msg += f"... و {len(opportunities_df) - 5} فرص أخرى"
+                    
+                    send_telegram_alert(telegram_msg)
+                    st.success("✅ تم إرسال التقرير إلى التليجرام!")
+                except Exception as e:
+                    st.warning(f"⚠️ فشل إرسال التليجرام: {e}")
             else:
                 st.info("⏳ لم تعثر الآلة على صفقات تحقق شروط الأمان، ولكن تم تخزين التحليلات للتعلم.")
 
@@ -290,6 +314,26 @@ with tab_analysis:
                     )
                     
                     st.success(f"✅ تم تخزين تحليل {row_choice['symbol']} في ملف التعلم الذاتي")
+                    
+                    # ============================================================
+                    # ✅ إرسال إشعار تليجرام إذا كانت إشارة شراء (تحليل منفرد)
+                    # ============================================================
+                    if "شراء" in dir_out:
+                        alert_msg = (
+                            f"🚨 *إشارة شراء من منظومة البورصة!* 🚨\n\n"
+                            f"📈 *السهم:* {row_choice['symbol']}\n"
+                            f"💰 *السعر الحالي:* {current_price:.2f} ج.م\n"
+                            f"🎯 *الهدف المتوقع:* {pred_target:.2f} ج.م\n"
+                            f"🟢 *أفضل دخول:* {entry_out:.2f} ج.م\n"
+                            f"🛡️ *وقف الخسارة:* {strat['stop_loss']:.2f} ج.م\n"
+                            f"🤖 *درجة الثقة:* {score_out}/100\n"
+                            f"📰 *نبرة الأخبار:* {news_score}"
+                        )
+                        try:
+                            send_telegram_alert(alert_msg)
+                            st.success("✅ تم إرسال الإشعار إلى التليجرام!")
+                        except Exception as e:
+                            st.warning(f"⚠️ فشل إرسال التليجرام: {e}")
 
                     col_l, col_r = st.columns(2)
                     with col_l:
