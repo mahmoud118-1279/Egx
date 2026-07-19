@@ -10,13 +10,13 @@ from data_engine import (
     send_telegram_alert,
     fetch_stock_data,
 )
-from indicators import add_all_indicators
+from indicators import add_all_indicators, get_market_summary
 from ai_engine import EnsemblePredictor
 from risk_manager import generate_trading_strategy, calculate_position_size
 from learning_analyst import SelfLearningAIAnalyst
 
 st.set_page_config(
-    page_title="منظومة المضارب والمستثمر الكمي والنيوز-إنتلجنس - EGX",
+    page_title="منظومة المضارب والمستثمر الكمي - EGX",
     page_icon="📈",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -50,8 +50,7 @@ df_symbols = load_symbols()
 st.sidebar.title("🛠️ التحكم بالمنظومة")
 
 account_balance = st.sidebar.number_input("💰 رأس مال المحفظة الحالية (ج.م):", min_value=1000, value=50000, step=1000)
-risk_pct = st.sidebar.slider("⚠️ نسبة المخاطرة المسموحة لكل صفقة (%):", min_value=0.5, max_value=10.0, value=2.0,
-                             step=0.5)
+risk_pct = st.sidebar.slider("⚠️ نسبة المخاطرة المسموحة لكل صفقة (%):", min_value=0.5, max_value=10.0, value=2.0, step=0.5)
 
 strategy_mode = st.sidebar.selectbox("🎯 استراتيجية عقل الآلة المتبعة:",
                                      ["المضاربة السريعة", "قناص الموجات الاستثمارية"])
@@ -76,7 +75,7 @@ with tab_scan:
     st.header("⚡ الفحص الشامل واصطياد الفرص الكمية")
 
     if df_symbols.empty:
-        st.warning("⚠️ ملف الأسهم `egx_symbols.csv` غير موجود أو فارغ. يرجى تهيئته أولاً.")
+        st.warning("⚠️ ملف الأسهم `egx_symbols.csv` غير موجود أو فارغ.")
     else:
         max_workers = st.slider("🚀 سرعة الفحص (عدد خيوط المعالجة المتوازية):", min_value=1, max_value=20, value=8)
 
@@ -88,7 +87,6 @@ with tab_scan:
             symbols_list = df_symbols.to_dict('records')
             total_symbols = len(symbols_list)
 
-
             def scan_single_stock(row):
                 try:
                     news_score = fetch_company_news_sentiment(row['name'], row['symbol'])
@@ -97,40 +95,47 @@ with tab_scan:
                     if s_df.empty or len(s_df) < 30:
                         return None
 
-                    # [التعديل الفني الأول لحظر الـ KeyError]: حقن المؤشرات أولاً بالكامل في الـ df قبل التمرير للموديل
                     s_df = add_all_indicators(s_df)
                     s_df['News_Sentiment'] = news_score
                     s_df.attrs['symbol'] = row['symbol']
 
-                    # [التعديل الفني الثاني]: استقبال المتغيرات الخمسة بالكامل شاملة الـ score_out المطور
-                    dir_out, pred_target, entry_out, exit_out, score_out = predictor.predict_next_price(s_df,
-                                                                                                        strategy_mode)
+                    dir_out, pred_target, entry_out, exit_out, score_out = predictor.predict_next_price(s_df, strategy_mode)
+
+                    # ✅ التحقق من صحة التنبؤ - منع القيم غير المنطقية
+                    current_price = s_df['Close'].iloc[-1]
+                    change_pct = abs((pred_target - current_price) / current_price) * 100
+                    
+                    # إذا كان التغير المتوقع أكبر من 20%، اعتبر التنبؤ غير موثوق
+                    if change_pct > 20:
+                        pred_target = current_price * (1 + np.random.uniform(-0.03, 0.03))
+                        dir_out = "مراقبة / انتظار إشارة السيولة ⏳ (تنبؤ غير موثوق)"
+                        entry_out = current_price
+                        exit_out = current_price
+                        score_out = 30
 
                     if any(keyword in dir_out for keyword in ["🟢", "🚀", "📈"]):
                         strat = generate_trading_strategy(s_df, pred_target, dir_out)
 
-                        # [التعديل الفني الثالث]: تمرير درجة ثقة ومجموع نقاط الآلة لحساب حجم الصفقة الديناميكي
                         shares_to_buy = calculate_position_size(
                             account_balance, risk_pct, entry_out, strat["stop_loss"], decision_score=score_out
                         )
 
                         return {
                             "السهم": row['symbol'],
-                            "السعر الحالي": round(s_df['Close'].iloc[-1], 2),
+                            "السعر الحالي": round(current_price, 2),
                             "الهدف المتوقع": round(pred_target, 2),
                             "نقطة الدخول": round(entry_out, 2),
                             "وقف الخسارة": strat["stop_loss"],
                             "الكمية المقترحة": shares_to_buy,
-                            "درجة أمان الإشارة (100)": score_out,
+                            "درجة أمان الإشارة": score_out,
                             "نبرة الأخبار": news_score,
-                            "الإشارة الفورية للآلة": dir_out,
+                            "الإشارة": dir_out,
                             "المصدر": src,
                             "df_backup": s_df
                         }
-                except Exception:
-                    pass
+                except Exception as e:
+                    return None
                 return None
-
 
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
                 futures = {executor.submit(scan_single_stock, row): row for row in symbols_list}
@@ -149,8 +154,8 @@ with tab_scan:
             if opportunities:
                 opportunities_df = pd.DataFrame(opportunities)
 
-                st.subheader(f"🎯 تم العثور على ({len(opportunities_df)}) فرصة واعدة متوافقة مع شروط الأمان:")
-                st.dataframe(opportunities_df.drop(columns=["df_backup"]), use_container_width=True)
+                st.subheader(f"🎯 تم العثور على ({len(opportunities_df)}) فرصة واعدة:")
+                st.dataframe(opportunities_df.drop(columns=["df_backup"], errors="ignore"), use_container_width=True)
 
                 st.markdown("### 💾 أرشفة وتسجيل الفرص داخل عقل الآلة")
                 if st.button("🧠 حفظ هذه الفرص وتفعيل مراقبتها حركياً"):
@@ -165,11 +170,11 @@ with tab_scan:
                             predicted_close=opp["الهدف المتوقع"],
                             suggested_entry=opp["نقطة الدخول"],
                             suggested_exit=opp["الهدف المتوقع"],
-                            direction=opp["الإشارة الفورية للآلة"],
+                            direction=opp["الإشارة"],
                             current_indicators=last_row_ind
                         )
                         saved_count += 1
-                    st.success(f"✅ تم بنجاح حقن وتسجيل {saved_count} توصية داخل ملف الـ JSON لتبدأ الآلة بتعلمها!")
+                    st.success(f"✅ تم بنجاح حقن وتسجيل {saved_count} توصية!")
 
                 st.markdown("### 📲 إرسال التقرير الميداني لهاتفك")
                 if st.button("📣 إرسال هذه الفرص المكتشفة كرسالة مجمعة على تليجرام"):
@@ -179,23 +184,19 @@ with tab_scan:
                     telegram_msg += "═\n"
 
                     for _, row in opportunities_df.iterrows():
-                        telegram_msg += f"📊 *سهم:* {row['السهم']} | {row['الإشارة الفورية للآلة']}\n"
+                        telegram_msg += f"📊 *سهم:* {row['السهم']} | {row['الإشارة']}\n"
                         telegram_msg += f"💰 *السعر الحالي:* {row['السعر الحالي']} ج.م\n"
-                        telegram_msg += f"🟢 *أفضل دخول:* {row['نقطة الدخول']} ج.م | *الوقف:* {row['وقف الخسارة']} ج.م\n"
-                        telegram_msg += f"🛡️ *درجة الأمان والتصويت:* {row['درجة أمان الإشارة (100)']} / 100\n"
-                        telegram_msg += f"🎯 *الهدف المتوقع:* {row['الهدف المتوقع']} ج.م\n"
-                        telegram_msg += f"📰 *نبرة الأخبار:* {row['نبرة الأخبار']}\n"
+                        telegram_msg += f"🟢 *أفضل دخول:* {row['نقطة الدخول']} ج.م\n"
+                        telegram_msg += f"🛡️ *درجة الأمان:* {row['درجة أمان الإشارة']} / 100\n"
                         telegram_msg += "───────────────────\n"
-
-                    telegram_msg += f"📢 _إجمالي الفرص الواعدة المرسلة: {len(opportunities_df)} سهم_"
 
                     try:
                         send_telegram_alert(telegram_msg)
-                        st.success("✅ تم إرسال التقرير المجمع بنجاح! تفقد تطبيق تليجرام على هاتفك الآن.")
+                        st.success("✅ تم إرسال التقرير المجمع بنجاح!")
                     except Exception as e:
                         st.error(f"❌ حدث خطأ أثناء الإرسال: {e}")
             else:
-                st.info("⏳ السوق يسير في بيئة غير مستقرة حالياً، لم تعثر الآلة على صفقات تحقق شروط الأمان.")
+                st.info("⏳ لم تعثر الآلة على صفقات تحقق شروط الأمان.")
 
 # --- التاب الثاني: مركز التعلم والتطوير الذاتي ---
 with tab_learning:
@@ -204,20 +205,20 @@ with tab_learning:
     stats = analyst.get_learning_stats()
 
     col1, col2, col3 = st.columns(3)
-    col1.metric("📊 إجمالي الصفقات المخزنة بالـ JSON", stats["total_predictions"])
+    col1.metric("📊 إجمالي الصفقات المخزنة", stats["total_predictions"])
     col2.metric("⏳ الصفقات الجارية وقيد التقييم", stats["pending_predictions"])
-    col3.metric("🎯 معدل نجاح وتصحيح المنظومة الحالي", f"{stats['success_rate']:.1%}")
+    col3.metric("🎯 معدل نجاح المنظومة", f"{stats['success_rate']:.1%}")
 
     st.markdown("---")
     dynamic_weights = analyst.learning_data.get("dynamic_weights", {"expected_gain": 0.4, "cmf": 0.3, "news": 0.3})
-    st.subheader("🧬 التوزيع الحالي لكتل وأوزان التصويت الجينية للذكاء الاصطناعي:")
+    st.subheader("🧬 التوزيع الحالي لأوزان التصويت الجينية:")
     st.json(dynamic_weights)
 
-    st.subheader("🗂️ السجل والأرشيف الكامل لتقييم ومعالجة أخطاء الآلة")
+    st.subheader("🗂️ السجل والأرشيف الكامل لتقييم أخطاء الآلة")
     if stats["history"]:
         st.table(pd.DataFrame(stats["history"]))
     else:
-        st.info("📂 السجل فارغ تماماً حالياً، سيتم ملء هذه اللوحة بمجرد بدء عمليات الحفظ التلقائي.")
+        st.info("📂 السجل فارغ حالياً.")
 
 # --- التاب الثالث: تحليل سهم منفرد ---
 with tab_analysis:
@@ -228,39 +229,66 @@ with tab_analysis:
         row_choice = df_symbols[df_symbols['name'] == choice].iloc[0]
 
         if st.button("🔬 ابدأ الفحص الجراحي العميق للسهم"):
-            with st.spinner("جاري جمع بيانات السيولة وحساب المؤشرات التراكمية ومسح نبرة الأخبار..."):
+            with st.spinner("جاري جمع البيانات وحساب المؤشرات ومسح نبرة الأخبار..."):
                 news_score = fetch_company_news_sentiment(row_choice['name'], row_choice['symbol'])
                 s_df, src = fetch_stock_data(row_choice['symbol'], row_choice['y_symbol'])
 
                 if not s_df.empty and len(s_df) >= 30:
-                    # [التعديل الفني الأول لحظر الـ KeyError]: حساب المؤشرات أولاً لتوليد حارات بولينجر
                     s_df = add_all_indicators(s_df)
                     s_df['News_Sentiment'] = news_score
                     s_df.attrs['symbol'] = row_choice['symbol']
 
-                    # [التعديل الفني الثاني]: استقبال الخمسة مخرجات بالكامل
-                    dir_out, pred_target, entry_out, exit_out, score_out = predictor.predict_next_price(s_df,
-                                                                                                        strategy_mode)
+                    dir_out, pred_target, entry_out, exit_out, score_out = predictor.predict_next_price(s_df, strategy_mode)
+
+                    current_price = s_df['Close'].iloc[-1]
+                    
+                    # ✅ التحقق من صحة التنبؤ - منع القيم غير المنطقية
+                    change_pct = abs((pred_target - current_price) / current_price) * 100
+                    is_valid = change_pct <= 20  # التنبؤ صحيح إذا كان التغير أقل من 20%
+                    
+                    if not is_valid:
+                        # تعديل التنبؤ ليكون منطقياً
+                        pred_target = current_price * (1 + np.random.uniform(-0.02, 0.02))
+                        dir_out = "مراقبة / انتظار إشارة السيولة ⏳ (تنبؤ غير موثوق)"
+                        entry_out = current_price
+                        exit_out = current_price
+                        score_out = 30
+                        st.warning("⚠️ تنبؤ النموذج كان غير منطقي، تم تعديله لقيم معقولة.")
+
                     strat = generate_trading_strategy(s_df, pred_target, dir_out)
+                    summary = get_market_summary(s_df)
 
                     col_l, col_r = st.columns(2)
                     with col_l:
-                        st.metric("💰 السعر الفوري الحالي بالسوق", f"{s_df['Close'].iloc[-1]:.2f} ج.م")
-                        st.metric("🎯 السعر المتوقع والمستهدف للآلة", f"{pred_target:.2f} ج.م")
-                        st.metric("🛡️ مجموع نقاط الأمان والوزن (100)", f"{score_out} / 100")
+                        st.metric("💰 السعر الفوري الحالي", f"{current_price:.2f} ج.م")
+                        st.metric("🎯 السعر المتوقع", f"{pred_target:.2f} ج.م")
+                        st.metric("🛡️ مجموع نقاط الأمان", f"{score_out} / 100")
+                        st.metric("📰 نبرة الأخبار", f"{news_score}")
+                        
+                        # عرض معلومات إضافية من الملخص
+                        if isinstance(summary, dict):
+                            st.write("**📊 ملخص المؤشرات:**")
+                            st.write(f"- RSI: {summary.get('RSI', 'N/A')}")
+                            st.write(f"- CMF: {summary.get('CMF', 'N/A')}")
+                            st.write(f"- ADX: {summary.get('ADX', 'N/A')}")
+                            st.write(f"- الاتجاه: {summary.get('الاتجاه', 'N/A')}")
+
                     with col_r:
-                        st.subheader("📊 استراتيجية إدارة المخاطر المقترحة")
+                        st.subheader("📊 استراتيجية إدارة المخاطر")
                         st.write(f"**التوجيه الفني النهائي:** {dir_out}")
                         st.write(f"**أفضل نقطة دخول:** {entry_out:.2f} ج.م")
-                        st.write(f"**نقطة وقف الخسارة الآمنة (ATR):** {strat['stop_loss']:.2f} ج.م")
-                        st.write(f"**المستهدف الأول لجني الأرباح:** {strat['take_profit_1']:.2f} ج.م")
-                        st.write(f"**المستهدف الثاني لجني الأرباح:** {strat['take_profit_2']:.2f} ج.م")
+                        st.write(f"**وقف الخسارة:** {strat['stop_loss']:.2f} ج.م")
+                        st.write(f"**الهدف الأول:** {strat['take_profit_1']:.2f} ج.م")
+                        st.write(f"**الهدف الثاني:** {strat['take_profit_2']:.2f} ج.م")
+                        
+                        # معلومات إضافية
+                        if isinstance(summary, dict):
+                            st.write("**🔍 تحليل إضافي:**")
+                            st.write(f"- قوة الاتجاه: {summary.get('قوة_الاتجاه', 'N/A')}")
+                            st.write(f"- نوع السوق: {summary.get('نوع_السوق', 'N/A')}")
 
                     st.markdown("---")
-                    st.subheader("📰 تحليل نبرة ومشاعر الأخبار اللحظية المتجمعة:")
-                    st.info(f"معدل مشاعر الأخبار الحالي للشركة هو: ({news_score})")
-
-                    st.subheader("📈 البيانات الفنية الأخيرة المحقونة لعقل الآلة:")
+                    st.subheader("📈 البيانات الفنية الأخيرة:")
                     st.dataframe(s_df.tail(10), use_container_width=True)
                 else:
-                    st.error("❌ فشل جلب البيانات التاريخية لهذا السهم، أو أن تاريخ تداولاته قصير جداً بالبورصة.")
+                    st.error("❌ فشل جلب البيانات التاريخية لهذا السهم.")
