@@ -1,6 +1,6 @@
 import os
 import json
-from datetime import datetime, timedelta
+from datetime import datetime
 import pandas as pd
 import numpy as np
 
@@ -8,9 +8,7 @@ from config import LEARNING_DATA_FILE
 
 
 class SelfLearningAIAnalyst:
-    """
-    نظام التعليم العميق والتطور الذاتي الحركي لتحليل الأخطاء وإعادة توزين الاستراتيجيات كمياً
-    """
+    """نظام التعليم العميق والتطور الذاتي الحركي لتحليل الأخطاء وإعادة توزين الاستراتيجيات كمياً"""
 
     def __init__(self):
         self.learning_file = LEARNING_DATA_FILE
@@ -28,39 +26,12 @@ class SelfLearningAIAnalyst:
                         data["success_patterns"] = []
                     if "dynamic_weights" not in data:
                         data["dynamic_weights"] = {"expected_gain": 0.4, "cmf": 0.3, "news": 0.3}
-                    if "performance_history" not in data:
-                        data["performance_history"] = []
-                    if "total_trades" not in data:
-                        data["total_trades"] = 0
-                    if "winning_trades" not in data:
-                        data["winning_trades"] = 0
-                    if "losing_trades" not in data:
-                        data["losing_trades"] = 0
-                    if "average_profit" not in data:
-                        data["average_profit"] = 0.0
-                    if "average_loss" not in data:
-                        data["average_loss"] = 0.0
                     return data
-            except Exception as e:
-                print(f"⚠️ خطأ في تحميل البيانات: {e}")
-                return self._get_default_data()
-        return self._get_default_data()
-
-    def _get_default_data(self):
-        """إرجاع البيانات الافتراضية"""
-        return {
-            "predictions": [],
-            "success_rate": 0.0,
-            "failure_patterns": [],
-            "success_patterns": [],
-            "dynamic_weights": {"expected_gain": 0.4, "cmf": 0.3, "news": 0.3},
-            "performance_history": [],
-            "total_trades": 0,
-            "winning_trades": 0,
-            "losing_trades": 0,
-            "average_profit": 0.0,
-            "average_loss": 0.0
-        }
+            except Exception:
+                return {"predictions": [], "success_rate": 0.0, "failure_patterns": [], "success_patterns": [],
+                        "dynamic_weights": {"expected_gain": 0.4, "cmf": 0.3, "news": 0.3}}
+        return {"predictions": [], "success_rate": 0.0, "failure_patterns": [], "success_patterns": [],
+                "dynamic_weights": {"expected_gain": 0.4, "cmf": 0.3, "news": 0.3}}
 
     def _save_learning_data(self):
         """حفظ السجلات والتطورات الناتجة عن التفكير الذاتي للآلة"""
@@ -68,7 +39,7 @@ class SelfLearningAIAnalyst:
             with open(self.learning_file, 'w', encoding='utf-8') as f:
                 json.dump(self.learning_data, f, ensure_ascii=False, indent=4)
         except Exception as e:
-            print(f"❌ خطأ أثناء حفظ سجل التعلم المتطور: {e}")
+            print(f"خطأ أثناء حفظ سجل التعلم المتطور: {e}")
 
     def record_prediction(self, symbol, current_price, predicted_close, suggested_entry, suggested_exit, direction,
                           current_indicators=None):
@@ -82,34 +53,23 @@ class SelfLearningAIAnalyst:
             "suggested_exit": float(suggested_exit),
             "direction": direction,
             "actual_max_reached": float(current_price),
-            "status": "Pending ⏳",
-            "entry_date": datetime.now().strftime("%Y-%m-%d"),
-            "exit_date": None,
-            "profit_pct": 0.0,
-            "holding_days": 0
+            "status": "Pending ⏳"
         }
 
         if current_indicators is not None:
             new_pred["indicators_snapshot"] = {
                 "RSI": float(current_indicators.get("RSI", 50.0)),
                 "CMF": float(current_indicators.get("CMF", 0.0)),
-                "News_Sentiment": float(current_indicators.get("News_Sentiment", 0.0)),
-                "ATR": float(current_indicators.get("ATR", 0.0)),
-                "Volume": float(current_indicators.get("Volume", 0.0)),
-                "MACD": float(current_indicators.get("MACD", 0.0)),
-                "ADX": float(current_indicators.get("ADX", 0.0))
+                "News_Sentiment": float(current_indicators.get("News_Sentiment", 0.0))
             }
 
         self.learning_data["predictions"].append(new_pred)
-        self.learning_data["total_trades"] += 1
         self._save_learning_data()
-        print(f"✅ تم تسجيل توصية جديدة لـ {symbol}")
         return True
 
     def evaluate_pending_predictions(self, fetch_stock_data_func):
         """تحديث الصفقات وتشغيل محرك التفكير المقارن"""
         updated = False
-        evaluated_count = 0
 
         for pred in self.learning_data.get("predictions", []):
             if pred["status"] != "Pending ⏳":
@@ -118,217 +78,100 @@ class SelfLearningAIAnalyst:
             symbol = pred["symbol"]
             try:
                 df, _ = fetch_stock_data_func(symbol)
-                if df.empty:
+                if df.empty: 
                     continue
 
                 recent_high = float(df['High'].max())
                 recent_close = float(df['Close'].iloc[-1])
-                entry_price = pred["suggested_entry"]
-                exit_target = pred["suggested_exit"]
 
                 if recent_high > pred["actual_max_reached"]:
                     pred["actual_max_reached"] = recent_high
                     updated = True
 
-                entry_date = datetime.strptime(pred["entry_date"], "%Y-%m-%d")
-                days_held = (datetime.now() - entry_date).days
-                pred["holding_days"] = days_held
-
-                if pred["actual_max_reached"] >= exit_target:
-                    profit_pct = ((exit_target - entry_price) / entry_price) * 100
-                    pred["status"] = f"نجاح 🎯 (ربح {profit_pct:.1f}%)"
-                    pred["profit_pct"] = profit_pct
-                    pred["exit_date"] = datetime.now().strftime("%Y-%m-%d")
-                    
-                    self.learning_data["winning_trades"] += 1
-                    self.learning_data["average_profit"] = (
-                        (self.learning_data["average_profit"] * (self.learning_data["winning_trades"] - 1) + profit_pct) 
-                        / self.learning_data["winning_trades"]
-                    )
-                    
+                if pred["actual_max_reached"] >= pred["suggested_exit"]:
+                    pred["status"] = "نجاح باهر 🎯 (حقق الهدف كاملاً)"
                     if "indicators_snapshot" in pred:
                         self.learning_data["success_patterns"].append({
                             "symbol": symbol, 
                             "indicators": pred["indicators_snapshot"],
-                            "profit": profit_pct,
-                            "date": pred["date"]
+                            "profit": ((pred["suggested_exit"] - pred["suggested_entry"]) / pred["suggested_entry"]) * 100
                         })
                     updated = True
-                    evaluated_count += 1
-
-                elif recent_close < entry_price * 0.95:
-                    loss_pct = ((recent_close - entry_price) / entry_price) * 100
-                    pred["status"] = f"فشل ❌ (خسارة {loss_pct:.1f}%)"
-                    pred["profit_pct"] = loss_pct
-                    pred["exit_date"] = datetime.now().strftime("%Y-%m-%d")
-                    
-                    self.learning_data["losing_trades"] += 1
-                    self.learning_data["average_loss"] = (
-                        (self.learning_data["average_loss"] * (self.learning_data["losing_trades"] - 1) + abs(loss_pct)) 
-                        / self.learning_data["losing_trades"]
-                    )
-                    
+                elif recent_close < pred["suggested_entry"] * 0.95:
+                    pred["status"] = "فشل ❌ (ضرب وقف الخسارة)"
                     if "indicators_snapshot" in pred:
                         self.learning_data["failure_patterns"].append({
                             "symbol": symbol, 
-                            "indicators": pred["indicators_snapshot"],
-                            "loss": loss_pct,
-                            "date": pred["date"]
+                            "indicators": pred["indicators_snapshot"]
                         })
                     updated = True
-                    evaluated_count += 1
-
-                elif days_held > 30:
-                    profit_pct = ((recent_close - entry_price) / entry_price) * 100
-                    if profit_pct > 0:
-                        pred["status"] = f"انتهاء المدة ⏰ (ربح {profit_pct:.1f}%)"
-                    else:
-                        pred["status"] = f"انتهاء المدة ⏰ (خسارة {profit_pct:.1f}%)"
-                    pred["profit_pct"] = profit_pct
-                    pred["exit_date"] = datetime.now().strftime("%Y-%m-%d")
-                    updated = True
-                    evaluated_count += 1
 
             except Exception as e:
-                print(f"⚠️ خطأ في مراجعة السهم {symbol}: {e}")
+                print(f"خطأ في مراجعة السهم {symbol}: {e}")
 
-        if evaluated_count > 0:
-            print(f"✅ تم تقييم {evaluated_count} صفقة جديدة")
-            self._recalculate_success_rate()
-            self._update_performance_history()
+        if updated:
             self._evolve_voting_weights()
+            self._recalculate_success_rate()
             self._save_learning_data()
 
         return updated
 
-    def _update_performance_history(self):
-        """تحديث سجل الأداء الشهري"""
-        now = datetime.now()
-        month_key = now.strftime("%Y-%m")
-        
-        found = False
-        for entry in self.learning_data.get("performance_history", []):
-            if entry["month"] == month_key:
-                entry["trades"] = self.learning_data["total_trades"]
-                entry["wins"] = self.learning_data["winning_trades"]
-                entry["losses"] = self.learning_data["losing_trades"]
-                entry["win_rate"] = self.learning_data["success_rate"]
-                found = True
-                break
-        
-        if not found:
-            self.learning_data["performance_history"].append({
-                "month": month_key,
-                "trades": self.learning_data["total_trades"],
-                "wins": self.learning_data["winning_trades"],
-                "losses": self.learning_data["losing_trades"],
-                "win_rate": self.learning_data["success_rate"]
-            })
-
     def _evolve_voting_weights(self):
-        """محرك التطور الذاتي المتقدم"""
+        """محرك التطور الذاتي: يحلل أي المعايير كانت سبباً في النجاح لرفع وزنها"""
         success_list = self.learning_data.get("success_patterns", [])
         failure_list = self.learning_data.get("failure_patterns", [])
 
-        if len(success_list) < 3 or len(failure_list) < 2:
+        if len(success_list) < 3:
             return
-
-        success_indicators = {
-            "news": [p["indicators"].get("News_Sentiment", 0.0) for p in success_list],
-            "cmf": [p["indicators"].get("CMF", 0.0) for p in success_list],
-            "rsi": [p["indicators"].get("RSI", 50.0) for p in success_list]
-        }
-
-        failure_indicators = {
-            "news": [p["indicators"].get("News_Sentiment", 0.0) for p in failure_list],
-            "cmf": [p["indicators"].get("CMF", 0.0) for p in failure_list],
-            "rsi": [p["indicators"].get("RSI", 50.0) for p in failure_list]
-        }
-
-        avg_success_news = np.mean(success_indicators["news"])
-        avg_failed_news = np.mean(failure_indicators["news"])
-        avg_success_cmf = np.mean(success_indicators["cmf"])
-        avg_failed_cmf = np.mean(failure_indicators["cmf"])
 
         current_weights = self.learning_data["dynamic_weights"]
 
-        news_diff = avg_success_news - avg_failed_news
-        if news_diff > 0.2:
+        avg_success_news = sum(p["indicators"].get("News_Sentiment", 0.0) for p in success_list) / len(success_list)
+        avg_failed_news = sum(p["indicators"].get("News_Sentiment", 0.0) for p in failure_list) / max(len(failure_list), 1)
+
+        if avg_success_news > 0.1 and avg_failed_news < 0.0:
             current_weights["news"] = min(current_weights["news"] + 0.05, 0.5)
             current_weights["cmf"] = max(current_weights["cmf"] - 0.025, 0.15)
             current_weights["expected_gain"] = max(current_weights["expected_gain"] - 0.025, 0.2)
-        elif news_diff < -0.1:
-            current_weights["news"] = max(current_weights["news"] - 0.03, 0.1)
-            current_weights["cmf"] = min(current_weights["cmf"] + 0.015, 0.4)
-
-        cmf_diff = avg_success_cmf - avg_failed_cmf
-        if cmf_diff > 0.1:
-            current_weights["cmf"] = min(current_weights["cmf"] + 0.03, 0.4)
-            current_weights["news"] = max(current_weights["news"] - 0.015, 0.15)
-
-        total = sum(current_weights.values())
-        if total > 0:
-            for key in current_weights:
-                current_weights[key] = current_weights[key] / total
 
         self.learning_data["dynamic_weights"] = current_weights
-        print(f"🧬 تم تحديث الأوزان: {current_weights}")
 
     def _recalculate_success_rate(self):
-        """إعادة حساب نسبة النجاح الكلية"""
         total_evaluated = 0
         total_correct = 0
-        
         for pred in self.learning_data.get("predictions", []):
             if pred["status"] != "Pending ⏳":
                 total_evaluated += 1
-                if "نجاح" in pred["status"] or "ربح" in pred["status"]:
+                if "نجاح" in pred["status"]:
                     total_correct += 1
-        
         if total_evaluated > 0:
             self.learning_data["success_rate"] = total_correct / total_evaluated
-        
-        self.learning_data["total_evaluated"] = total_evaluated
 
     def get_learning_stats(self):
-        """الحصول على إحصائيات التعلم"""
         total = len(self.learning_data.get("predictions", []))
         pending = sum(1 for p in self.learning_data.get("predictions", []) if p["status"] == "Pending ⏳")
         success_rate = self.learning_data.get("success_rate", 0.0)
-        winning_trades = self.learning_data.get("winning_trades", 0)
-        losing_trades = self.learning_data.get("losing_trades", 0)
-        avg_profit = self.learning_data.get("average_profit", 0.0)
-        avg_loss = self.learning_data.get("average_loss", 0.0)
-        
-        profit_factor = (winning_trades * avg_profit) / (losing_trades * avg_loss + 1e-10) if losing_trades > 0 else float('inf')
-        
         history = []
         for p in reversed(self.learning_data.get("predictions", [])):
             history.append({
-                "التاريخ": p["date"],
-                "S": p["symbol"],
-                "R": p["direction"][:30] + "..." if len(p["direction"]) > 30 else p["direction"],
-                "سعر الدخول": f"{p['suggested_entry']:.2f}",
+                "التاريخ": p["date"], 
+                "S": p["symbol"], 
+                "R": p["direction"],
+                "سعر الدخول": f"{p['suggested_entry']:.2f}", 
                 "الهدف": f"{p['suggested_exit']:.2f}",
-                "أعلى سعر": f"{p['actual_max_reached']:.2f}" if p['actual_max_reached'] else "⏳",
-                "الربح %": f"{p.get('profit_pct', 0):.1f}%" if p.get('profit_pct', 0) != 0 else "⏳",
+                "أعلى سعر": f"{p['actual_max_reached']:.2f}" if p['actual_max_reached'] else "⏳", 
                 "الحالة": p["status"]
             })
-
         return {
-            "total_predictions": total,
-            "pending_predictions": pending,
+            "total_predictions": total, 
+            "pending_predictions": pending, 
             "success_rate": success_rate,
-            "winning_trades": winning_trades,
-            "losing_trades": losing_trades,
-            "average_profit": avg_profit,
-            "average_loss": avg_loss,
-            "profit_factor": profit_factor,
-            "history": history,
-            "dynamic_weights": self.learning_data.get("dynamic_weights", {}),
-            "performance_history": self.learning_data.get("performance_history", [])
+            "history": history
         }
 
+    # ============================================================
+    # ✅ الدالة المضافة لحل مشكلة AttributeError
+    # ============================================================
     def get_best_patterns(self, top_n=5):
         """
         الحصول على أفضل أنماط النجاح
@@ -354,44 +197,53 @@ class SelfLearningAIAnalyst:
             cmf = ind.get('CMF', 0)
             news = ind.get('News_Sentiment', 0)
             
-            # تصنيف المؤشرات
+            # تصنيف المؤشرات إلى فئات
             rsi_bucket = int(rsi / 10) * 10
-            cmf_bucket = 'pos' if cmf > 0 else 'neg'
-            news_bucket = 'pos' if news > 0 else 'neg'
+            cmf_bucket = 'إيجابي' if cmf > 0 else 'سلبي'
+            news_bucket = 'إيجابي' if news > 0 else 'سلبي'
             
             key = f"RSI_{rsi_bucket}_CMF_{cmf_bucket}_News_{news_bucket}"
             
             if key not in patterns:
                 patterns[key] = {
-                    "count": 0, 
-                    "profits": [], 
-                    "indicators": ind,
+                    "count": 0,
+                    "profits": [],
                     "rsi_range": f"{rsi_bucket}-{rsi_bucket+10}",
-                    "cmf_type": "إيجابي" if cmf > 0 else "سلبي",
-                    "news_type": "إيجابي" if news > 0 else "سلبي",
+                    "cmf_type": cmf_bucket,
+                    "news_type": news_bucket,
                     "avg_rsi": 0,
                     "avg_cmf": 0,
-                    "avg_news": 0
+                    "avg_news": 0,
+                    "total_profit": 0,
+                    "wins": 0
                 }
+            
             patterns[key]["count"] += 1
-            patterns[key]["profits"].append(p.get("profit", 0))
-            patterns[key]["avg_rsi"] = (patterns[key]["avg_rsi"] * (patterns[key]["count"] - 1) + rsi) / patterns[key]["count"]
-            patterns[key]["avg_cmf"] = (patterns[key]["avg_cmf"] * (patterns[key]["count"] - 1) + cmf) / patterns[key]["count"]
-            patterns[key]["avg_news"] = (patterns[key]["avg_news"] * (patterns[key]["count"] - 1) + news) / patterns[key]["count"]
+            profit = p.get("profit", 0)
+            patterns[key]["profits"].append(profit)
+            patterns[key]["total_profit"] += profit
+            if profit > 0:
+                patterns[key]["wins"] += 1
+            
+            # تحديث المتوسطات
+            count = patterns[key]["count"]
+            patterns[key]["avg_rsi"] = (patterns[key]["avg_rsi"] * (count - 1) + rsi) / count
+            patterns[key]["avg_cmf"] = (patterns[key]["avg_cmf"] * (count - 1) + cmf) / count
+            patterns[key]["avg_news"] = (patterns[key]["avg_news"] * (count - 1) + news) / count
         
         # ترتيب الأنماط حسب التكرار
         sorted_patterns = sorted(patterns.items(), key=lambda x: x[1]["count"], reverse=True)
         
         result = []
         for key, data in sorted_patterns[:top_n]:
-            avg_profit = np.mean(data["profits"]) if data["profits"] else 0
-            win_rate = sum(1 for p in data["profits"] if p > 0) / len(data["profits"]) if data["profits"] else 0
+            avg_profit = data["total_profit"] / data["count"] if data["count"] > 0 else 0
+            win_rate = data["wins"] / data["count"] if data["count"] > 0 else 0
             
             result.append({
                 "pattern": key,
                 "count": data["count"],
-                "avg_profit": avg_profit,
-                "win_rate": win_rate,
+                "avg_profit": round(avg_profit, 2),
+                "win_rate": round(win_rate * 100, 1),
                 "rsi_range": data["rsi_range"],
                 "cmf_type": data["cmf_type"],
                 "news_type": data["news_type"],
@@ -401,30 +253,3 @@ class SelfLearningAIAnalyst:
             })
         
         return result
-
-    def get_learning_summary(self):
-        """الحصول على ملخص التعلم"""
-        stats = self.get_learning_stats()
-        
-        summary = f"""
-📊 **ملخص أداء نظام التعلم الذاتي**
-{'='*40}
-
-📈 **الإحصائيات العامة:**
-- إجمالي الصفقات: {stats['total_predictions']}
-- الصفقات المعلقة: {stats['pending_predictions']}
-- نسبة النجاح: {stats['success_rate']:.1%}
-
-💰 **الربح والخسارة:**
-- الصفقات الرابحة: {stats['winning_trades']}
-- الصفقات الخاسرة: {stats['losing_trades']}
-- متوسط الربح: {stats['average_profit']:.2f}%
-- متوسط الخسارة: {stats['average_loss']:.2f}%
-- Profit Factor: {stats['profit_factor']:.2f}
-
-🧬 **الأوزان الحالية:**
-- الربح المتوقع: {stats['dynamic_weights'].get('expected_gain', 0.4):.2f}
-- CMF: {stats['dynamic_weights'].get('cmf', 0.3):.2f}
-- الأخبار: {stats['dynamic_weights'].get('news', 0.3):.2f}
-"""
-        return summary
