@@ -70,6 +70,9 @@ class EGXQuantumDesktopApp(ctk.CTk):
         self.main_frame = ctk.CTkFrame(self, fg_color="#0F172A")
         self.main_frame.pack(side="right", expand=True, fill="both", padx=10, pady=10)
 
+        # متغير لتخزين السهم الحالي
+        self.current_symbol = None
+
         self.build_sidebar_widgets()
         self.build_welcome_screen()
 
@@ -131,6 +134,30 @@ class EGXQuantumDesktopApp(ctk.CTk):
         )
         self.btn_evaluate.pack(pady=10, padx=15)
 
+        # ✅ زر تنظيف البيانات القديمة
+        self.btn_clean = ctk.CTkButton(
+            self.sidebar,
+            text="🧹 تنظيف البيانات القديمة (90 يوم)",
+            command=self.clean_old_data,
+            fg_color="#EF4444",
+            hover_color="#DC2626",
+            height=35,
+            font=ctk.CTkFont(size=12)
+        )
+        self.btn_clean.pack(pady=5, padx=15)
+
+        # ✅ زر تصدير بيانات التعلم
+        self.btn_export = ctk.CTkButton(
+            self.sidebar,
+            text="📤 تصدير بيانات التعلم",
+            command=self.export_learning_data,
+            fg_color="#10B981",
+            hover_color="#059669",
+            height=35,
+            font=ctk.CTkFont(size=12)
+        )
+        self.btn_export.pack(pady=5, padx=15)
+
         self.status_label = ctk.CTkLabel(
             self.sidebar, 
             text="✅ البرنامج جاهز.. بانتظار اختيار السهم",
@@ -147,13 +174,53 @@ class EGXQuantumDesktopApp(ctk.CTk):
             text="🚀 أهلاً بك في نظام المضاربة والتعلم الذاتي للبورصة المصرية\n\n"
                  "قم باختيار السهم الذي ترغب بمضاربته من القائمة اليسرى\n"
                  "ثم اضغط على زر 'تشغيل التحليل الفوري' لبدء اقتناص الفرص\n\n"
-                 "📊 يمكنك أيضاً تحديث تقييم الصفقات السابقة باستخدام الزر المخصص",
+                 "📊 يمكنك أيضاً تحديث تقييم الصفقات السابقة باستخدام الزر المخصص\n"
+                 "🧹 تنظيف البيانات القديمة لإدارة حجم الملف\n"
+                 "📤 تصدير بيانات التعلم لعمل نسخة احتياطية",
             font=ctk.CTkFont(size=14), 
             text_color="#94A3B8", 
             justify="center"
         )
         self.welcome_label.pack(expand=True)
 
+    # ============================================================
+    # ✅ دالة تنظيف البيانات القديمة
+    # ============================================================
+    def clean_old_data(self):
+        """تنظيف البيانات القديمة من ملف التعلم"""
+        self.status_label.configure(text="🧹 جاري تنظيف البيانات القديمة...", text_color="#F59E0B")
+        self.update_idletasks()
+        
+        try:
+            self.analyst.clear_old_predictions(days=90)
+            self.status_label.configure(text="✅ تم تنظيف البيانات القديمة بنجاح!", text_color="#10B981")
+            
+            # تحديث الواجهة
+            self.refresh_current_view()
+            
+        except Exception as e:
+            self.status_label.configure(text=f"❌ خطأ في التنظيف: {str(e)[:50]}", text_color="#EF4444")
+
+    # ============================================================
+    # ✅ دالة تصدير بيانات التعلم
+    # ============================================================
+    def export_learning_data(self):
+        """تصدير بيانات التعلم إلى ملف"""
+        self.status_label.configure(text="📤 جاري تصدير بيانات التعلم...", text_color="#F59E0B")
+        self.update_idletasks()
+        
+        try:
+            file_path = self.analyst.export_learning_data()
+            if file_path:
+                self.status_label.configure(text=f"✅ تم التصدير إلى {file_path}", text_color="#10B981")
+            else:
+                self.status_label.configure(text="❌ فشل في التصدير", text_color="#EF4444")
+        except Exception as e:
+            self.status_label.configure(text=f"❌ خطأ في التصدير: {str(e)[:50]}", text_color="#EF4444")
+
+    # ============================================================
+    # ✅ دالة تقييم التوقعات
+    # ============================================================
     def evaluate_predictions(self):
         """تحديث وتقييم التوقعات السابقة"""
         self.status_label.configure(text="🔄 جاري تحديث وتقييم الصفقات السابقة...", text_color="#F59E0B")
@@ -176,6 +243,9 @@ class EGXQuantumDesktopApp(ctk.CTk):
         if hasattr(self, 'current_symbol') and self.current_symbol:
             self.execute_analysis()
 
+    # ============================================================
+    # ✅ دالة تنفيذ التحليل (المعدلة)
+    # ============================================================
     def execute_analysis(self):
         """استدعاء الحسابات وتدريب عقل المضارب وتسجيل الصفقات للتعلم من الأخطاء"""
         self.status_label.configure(text="🧠 جاري مراجعة صفقات السوق وتدريب المضارب...", text_color="#F59E0B")
@@ -217,8 +287,15 @@ class EGXQuantumDesktopApp(ctk.CTk):
             df_indicators
         )
 
-        # 6. تسجيل التوصية الحالية
+        # 6. ✅ تسجيل التوصية (مع تحويل إلى dict)
         try:
+            last_row = df_indicators.iloc[-1]
+            indicators_dict = {
+                "RSI": float(last_row.get('RSI', 50)),
+                "CMF": float(last_row.get('CMF', 0)),
+                "News_Sentiment": float(last_row.get('News_Sentiment', 0))
+            }
+            
             self.analyst.record_prediction(
                 selected_symbol,
                 df_indicators['Close'].iloc[-1],
@@ -226,11 +303,7 @@ class EGXQuantumDesktopApp(ctk.CTk):
                 best_entry,
                 best_exit,
                 direction,
-                {
-                    "RSI": df_indicators['RSI'].iloc[-1] if 'RSI' in df_indicators.columns else 50,
-                    "CMF": df_indicators['CMF'].iloc[-1] if 'CMF' in df_indicators.columns else 0,
-                    "News_Sentiment": df_indicators['News_Sentiment'].iloc[-1] if 'News_Sentiment' in df_indicators.columns else 0
-                }
+                indicators_dict  # ✅ dict
             )
         except Exception as e:
             print(f"⚠️ خطأ في تسجيل التوصية: {e}")
@@ -240,7 +313,7 @@ class EGXQuantumDesktopApp(ctk.CTk):
         strategy['entry_price'] = best_entry
         strategy['take_profit_1'] = best_exit
 
-        # 8. إرسال إشعار تليجرام إذا كانت إشارة شراء
+        # 8. ✅ إرسال إشعار تليجرام إذا كانت إشارة شراء
         if "شراء" in direction or strategy.get("action") == "شراء 🟢":
             alert_msg = (
                 f"🚨 *إشارة مضاربة كمية جديدة من منظومة بصرة!* 🚨\n\n"
@@ -248,15 +321,16 @@ class EGXQuantumDesktopApp(ctk.CTk):
                 f"💵 *السعر الحالي:* {df_indicators['Close'].iloc[-1]:.2f} ج.م\n"
                 f"🔮 *السعر المستهدف للآلة:* {predicted_close:.2f} ج.م\n\n"
                 f"🎯 *نقطة الدخول المقترحة:* {best_entry:.2f} ج.م\n"
-                f"🛡️ *وقف الخسارة (ATR):* {strategy['stop_loss']:.2f} ج.م\n"
-                f"💰 *الهدف الأول:* {strategy['take_profit_1']:.2f} ج.م\n"
-                f"🚀 *الهدف الثاني:* {strategy['take_profit_2']:.2f} ج.م\n\n"
-                f"⚖️ *نسبة المخاطرة للمكسب:* {strategy['risk_reward_ratio']}\n"
+                f"🛡️ *وقف الخسارة (ATR):* {strategy.get('stop_loss', best_entry * 0.95):.2f} ج.م\n"
+                f"💰 *الهدف الأول:* {strategy.get('take_profit_1', best_exit):.2f} ج.م\n"
+                f"🚀 *الهدف الثاني:* {strategy.get('take_profit_2', best_exit * 1.1):.2f} ج.م\n\n"
+                f"⚖️ *نسبة المخاطرة للمكسب:* {strategy.get('risk_reward_ratio', '1:1.5')}\n"
                 f"🤖 *درجة ثقة الآلة:* {decision_score}/100\n"
                 f"_تم الفحص والتحليل آلياً بواسطة الهجين الكمي_"
             )
             try:
                 send_telegram_alert(alert_msg)
+                print("✅ تم إرسال إشعار التليجرام")
             except Exception as e:
                 print(f"⚠️ خطأ في إرسال التليجرام: {e}")
 
@@ -278,6 +352,9 @@ class EGXQuantumDesktopApp(ctk.CTk):
         
         self.status_label.configure(text="✅ تم تحديث الأهداف ومراجعة الأخطاء بنجاح", text_color="#10B981")
 
+    # ============================================================
+    # ✅ دالة عرض النتائج (المعدلة)
+    # ============================================================
     def display_dashboard_results(self, symbol, df, pred_price, best_entry, best_exit, direction, strategy, score=50):
         """عرض النتائج في لوحة التحكم مع تبويبات متعددة"""
         
@@ -463,6 +540,15 @@ class EGXQuantumDesktopApp(ctk.CTk):
         )
         lbl_success_box.pack(pady=5)
 
+        # ✅ إضافة Profit Factor
+        lbl_profit_factor = ctk.CTkLabel(
+            learn_panel,
+            text=f"📈 Profit Factor: {stats.get('profit_factor', 0):.2f}",
+            font=ctk.CTkFont(size=14, weight="bold"),
+            text_color="#8B5CF6"
+        )
+        lbl_profit_factor.pack(pady=2)
+
         lbl_details = ctk.CTkLabel(
             learn_panel,
             text=f"📊 إجمالي الصفقات: {stats['total_predictions']}  |  ⏳ قيد التقييم: {stats['pending_predictions']}",
@@ -482,8 +568,26 @@ class EGXQuantumDesktopApp(ctk.CTk):
         )
         lbl_weights.pack(pady=2)
 
+        # ✅ عرض أفضل أنماط النجاح
+        try:
+            best_patterns = self.analyst.get_best_patterns(top_n=3)
+            if best_patterns:
+                patterns_text = "🏆 أفضل أنماط النجاح:\n"
+                for i, p in enumerate(best_patterns[:3], 1):
+                    patterns_text += f"  {i}. RSI: {p['rsi_range']} | CMF: {p['cmf_type']} | نجاح: {p['win_rate']}%\n"
+                lbl_patterns = ctk.CTkLabel(
+                    learn_panel,
+                    text=patterns_text,
+                    font=ctk.CTkFont(size=11),
+                    text_color="#94A3B8",
+                    justify="left"
+                )
+                lbl_patterns.pack(pady=5, anchor="w")
+        except Exception as e:
+            print(f"⚠️ خطأ في عرض الأنماط: {e}")
+
         # جدول السجل
-        table_box = ctk.CTkTextbox(learn_panel, height=220, font=ctk.CTkFont(size=11))
+        table_box = ctk.CTkTextbox(learn_panel, height=180, font=ctk.CTkFont(size=11))
         table_box.pack(fill="both", expand=True, pady=10)
 
         table_text = "🗂️ سجل ومراجعة صفقات المضارب التاريخية:\n"
@@ -511,6 +615,9 @@ class EGXQuantumDesktopApp(ctk.CTk):
         self.current_symbol = symbol
 
 
+# ============================================================
+# ✅ تشغيل التطبيق
+# ============================================================
 if __name__ == "__main__":
     app = EGXQuantumDesktopApp()
     app.mainloop()
