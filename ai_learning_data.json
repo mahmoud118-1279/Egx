@@ -186,7 +186,3196 @@
             "direction": "❌ السهم لا يصلح للاستثمار طويل المدى حالياً",
             "actual_max_reached": null,
             "status": "Pending ⏳"
+        },
+        {
+            "date": "2026-07-22 22:54",
+            "symbol": "SWDY",
+            "current_price": 93.6,
+            "predicted_close": 93.6,
+            "suggested_entry": 93.6,
+            "suggested_exit": 93.6,
+            "direction": "⚠️ النموذج غير مدرب",
+            "actual_max_reached": 93.9,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 74.20634919810405,
+                "CMF": 0.1126136158451835,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:54",
+            "symbol": "COMI",
+            "current_price": 140.0,
+            "predicted_close": 140.0,
+            "suggested_entry": 140.0,
+            "suggested_exit": 140.0,
+            "direction": "⚠️ النموذج غير مدرب",
+            "actual_max_reached": 145.01,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 72.0180305096801,
+                "CMF": 0.11335863380746065,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:54",
+            "symbol": "ABUK",
+            "current_price": 72.3,
+            "predicted_close": 72.3,
+            "suggested_entry": 72.3,
+            "suggested_exit": 72.3,
+            "direction": "⚠️ النموذج غير مدرب",
+            "actual_max_reached": 95.0,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 63.4723086441281,
+                "CMF": -0.013288609504968617,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:54",
+            "symbol": "MFPC",
+            "current_price": 37.22,
+            "predicted_close": 40.942,
+            "suggested_entry": 37.03328571428571,
+            "suggested_exit": 41.22207142857143,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 52.0,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 57.88113694043492,
+                "CMF": 0.02187339555704198,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:54",
+            "symbol": "TMGH",
+            "current_price": 100.5,
+            "predicted_close": 90.45,
+            "suggested_entry": 100.5,
+            "suggested_exit": 96.95357142857142,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 103.87,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 68.36055655803354,
+                "CMF": 0.05131732830627745,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:54",
+            "symbol": "EGAL",
+            "current_price": 301.12,
+            "predicted_close": 271.00800000000004,
+            "suggested_entry": 301.12,
+            "suggested_exit": 291.4225,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 344.99,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 64.5586549466874,
+                "CMF": -0.014622643639342733,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:54",
+            "symbol": "ETEL",
+            "current_price": 103.28,
+            "predicted_close": 92.952,
+            "suggested_entry": 103.28,
+            "suggested_exit": 98.66642857142857,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 112.98,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 79.13708355484476,
+                "CMF": -0.06334304864523886,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:54",
+            "symbol": "EAST",
+            "current_price": 37.49,
+            "predicted_close": 41.239000000000004,
+            "suggested_entry": 37.49,
+            "suggested_exit": 37.49,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 49.99,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 51.23287669267784,
+                "CMF": 0.17515634196149735,
+                "News_Sentiment": -0.2
+            }
+        },
+        {
+            "date": "2026-07-22 22:55",
+            "symbol": "QNBE",
+            "current_price": 56.71,
+            "predicted_close": 61.670529659244224,
+            "suggested_entry": 56.71,
+            "suggested_exit": 56.71,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 61.0,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 73.65406642575996,
+                "CMF": -0.12386680323499416,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:55",
+            "symbol": "ALCN",
+            "current_price": 29.76,
+            "predicted_close": 32.736000000000004,
+            "suggested_entry": 29.76,
+            "suggested_exit": 29.76,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 34.7,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 69.39890707727915,
+                "CMF": -0.25262459379393126,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:55",
+            "symbol": "FWRY",
+            "current_price": 19.3,
+            "predicted_close": 21.230000000000004,
+            "suggested_entry": 19.214714285714287,
+            "suggested_exit": 21.357928571428577,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 21.66,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 65.84507039007642,
+                "CMF": 0.14303385101671695,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:56",
+            "symbol": "FERC",
+            "current_price": 78.26,
+            "predicted_close": 70.43400000000001,
+            "suggested_entry": 78.26,
+            "suggested_exit": 74.41892857142858,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 101.0,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 63.134411595739685,
+                "CMF": -0.10331326720905688,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:56",
+            "symbol": "EMFD",
+            "current_price": 11.75,
+            "predicted_close": 12.925,
+            "suggested_entry": 11.689428571428572,
+            "suggested_exit": 13.015857142857143,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 12.7,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 54.78260866230625,
+                "CMF": -0.017752536850832806,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:56",
+            "symbol": "ORAS",
+            "current_price": 713.5,
+            "predicted_close": 642.15,
+            "suggested_entry": 713.5,
+            "suggested_exit": 691.6364285714286,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 812.5,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 41.8703192741563,
+                "CMF": -0.2779543843939462,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:56",
+            "symbol": "EFIH",
+            "current_price": 23.39,
+            "predicted_close": 25.729000000000003,
+            "suggested_entry": 23.24742857142857,
+            "suggested_exit": 25.942857142857147,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 23.7,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 69.86506745160256,
+                "CMF": 0.23298856565684972,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:56",
+            "symbol": "HRHO",
+            "current_price": 26.95,
+            "predicted_close": 29.645000000000003,
+            "suggested_entry": 26.95,
+            "suggested_exit": 26.95,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 31.5,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 52.38095235185186,
+                "CMF": -0.20343698812592018,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:56",
+            "symbol": "BTFH",
+            "current_price": 3.09,
+            "predicted_close": 3.399,
+            "suggested_entry": 3.09,
+            "suggested_exit": 3.09,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 3.67,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 63.043478068998084,
+                "CMF": -0.09891482249007034,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:56",
+            "symbol": "HDBK",
+            "current_price": 83.0,
+            "predicted_close": 74.7,
+            "suggested_entry": 83.0,
+            "suggested_exit": 69.935,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 174.9,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 8.882549675266233,
+                "CMF": 0.03080297190971256,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:56",
+            "symbol": "FAIT",
+            "current_price": 38.0,
+            "predicted_close": 41.800000000000004,
+            "suggested_entry": 37.87828571428572,
+            "suggested_exit": 41.98257142857143,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 38.48,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 64.73988436686837,
+                "CMF": 0.20416771150401838,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:56",
+            "symbol": "JUFO",
+            "current_price": 28.9,
+            "predicted_close": 31.790000000000003,
+            "suggested_entry": 28.9,
+            "suggested_exit": 28.9,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 32.94,
+            "status": "نجاح باهر 🎯 (حقق الهدف كاملاً)",
+            "indicators_snapshot": {
+                "RSI": 39.851024198176646,
+                "CMF": -0.1256045415531781,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:57",
+            "symbol": "ADIB",
+            "current_price": 49.400001525878906,
+            "predicted_close": 54.3400016784668,
+            "suggested_entry": 49.14785864693778,
+            "suggested_exit": 54.71821599687849,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 49.400001525878906,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 54.17814022312857,
+                "CMF": 0.20953801669509167,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:57",
+            "symbol": "PHDC",
+            "current_price": 15.100000381469727,
+            "predicted_close": 16.6100004196167,
+            "suggested_entry": 15.100000381469727,
+            "suggested_exit": 15.100000381469727,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 15.100000381469727,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 60.593209001968276,
+                "CMF": -0.11635961220597914,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:57",
+            "symbol": "EGCH",
+            "current_price": 13.050000190734863,
+            "predicted_close": 14.35500020980835,
+            "suggested_entry": 13.050000190734863,
+            "suggested_exit": 13.050000190734863,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 13.050000190734863,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 70.14220146903486,
+                "CMF": -0.48383426871038154,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:57",
+            "symbol": "ORHD",
+            "current_price": 39.25,
+            "predicted_close": 43.175000000000004,
+            "suggested_entry": 39.079857090541296,
+            "suggested_exit": 43.43021436418806,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 39.25,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 57.00328038661479,
+                "CMF": -0.01705957468233248,
+                "News_Sentiment": 0.17
+            }
+        },
+        {
+            "date": "2026-07-22 22:57",
+            "symbol": "EXPA",
+            "current_price": 20.0,
+            "predicted_close": 22.0,
+            "suggested_entry": 20.0,
+            "suggested_exit": 19.467500686645508,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 20.0,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 84.03047115064832,
+                "CMF": -0.01075599015337575,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:57",
+            "symbol": "EFIC",
+            "current_price": 185.9499969482422,
+            "predicted_close": 167.35499725341796,
+            "suggested_entry": 185.9499969482422,
+            "suggested_exit": 174.43321228027344,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 185.9499969482422,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 56.79156442916899,
+                "CMF": -0.5891602974649772,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:57",
+            "symbol": "CIEB",
+            "current_price": 24.399999618530273,
+            "predicted_close": 26.839999580383303,
+            "suggested_entry": 24.31671395983015,
+            "suggested_exit": 26.96492806843349,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 24.399999618530273,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 65.16395008694039,
+                "CMF": 0.10967315485647987,
+                "News_Sentiment": 0.1
+            }
+        },
+        {
+            "date": "2026-07-22 22:57",
+            "symbol": "GBCO",
+            "current_price": 32.25,
+            "predicted_close": 35.475,
+            "suggested_entry": 32.011428696768625,
+            "suggested_exit": 35.83285695484707,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 32.25,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 48.607236336635545,
+                "CMF": 0.21863621249586684,
+                "News_Sentiment": 0.1
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "SKPC",
+            "current_price": 15.949999809265137,
+            "predicted_close": 17.544999790191653,
+            "suggested_entry": 15.949999809265137,
+            "suggested_exit": 15.949999809265137,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 15.949999809265137,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 51.002228480130114,
+                "CMF": -0.42366985281118696,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "SCTS",
+            "current_price": 611.4400024414062,
+            "predicted_close": 550.2960021972657,
+            "suggested_entry": 611.4400024414062,
+            "suggested_exit": 580.8314317975726,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 611.4400024414062,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 42.61332968485225,
+                "CMF": -0.35452008859820666,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "CLHO",
+            "current_price": 16.670000076293945,
+            "predicted_close": 18.337000083923343,
+            "suggested_entry": 16.670000076293945,
+            "suggested_exit": 16.670000076293945,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 16.670000076293945,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 48.41270379210626,
+                "CMF": -0.2406565017190367,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "CANA",
+            "current_price": 37.0,
+            "predicted_close": 40.7,
+            "suggested_entry": 37.0,
+            "suggested_exit": 37.0,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 37.0,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 61.75943039642979,
+                "CMF": -0.09627165951951897,
+                "News_Sentiment": 0.1
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "ARCC",
+            "current_price": 57.060001373291016,
+            "predicted_close": 61.242964050784245,
+            "suggested_entry": 57.060001373291016,
+            "suggested_exit": 57.060001373291016,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 57.060001373291016,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 62.64442225560202,
+                "CMF": -0.16126427837493781,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "ORWE",
+            "current_price": 23.0,
+            "predicted_close": 25.3,
+            "suggested_entry": 23.0,
+            "suggested_exit": 23.0,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 23.0,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 60.41667629546029,
+                "CMF": -0.05755156640746484,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "SCEM",
+            "current_price": 77.4000015258789,
+            "predicted_close": 69.66000137329102,
+            "suggested_entry": 77.4000015258789,
+            "suggested_exit": 73.1560720716204,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 77.4000015258789,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 80.35143348503925,
+                "CMF": 0.30310463586191255,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "HELI",
+            "current_price": 8.3100004196167,
+            "predicted_close": 9.14100046157837,
+            "suggested_entry": 8.3100004196167,
+            "suggested_exit": 7.908214807510376,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 8.3100004196167,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 92.44444259731279,
+                "CMF": 0.173212917740035,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "RAYA",
+            "current_price": 7.579999923706055,
+            "predicted_close": 8.337999916076662,
+            "suggested_entry": 7.522428498949323,
+            "suggested_exit": 8.424357053211759,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 7.579999923706055,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 48.06201691051397,
+                "CMF": 0.087966825515294,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "EGSA",
+            "current_price": 9.0,
+            "predicted_close": 9.9,
+            "suggested_entry": 8.976571396418981,
+            "suggested_exit": 9.93514290537153,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 9.0,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 68.6567141499795,
+                "CMF": 10090584.02164236,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "ATQA",
+            "current_price": 9.649999618530273,
+            "predicted_close": 10.614999580383301,
+            "suggested_entry": 9.649999618530273,
+            "suggested_exit": 9.649999618530273,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 9.649999618530273,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 60.999965582324656,
+                "CMF": -0.41219815796407544,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "MTIE",
+            "current_price": 9.449999809265137,
+            "predicted_close": 10.394999790191651,
+            "suggested_entry": 9.395856966291156,
+            "suggested_exit": 10.476214054652624,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 9.449999809265137,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 62.56409173470625,
+                "CMF": 0.1179369835143801,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "ISPH",
+            "current_price": 11.640000343322754,
+            "predicted_close": 12.804000377655031,
+            "suggested_entry": 11.640000343322754,
+            "suggested_exit": 11.640000343322754,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 11.640000343322754,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 48.739506516202525,
+                "CMF": -0.13234967214372098,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "PHAR",
+            "current_price": 90.69999694824219,
+            "predicted_close": 81.62999725341797,
+            "suggested_entry": 90.69999694824219,
+            "suggested_exit": 87.96892574855259,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 90.69999694824219,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 66.3053919760136,
+                "CMF": -0.035732146809034006,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "MHOT",
+            "current_price": 16.56999969482422,
+            "predicted_close": 18.226999664306643,
+            "suggested_entry": 16.56999969482422,
+            "suggested_exit": 16.56999969482422,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 16.56999969482422,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 42.526687592379346,
+                "CMF": -0.3675922671857273,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:58",
+            "symbol": "EFID",
+            "current_price": 28.049999237060547,
+            "predicted_close": 30.854999160766603,
+            "suggested_entry": 27.923856489998954,
+            "suggested_exit": 31.044213281358992,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 28.049999237060547,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 58.86525716171479,
+                "CMF": 0.14454160380683015,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:59",
+            "symbol": "EGTS",
+            "current_price": 17.760000228881836,
+            "predicted_close": 19.53600025177002,
+            "suggested_entry": 17.760000228881836,
+            "suggested_exit": 17.760000228881836,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 17.760000228881836,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 52.58764500132321,
+                "CMF": -0.23936383549985757,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:59",
+            "symbol": "AMOC",
+            "current_price": 8.239999771118164,
+            "predicted_close": 9.063999748229982,
+            "suggested_entry": 8.239999771118164,
+            "suggested_exit": 8.239999771118164,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 8.239999771118164,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 65.03066671456563,
+                "CMF": -0.1368383449180813,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:59",
+            "symbol": "MASR",
+            "current_price": 8.359999656677246,
+            "predicted_close": 9.19599962234497,
+            "suggested_entry": 8.359999656677246,
+            "suggested_exit": 8.041785495621818,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 8.359999656677246,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 83.5443086897028,
+                "CMF": 0.2629468373410557,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:59",
+            "symbol": "CIRA",
+            "current_price": 31.600000381469727,
+            "predicted_close": 34.7600004196167,
+            "suggested_entry": 31.600000381469727,
+            "suggested_exit": 31.600000381469727,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 31.600000381469727,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 69.77012926981358,
+                "CMF": -0.13233761332830263,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:59",
+            "symbol": "CSAG",
+            "current_price": 33.5099983215332,
+            "predicted_close": 36.86099815368652,
+            "suggested_entry": 33.5099983215332,
+            "suggested_exit": 33.5099983215332,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 33.5099983215332,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 61.29804009047375,
+                "CMF": -0.11828950153775972,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:59",
+            "symbol": "SAUD",
+            "current_price": 21.950000762939453,
+            "predicted_close": 24.1450008392334,
+            "suggested_entry": 21.865857941763743,
+            "suggested_exit": 24.271215070996966,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 21.950000762939453,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 65.06852085820259,
+                "CMF": 0.10733148863814129,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:59",
+            "symbol": "POUL",
+            "current_price": 38.81999969482422,
+            "predicted_close": 42.70199966430664,
+            "suggested_entry": 38.57414267403739,
+            "suggested_exit": 43.070785195486884,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 38.81999969482422,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 61.03038254731426,
+                "CMF": 0.11701028888140134,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 22:59",
+            "symbol": "ELEC",
+            "current_price": 2.2300000190734863,
+            "predicted_close": 2.453000020980835,
+            "suggested_entry": 2.2300000190734863,
+            "suggested_exit": 2.2300000190734863,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 2.2300000190734863,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 68.29270113172313,
+                "CMF": -0.32901680644004433,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:00",
+            "symbol": "MBSC",
+            "current_price": 245.6699981689453,
+            "predicted_close": 221.10299835205078,
+            "suggested_entry": 245.6699981689453,
+            "suggested_exit": 237.8421412876674,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 245.6699981689453,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 60.402339290020734,
+                "CMF": -0.05368855084507628,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:00",
+            "symbol": "TALM",
+            "current_price": 15.930000305175781,
+            "predicted_close": 17.52300033569336,
+            "suggested_entry": 15.930000305175781,
+            "suggested_exit": 15.930000305175781,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 15.930000305175781,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 56.32183714518528,
+                "CMF": -0.32212868399014427,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:00",
+            "symbol": "CICH",
+            "current_price": 12.010000228881836,
+            "predicted_close": 13.21100025177002,
+            "suggested_entry": 12.010000228881836,
+            "suggested_exit": 12.010000228881836,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 12.010000228881836,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 50.41323255623055,
+                "CMF": -0.168453348469759,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:00",
+            "symbol": "SUGR",
+            "current_price": 46.970001220703125,
+            "predicted_close": 51.66700134277344,
+            "suggested_entry": 46.970001220703125,
+            "suggested_exit": 46.970001220703125,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 46.970001220703125,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 61.18011242373209,
+                "CMF": -0.2851931423648453,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:00",
+            "symbol": "IFAP",
+            "current_price": 19.219999313354492,
+            "predicted_close": 21.14199924468994,
+            "suggested_entry": 19.219999313354492,
+            "suggested_exit": 19.219999313354492,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 19.219999313354492,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 50.49016075304785,
+                "CMF": -0.09033874987715777,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:00",
+            "symbol": "OLFI",
+            "current_price": 22.75,
+            "predicted_close": 25.025000000000002,
+            "suggested_entry": 22.6459999356951,
+            "suggested_exit": 25.181000096457346,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 22.75,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 57.94394518720485,
+                "CMF": 0.045979502063757054,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:00",
+            "symbol": "MCQE",
+            "current_price": 190.02000427246094,
+            "predicted_close": 171.01800384521485,
+            "suggested_entry": 190.02000427246094,
+            "suggested_exit": 183.3160732814244,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 190.02000427246094,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 75.27387419381672,
+                "CMF": 0.029161810779264562,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:00",
+            "symbol": "GDWA",
+            "current_price": 0.8730000257492065,
+            "predicted_close": 0.9603000283241273,
+            "suggested_entry": 0.8730000257492065,
+            "suggested_exit": 0.8387142930712018,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 0.8730000257492065,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 84.61539267326992,
+                "CMF": -0.20155378138010346,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:01",
+            "symbol": "MPRC",
+            "current_price": 44.349998474121094,
+            "predicted_close": 48.78499832153321,
+            "suggested_entry": 44.349998474121094,
+            "suggested_exit": 44.349998474121094,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 44.349998474121094,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 77.02823846384682,
+                "CMF": 0.3287277071617895,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:01",
+            "symbol": "AMES",
+            "current_price": 107.94000244140625,
+            "predicted_close": 97.14600219726563,
+            "suggested_entry": 107.94000244140625,
+            "suggested_exit": 87.71785858699253,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 107.94000244140625,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 65.85938445899771,
+                "CMF": 0.3704183488590776,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:01",
+            "symbol": "EGBE",
+            "current_price": 0.48399999737739563,
+            "predicted_close": 0.5323999971151352,
+            "suggested_entry": 0.48399999737739563,
+            "suggested_exit": 0.3846646150674996,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 0.48399999737739563,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 96.85266259130462,
+                "CMF": 0.15636576173088654,
+                "News_Sentiment": -0.17
+            }
+        },
+        {
+            "date": "2026-07-22 23:01",
+            "symbol": "OIH",
+            "current_price": 1.4900000095367432,
+            "predicted_close": 1.6390000104904177,
+            "suggested_entry": 1.4900000095367432,
+            "suggested_exit": 1.4610714529241835,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 1.4900000095367432,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 83.33334891795607,
+                "CMF": 0.16319404141653412,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:01",
+            "symbol": "RMDA",
+            "current_price": 4.989999771118164,
+            "predicted_close": 5.488999748229981,
+            "suggested_entry": 4.989999771118164,
+            "suggested_exit": 4.989999771118164,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 4.989999771118164,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 54.76189917304913,
+                "CMF": -0.2581649343366708,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:01",
+            "symbol": "BINV",
+            "current_price": 47.56999969482422,
+            "predicted_close": 52.32699966430665,
+            "suggested_entry": 47.56999969482422,
+            "suggested_exit": 47.56999969482422,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 47.56999969482422,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 54.36891730441157,
+                "CMF": -0.1464845086432917,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:01",
+            "symbol": "EGAS",
+            "current_price": 52.349998474121094,
+            "predicted_close": 57.584998321533206,
+            "suggested_entry": 52.349998474121094,
+            "suggested_exit": 52.349998474121094,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 52.349998474121094,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 66.9108571175792,
+                "CMF": -0.11082523217523252,
+                "News_Sentiment": -0.25
+            }
+        },
+        {
+            "date": "2026-07-22 23:01",
+            "symbol": "ISMQ",
+            "current_price": 9.270000457763672,
+            "predicted_close": 10.197000503540039,
+            "suggested_entry": 9.270000457763672,
+            "suggested_exit": 9.270000457763672,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 9.270000457763672,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 54.183265691053975,
+                "CMF": -0.15579829416981808,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:02",
+            "symbol": "DOMT",
+            "current_price": 26.68000030517578,
+            "predicted_close": 29.34800033569336,
+            "suggested_entry": 26.68000030517578,
+            "suggested_exit": 26.68000030517578,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 26.68000030517578,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 45.01844704470815,
+                "CMF": -0.1674231571027533,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:02",
+            "symbol": "GSSC",
+            "current_price": 272.0,
+            "predicted_close": 244.8,
+            "suggested_entry": 272.0,
+            "suggested_exit": 260.6910661969866,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 272.0,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 81.05757557140925,
+                "CMF": -0.06876927357935309,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:02",
+            "symbol": "MOIN",
+            "current_price": 23.81999969482422,
+            "predicted_close": 26.201999664306644,
+            "suggested_entry": 23.689856828962053,
+            "suggested_exit": 26.39721396309989,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 23.81999969482422,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 39.035100170279286,
+                "CMF": 0.23399849540084214,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:02",
+            "symbol": "OCDI",
+            "current_price": 27.290000915527344,
+            "predicted_close": 30.01900100708008,
+            "suggested_entry": 27.091286604745047,
+            "suggested_exit": 30.317072473253525,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 27.290000915527344,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 67.16826546086172,
+                "CMF": 0.23383989448077658,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:02",
+            "symbol": "CCAP",
+            "current_price": 5.46999979019165,
+            "predicted_close": 6.016999769210816,
+            "suggested_entry": 5.46999979019165,
+            "suggested_exit": 5.240714039121356,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 5.46999979019165,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 79.16666326293586,
+                "CMF": -0.22657393058594272,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:02",
+            "symbol": "BIOC",
+            "current_price": 110.69999694824219,
+            "predicted_close": 99.62999725341797,
+            "suggested_entry": 110.69999694824219,
+            "suggested_exit": 98.27678298950195,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 110.69999694824219,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 76.42711390390886,
+                "CMF": 0.3162960376344202,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:02",
+            "symbol": "PHTV",
+            "current_price": 315.0,
+            "predicted_close": 283.5,
+            "suggested_entry": 315.0,
+            "suggested_exit": 296.20071193150113,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 315.0,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 79.5801421115236,
+                "CMF": 0.367626276389203,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:02",
+            "symbol": "DSCW",
+            "current_price": 1.9900000095367432,
+            "predicted_close": 2.1890000104904175,
+            "suggested_entry": 1.9900000095367432,
+            "suggested_exit": 1.9267857585634505,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 1.9900000095367432,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 96.42857398748212,
+                "CMF": 0.32775534512079524,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:03",
+            "symbol": "ZMID",
+            "current_price": 7.420000076293945,
+            "predicted_close": 8.16200008392334,
+            "suggested_entry": 7.37185720716204,
+            "suggested_exit": 8.234214387621199,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 7.420000076293945,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 71.56863061011165,
+                "CMF": 0.04062777439725813,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:03",
+            "symbol": "ENGC",
+            "current_price": 42.0,
+            "predicted_close": 46.2,
+            "suggested_entry": 41.62128584725516,
+            "suggested_exit": 46.76807122911726,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 42.0,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 70.86810766677237,
+                "CMF": 0.18856165899338062,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:03",
+            "symbol": "MICH",
+            "current_price": 39.47999954223633,
+            "predicted_close": 43.42799949645996,
+            "suggested_entry": 39.29714241027832,
+            "suggested_exit": 43.70228519439697,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 39.47999954223633,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 66.81818534364598,
+                "CMF": -0.04442786951845563,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:03",
+            "symbol": "AXPH",
+            "current_price": 1233.1500244140625,
+            "predicted_close": 1109.8350219726562,
+            "suggested_entry": 1233.1500244140625,
+            "suggested_exit": 1130.875732421875,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 1233.1500244140625,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 71.40124342382383,
+                "CMF": -0.19990380551917616,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:03",
+            "symbol": "WCDF",
+            "current_price": 564.530029296875,
+            "predicted_close": 508.0770263671875,
+            "suggested_entry": 564.530029296875,
+            "suggested_exit": 520.5768138340542,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 564.530029296875,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 59.801781165807206,
+                "CMF": 0.016404033815722995,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:03",
+            "symbol": "CPCI",
+            "current_price": 471.1099853515625,
+            "predicted_close": 423.9989868164063,
+            "suggested_entry": 471.1099853515625,
+            "suggested_exit": 433.5885587419782,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 471.1099853515625,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 74.03681978898811,
+                "CMF": -0.09617565655045202,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:03",
+            "symbol": "SPIN",
+            "current_price": 14.949999809265137,
+            "predicted_close": 16.444999790191652,
+            "suggested_entry": 14.949999809265137,
+            "suggested_exit": 14.622142825807844,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 14.949999809265137,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 86.91599519097764,
+                "CMF": -0.2869615078493372,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:03",
+            "symbol": "SAIB",
+            "current_price": 2.109999895095825,
+            "predicted_close": 2.320999884605408,
+            "suggested_entry": 2.109999895095825,
+            "suggested_exit": 2.109999895095825,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 2.109999895095825,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 0.0,
+                "CMF": -8400001525.864169,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:04",
+            "symbol": "UEFM",
+            "current_price": 540.25,
+            "predicted_close": 486.225,
+            "suggested_entry": 540.25,
+            "suggested_exit": 498.86928231375555,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 540.25,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 69.44151848972811,
+                "CMF": -0.1528942840830698,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:04",
+            "symbol": "MPCI",
+            "current_price": 269.0,
+            "predicted_close": 242.1,
+            "suggested_entry": 269.0,
+            "suggested_exit": 253.90571212768555,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 269.0,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 75.52576396772949,
+                "CMF": -0.15463097379422905,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:04",
+            "symbol": "OFH",
+            "current_price": 0.7070000171661377,
+            "predicted_close": 0.7777000188827515,
+            "suggested_entry": 0.7070000171661377,
+            "suggested_exit": 0.6782857307365963,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 0.7070000171661377,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 84.21052562634684,
+                "CMF": 0.37890225697098723,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:04",
+            "symbol": "SVCE",
+            "current_price": 9.399999618530273,
+            "predicted_close": 10.339999580383301,
+            "suggested_entry": 9.399999618530273,
+            "suggested_exit": 9.399999618530273,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 9.399999618530273,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 60.44443800190531,
+                "CMF": -0.22189829587553508,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:04",
+            "symbol": "KABO",
+            "current_price": 8.609999656677246,
+            "predicted_close": 9.470999622344971,
+            "suggested_entry": 8.609999656677246,
+            "suggested_exit": 8.136428373200554,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 8.609999656677246,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 95.9016424929269,
+                "CMF": 0.32790912008738066,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:04",
+            "symbol": "PRDC",
+            "current_price": 9.6899995803833,
+            "predicted_close": 10.658999538421632,
+            "suggested_entry": 9.5651424407959,
+            "suggested_exit": 10.846285247802737,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 9.6899995803833,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 70.05253641848876,
+                "CMF": 0.1108745222202184,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:04",
+            "symbol": "AJWA",
+            "current_price": 168.2899932861328,
+            "predicted_close": 151.46099395751955,
+            "suggested_entry": 168.2899932861328,
+            "suggested_exit": 157.74820927211218,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 168.2899932861328,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 39.70626522929416,
+                "CMF": -0.27818111247459976,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:04",
+            "symbol": "MFSC",
+            "current_price": 46.47999954223633,
+            "predicted_close": 51.127999496459964,
+            "suggested_entry": 46.47999954223633,
+            "suggested_exit": 46.47999954223633,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 46.47999954223633,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 47.590364438504025,
+                "CMF": -0.46613533042234007,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:05",
+            "symbol": "KZPC",
+            "current_price": 8.579999923706055,
+            "predicted_close": 9.437999916076661,
+            "suggested_entry": 8.579999923706055,
+            "suggested_exit": 8.579999923706055,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 8.579999923706055,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 58.65386899977418,
+                "CMF": -0.23535431083872427,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:05",
+            "symbol": "ARAB",
+            "current_price": 0.2370000034570694,
+            "predicted_close": 0.26070000380277636,
+            "suggested_entry": 0.2370000034570694,
+            "suggested_exit": 0.2370000034570694,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 0.2370000034570694,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 67.4698801104557,
+                "CMF": -0.19621358277760179,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:05",
+            "symbol": "ADCI",
+            "current_price": 253.1199951171875,
+            "predicted_close": 227.80799560546876,
+            "suggested_entry": 253.1199951171875,
+            "suggested_exit": 240.25963810511996,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 253.1199951171875,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 67.40026378341338,
+                "CMF": -0.24466799094696787,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:05",
+            "symbol": "NAHO",
+            "current_price": 0.10199999809265137,
+            "predicted_close": 0.11219999790191651,
+            "suggested_entry": 0.10199999809265137,
+            "suggested_exit": 0.10199999809265137,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 0.10199999809265137,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 39.99995899764999,
+                "CMF": -2915.9883698943972,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:05",
+            "symbol": "OCPH",
+            "current_price": 465.0,
+            "predicted_close": 418.5,
+            "suggested_entry": 465.0,
+            "suggested_exit": 431.4353583199637,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 465.0,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 93.8748393566481,
+                "CMF": -0.1529328291591518,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:05",
+            "symbol": "AFMC",
+            "current_price": 100.98999786376953,
+            "predicted_close": 90.89099807739258,
+            "suggested_entry": 100.98999786376953,
+            "suggested_exit": 90.44606808253697,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 100.98999786376953,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 77.652448389746,
+                "CMF": 0.07094255032968969,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:05",
+            "symbol": "UNIT",
+            "current_price": 18.5,
+            "predicted_close": 20.35,
+            "suggested_entry": 18.5,
+            "suggested_exit": 18.5,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 18.5,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 72.92682318961023,
+                "CMF": 0.018218690758488285,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:05",
+            "symbol": "ELKA",
+            "current_price": 2.049999952316284,
+            "predicted_close": 2.2549999475479128,
+            "suggested_entry": 2.049999952316284,
+            "suggested_exit": 1.8592856441225325,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 2.049999952316284,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 83.33332034776534,
+                "CMF": 0.2550598723864712,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:06",
+            "symbol": "NINH",
+            "current_price": 21.520000457763672,
+            "predicted_close": 23.67200050354004,
+            "suggested_entry": 21.314429010663712,
+            "suggested_exit": 23.980357674189978,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 21.520000457763672,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 70.94764348355356,
+                "CMF": 0.0811989606180505,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:06",
+            "symbol": "SMFR",
+            "current_price": 229.22999572753906,
+            "predicted_close": 206.30699615478517,
+            "suggested_entry": 229.22999572753906,
+            "suggested_exit": 206.76213891165597,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 229.22999572753906,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 70.34632132346195,
+                "CMF": -0.23278199801520805,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:06",
+            "symbol": "ASCM",
+            "current_price": 61.099998474121094,
+            "predicted_close": 62.482286508636264,
+            "suggested_entry": 61.099998474121094,
+            "suggested_exit": 61.099998474121094,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 61.099998474121094,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 58.474579551837465,
+                "CMF": -0.555414055968606,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:06",
+            "symbol": "ELSH",
+            "current_price": 14.09000015258789,
+            "predicted_close": 15.499000167846681,
+            "suggested_entry": 14.09000015258789,
+            "suggested_exit": 14.09000015258789,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 14.09000015258789,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 69.33115692799595,
+                "CMF": -0.133238348928179,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:06",
+            "symbol": "EDFM",
+            "current_price": 391.8800048828125,
+            "predicted_close": 352.69200439453124,
+            "suggested_entry": 391.8800048828125,
+            "suggested_exit": 364.7685786655971,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 391.8800048828125,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 80.65420015718216,
+                "CMF": -0.13394857403602184,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:06",
+            "symbol": "MCRO",
+            "current_price": 1.399999976158142,
+            "predicted_close": 1.5399999737739565,
+            "suggested_entry": 1.399999976158142,
+            "suggested_exit": 1.3260714369160789,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 1.399999976158142,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 79.41177159745246,
+                "CMF": 0.02835707549492261,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:06",
+            "symbol": "LCSW",
+            "current_price": 33.83000183105469,
+            "predicted_close": 37.21300201416016,
+            "suggested_entry": 33.83000183105469,
+            "suggested_exit": 31.741787365504674,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 33.83000183105469,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 79.22848803546461,
+                "CMF": 0.16488282749546135,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:06",
+            "symbol": "ACGC",
+            "current_price": 10.100000381469727,
+            "predicted_close": 11.1100004196167,
+            "suggested_entry": 10.046286078861781,
+            "suggested_exit": 11.190571873528617,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 10.100000381469727,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 70.89202566947712,
+                "CMF": -0.02704922285472199,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:07",
+            "symbol": "EALR",
+            "current_price": 365.95001220703125,
+            "predicted_close": 329.3550109863281,
+            "suggested_entry": 365.95001220703125,
+            "suggested_exit": 333.7332262311663,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 365.95001220703125,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 62.06287096708032,
+                "CMF": -0.38515061945960377,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:07",
+            "symbol": "ECAP",
+            "current_price": 33.7400016784668,
+            "predicted_close": 37.11400184631348,
+            "suggested_entry": 33.7400016784668,
+            "suggested_exit": 33.7400016784668,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 33.7400016784668,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 62.8808884512148,
+                "CMF": -0.12795321743515722,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:07",
+            "symbol": "NCCW",
+            "current_price": 6.670000076293945,
+            "predicted_close": 7.33700008392334,
+            "suggested_entry": 6.670000076293945,
+            "suggested_exit": 6.670000076293945,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 6.670000076293945,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 66.88311139365848,
+                "CMF": -0.17246766955896753,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:07",
+            "symbol": "SNFC",
+            "current_price": 11.380000114440918,
+            "predicted_close": 12.518000125885012,
+            "suggested_entry": 11.300714424678258,
+            "suggested_exit": 12.636928660529001,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 11.380000114440918,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 35.10637864407235,
+                "CMF": 0.14356036576902628,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:07",
+            "symbol": "INFI",
+            "current_price": 106.04000091552734,
+            "predicted_close": 95.43600082397461,
+            "suggested_entry": 106.04000091552734,
+            "suggested_exit": 99.23535782950265,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 106.04000091552734,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 80.40594222898832,
+                "CMF": -0.3495368979503117,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:07",
+            "symbol": "AMIA",
+            "current_price": 10.5,
+            "predicted_close": 11.55,
+            "suggested_entry": 10.5,
+            "suggested_exit": 10.5,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 10.5,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 73.75691048810592,
+                "CMF": 0.283704211828567,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:07",
+            "symbol": "ATLC",
+            "current_price": 5.260000228881836,
+            "predicted_close": 5.78600025177002,
+            "suggested_entry": 5.260000228881836,
+            "suggested_exit": 5.260000228881836,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 5.260000228881836,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 45.714285622857055,
+                "CMF": -0.08628743766914833,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:07",
+            "symbol": "DAPH",
+            "current_price": 92.0,
+            "predicted_close": 82.8,
+            "suggested_entry": 92.0,
+            "suggested_exit": 87.31250081743512,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 92.0,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 73.4274541817114,
+                "CMF": -0.1486661135166402,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:08",
+            "symbol": "WKOL",
+            "current_price": 313.67999267578125,
+            "predicted_close": 282.31199340820314,
+            "suggested_entry": 313.67999267578125,
+            "suggested_exit": 290.6507099696568,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 313.67999267578125,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 68.3684440810066,
+                "CMF": -0.18638685430701754,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:08",
+            "symbol": "RACC",
+            "current_price": 9.979999542236328,
+            "predicted_close": 10.977999496459962,
+            "suggested_entry": 9.979999542236328,
+            "suggested_exit": 9.979999542236328,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 9.979999542236328,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 55.932193767860134,
+                "CMF": -0.2879848194896316,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:08",
+            "symbol": "EHDR",
+            "current_price": 2.9200000762939453,
+            "predicted_close": 3.21200008392334,
+            "suggested_entry": 2.9200000762939453,
+            "suggested_exit": 2.9200000762939453,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 2.9200000762939453,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 74.69879540081078,
+                "CMF": -0.044963425249998155,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:08",
+            "symbol": "CEFM",
+            "current_price": 125.12000274658203,
+            "predicted_close": 112.60800247192383,
+            "suggested_entry": 125.12000274658203,
+            "suggested_exit": 112.60143334524972,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 125.12000274658203,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 69.34883878676696,
+                "CMF": 0.13693336675635773,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:08",
+            "symbol": "ACAMD",
+            "current_price": 2.450000047683716,
+            "predicted_close": 2.6950000524520874,
+            "suggested_entry": 2.450000047683716,
+            "suggested_exit": 2.450000047683716,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 2.450000047683716,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 76.92309075455572,
+                "CMF": 0.1928842402408184,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:08",
+            "symbol": "CERA",
+            "current_price": 1.340000033378601,
+            "predicted_close": 1.4740000367164614,
+            "suggested_entry": 1.3308571764401027,
+            "suggested_exit": 1.4877143221242088,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 1.340000033378601,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 67.56756644113011,
+                "CMF": 0.0880242414202659,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:08",
+            "symbol": "ADPC",
+            "current_price": 4.010000228881836,
+            "predicted_close": 4.4110002517700195,
+            "suggested_entry": 4.010000228881836,
+            "suggested_exit": 3.8192858951432367,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 4.010000228881836,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 85.89744867523567,
+                "CMF": -0.1556163198071747,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:08",
+            "symbol": "IDRE",
+            "current_price": 48.20000076293945,
+            "predicted_close": 53.020000839233404,
+            "suggested_entry": 48.20000076293945,
+            "suggested_exit": 48.20000076293945,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 48.20000076293945,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 67.12329026842684,
+                "CMF": -0.2233862943988428,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:09",
+            "symbol": "AALR",
+            "current_price": 237.5399932861328,
+            "predicted_close": 213.78599395751954,
+            "suggested_entry": 237.5399932861328,
+            "suggested_exit": 217.11320659092496,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 237.5399932861328,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 70.59231376196641,
+                "CMF": -0.2701174762044928,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:09",
+            "symbol": "NHPS",
+            "current_price": 90.55000305175781,
+            "predicted_close": 81.49500274658203,
+            "suggested_entry": 90.55000305175781,
+            "suggested_exit": 81.59714535304478,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 90.55000305175781,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 82.6451160591058,
+                "CMF": -0.03804844571624133,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:09",
+            "symbol": "MENA",
+            "current_price": 7.079999923706055,
+            "predicted_close": 7.787999916076661,
+            "suggested_entry": 7.079999923706055,
+            "suggested_exit": 7.079999923706055,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 7.079999923706055,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 57.66871555527976,
+                "CMF": -0.16840337099603012,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:09",
+            "symbol": "MOSC",
+            "current_price": 287.32000732421875,
+            "predicted_close": 258.5880065917969,
+            "suggested_entry": 287.32000732421875,
+            "suggested_exit": 263.4925090244838,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 287.32000732421875,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 61.4757860329918,
+                "CMF": -0.3057720471974875,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:09",
+            "symbol": "AMER",
+            "current_price": 4.239999771118164,
+            "predicted_close": 4.663999748229981,
+            "suggested_entry": 4.239999771118164,
+            "suggested_exit": 3.857499803815569,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 4.239999771118164,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 89.95634641673591,
+                "CMF": 0.36806741201118626,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:09",
+            "symbol": "NDRL",
+            "current_price": 4.690000057220459,
+            "predicted_close": 5.159000062942505,
+            "suggested_entry": 4.690000057220459,
+            "suggested_exit": 5.159000062942505,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 4.690000057220459,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 0.0,
+                "CMF": 0.0,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:09",
+            "symbol": "ISMA",
+            "current_price": 28.149999618530273,
+            "predicted_close": 30.964999580383303,
+            "suggested_entry": 28.004142570495606,
+            "suggested_exit": 31.183785152435306,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 28.149999618530273,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 44.37499402659661,
+                "CMF": 0.08139110671509583,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:09",
+            "symbol": "MPCO",
+            "current_price": 1.850000023841858,
+            "predicted_close": 2.0350000262260437,
+            "suggested_entry": 1.850000023841858,
+            "suggested_exit": 1.850000023841858,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 1.850000023841858,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 52.94117419015014,
+                "CMF": -0.16625574641710839,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:09",
+            "symbol": "ETRS",
+            "current_price": 10.859999656677246,
+            "predicted_close": 11.945999622344972,
+            "suggested_entry": 10.859999656677246,
+            "suggested_exit": 10.859999656677246,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 10.859999656677246,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 53.921566757161116,
+                "CMF": -0.09386169264011124,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:10",
+            "symbol": "RTVC",
+            "current_price": 4.139999866485596,
+            "predicted_close": 4.5539998531341555,
+            "suggested_entry": 4.139999866485596,
+            "suggested_exit": 4.139999866485596,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 4.139999866485596,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 75.75758435422286,
+                "CMF": 0.04533895372741451,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:10",
+            "symbol": "SDTI",
+            "current_price": 48.86000061035156,
+            "predicted_close": 53.746000671386724,
+            "suggested_entry": 48.61942917960031,
+            "suggested_exit": 54.10685781751361,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 48.86000061035156,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 70.7575812596888,
+                "CMF": 0.12360265284344715,
+                "News_Sentiment": 0.25
+            }
+        },
+        {
+            "date": "2026-07-22 23:10",
+            "symbol": "MILS",
+            "current_price": 168.22999572753906,
+            "predicted_close": 151.40699615478516,
+            "suggested_entry": 168.22999572753906,
+            "suggested_exit": 152.8496366228376,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 168.22999572753906,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 70.58638656854444,
+                "CMF": 0.23896045854753706,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:10",
+            "symbol": "MAAL",
+            "current_price": 8.600000381469727,
+            "predicted_close": 9.4600004196167,
+            "suggested_entry": 8.600000381469727,
+            "suggested_exit": 8.154285958835057,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 8.600000381469727,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 84.92468591014938,
+                "CMF": 0.15338067403454989,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:10",
+            "symbol": "COSG",
+            "current_price": 1.7000000476837158,
+            "predicted_close": 1.8700000524520874,
+            "suggested_entry": 1.7000000476837158,
+            "suggested_exit": 1.6228571619306291,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 1.7000000476837158,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 84.61539826737197,
+                "CMF": -0.12742673671062635,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:10",
+            "symbol": "RAKT",
+            "current_price": 22.639999389648438,
+            "predicted_close": 24.903999328613285,
+            "suggested_entry": 22.639999389648438,
+            "suggested_exit": 22.639999389648438,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 22.639999389648438,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 62.216618128238615,
+                "CMF": -1.8816059092929132,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:10",
+            "symbol": "ODIN",
+            "current_price": 2.5199999809265137,
+            "predicted_close": 2.7719999790191654,
+            "suggested_entry": 2.5199999809265137,
+            "suggested_exit": 2.3517856768199374,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 2.5199999809265137,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 78.08218760449161,
+                "CMF": -0.05290388096380168,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:10",
+            "symbol": "SIPC",
+            "current_price": 3.8399999141693115,
+            "predicted_close": 4.223999905586243,
+            "suggested_entry": 3.8399999141693115,
+            "suggested_exit": 3.665357095854623,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 3.8399999141693115,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 83.11689342095647,
+                "CMF": -0.0986920007732442,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:11",
+            "symbol": "ZEOT",
+            "current_price": 11.670000076293945,
+            "predicted_close": 12.837000083923341,
+            "suggested_entry": 11.670000076293945,
+            "suggested_exit": 11.670000076293945,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 11.670000076293945,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 68.96552205371495,
+                "CMF": -0.23463952760768156,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:11",
+            "symbol": "MEPA",
+            "current_price": 1.9900000095367432,
+            "predicted_close": 2.1890000104904175,
+            "suggested_entry": 1.9900000095367432,
+            "suggested_exit": 1.8785714294229234,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 1.9900000095367432,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 90.5660459842859,
+                "CMF": 0.15126003079053976,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:11",
+            "symbol": "UEGC",
+            "current_price": 2.4100000858306885,
+            "predicted_close": 2.6510000944137575,
+            "suggested_entry": 2.4100000858306885,
+            "suggested_exit": 2.209642929690225,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 2.4100000858306885,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 90.90908274317619,
+                "CMF": 0.45714190193385196,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:11",
+            "symbol": "GGCC",
+            "current_price": 0.8370000123977661,
+            "predicted_close": 0.9207000136375428,
+            "suggested_entry": 0.8370000123977661,
+            "suggested_exit": 0.7566428727337292,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 0.8370000123977661,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 88.62145671556402,
+                "CMF": 0.34620532157752715,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:11",
+            "symbol": "APSW",
+            "current_price": 9.229999542236328,
+            "predicted_close": 10.152999496459962,
+            "suggested_entry": 9.229999542236328,
+            "suggested_exit": 8.801428215844291,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 9.229999542236328,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 83.4586255024589,
+                "CMF": 0.13678125250307513,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:11",
+            "symbol": "SCFM",
+            "current_price": 270.3399963378906,
+            "predicted_close": 243.30599670410157,
+            "suggested_entry": 270.3399963378906,
+            "suggested_exit": 245.64463860648019,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 270.3399963378906,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 63.77567858380277,
+                "CMF": -0.11448470713609621,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:11",
+            "symbol": "NIPH",
+            "current_price": 229.97999572753906,
+            "predicted_close": 206.98199615478515,
+            "suggested_entry": 229.97999572753906,
+            "suggested_exit": 213.4264259338379,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 229.97999572753906,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 84.26686058087871,
+                "CMF": 0.19543284465934674,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:11",
+            "symbol": "SEIG",
+            "current_price": 241.4600067138672,
+            "predicted_close": 217.3140060424805,
+            "suggested_entry": 241.4600067138672,
+            "suggested_exit": 212.38250841413225,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 241.4600067138672,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 71.36755929573907,
+                "CMF": -0.09412557504876913,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "ALUM",
+            "current_price": 23.799999237060547,
+            "predicted_close": 26.179999160766602,
+            "suggested_entry": 23.799999237060547,
+            "suggested_exit": 22.72642755508423,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 23.799999237060547,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 80.50458110994961,
+                "CMF": -0.23941139385216506,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "PRCL",
+            "current_price": 35.79999923706055,
+            "predicted_close": 39.3799991607666,
+            "suggested_entry": 35.4319991520473,
+            "suggested_exit": 39.931999288286484,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 35.79999923706055,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 66.77896539384852,
+                "CMF": 0.22288094114916887,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "CAED",
+            "current_price": 116.0199966430664,
+            "predicted_close": 104.41799697875977,
+            "suggested_entry": 116.0199966430664,
+            "suggested_exit": 100.59356852940151,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 116.0199966430664,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 78.4478337092799,
+                "CMF": 0.29541537121370204,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "AFDI",
+            "current_price": 48.5,
+            "predicted_close": 53.35,
+            "suggested_entry": 48.5,
+            "suggested_exit": 48.5,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 48.5,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 71.98021943737416,
+                "CMF": -0.22305639889458284,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "RUBX",
+            "current_price": 13.65999984741211,
+            "predicted_close": 15.025999832153321,
+            "suggested_entry": 13.65999984741211,
+            "suggested_exit": 13.65999984741211,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 13.65999984741211,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 73.69402256183122,
+                "CMF": -0.19176914930766276,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "KWIN",
+            "current_price": 97.0999984741211,
+            "predicted_close": 87.38999862670899,
+            "suggested_entry": 97.0999984741211,
+            "suggested_exit": 88.40214211600167,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 97.0999984741211,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 92.02856880909788,
+                "CMF": -0.14194905345033862,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "DTPP",
+            "current_price": 226.0800018310547,
+            "predicted_close": 203.4720016479492,
+            "suggested_entry": 226.0800018310547,
+            "suggested_exit": 194.98071670532227,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 226.0800018310547,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 72.53209317167085,
+                "CMF": -0.1419544523630514,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "OBRI",
+            "current_price": 35.29999923706055,
+            "predicted_close": 38.829999160766604,
+            "suggested_entry": 35.29999923706055,
+            "suggested_exit": 35.29999923706055,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 35.29999923706055,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 60.03262718192938,
+                "CMF": -0.35839461860593047,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "UNIP",
+            "current_price": 0.421999990940094,
+            "predicted_close": 0.46419999003410345,
+            "suggested_entry": 0.421999990940094,
+            "suggested_exit": 0.3993928517614092,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 0.421999990940094,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 91.452997325403,
+                "CMF": 0.3488662497372876,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "MOED",
+            "current_price": 0.7229999899864197,
+            "predicted_close": 0.7952999889850617,
+            "suggested_entry": 0.7195428482123783,
+            "suggested_exit": 0.8004857016461236,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 0.7229999899864197,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 68.03276808379402,
+                "CMF": 0.07653494414786609,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "ASPI",
+            "current_price": 0.36500000953674316,
+            "predicted_close": 0.4015000104904175,
+            "suggested_entry": 0.36500000953674316,
+            "suggested_exit": 0.36500000953674316,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 0.36500000953674316,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 74.99998101053424,
+                "CMF": -0.08219869575266403,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "GTWL",
+            "current_price": 105.55000305175781,
+            "predicted_close": 94.99500274658203,
+            "suggested_entry": 105.55000305175781,
+            "suggested_exit": 87.92607307434082,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 105.55000305175781,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 63.299101056370574,
+                "CMF": -0.021686521268864896,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "ARVA",
+            "current_price": 11.050000190734863,
+            "predicted_close": 12.155000209808351,
+            "suggested_entry": 11.050000190734863,
+            "suggested_exit": 11.050000190734863,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 11.050000190734863,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 58.62070419445216,
+                "CMF": -0.19701077889942187,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "SPMD",
+            "current_price": 0.45100000500679016,
+            "predicted_close": 0.49610000550746924,
+            "suggested_entry": 0.45100000500679016,
+            "suggested_exit": 0.45100000500679016,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 0.45100000500679016,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 75.92594030992643,
+                "CMF": -0.26505647289778356,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "RREI",
+            "current_price": 3.759999990463257,
+            "predicted_close": 4.135999989509583,
+            "suggested_entry": 3.759999990463257,
+            "suggested_exit": 3.759999990463257,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 3.759999990463257,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 71.21211613506216,
+                "CMF": -0.2987497465018391,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:12",
+            "symbol": "EBSC",
+            "current_price": 1.8799999952316284,
+            "predicted_close": 2.0679999947547913,
+            "suggested_entry": 1.8799999952316284,
+            "suggested_exit": 1.8799999952316284,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 1.8799999952316284,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 59.154933244494075,
+                "CMF": -0.3086067525454285,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:13",
+            "symbol": "ROTO",
+            "current_price": 42.290000915527344,
+            "predicted_close": 46.519001007080085,
+            "suggested_entry": 42.290000915527344,
+            "suggested_exit": 42.290000915527344,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 42.290000915527344,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 54.003566260754496,
+                "CMF": -0.2580069614060602,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:13",
+            "symbol": "EEII",
+            "current_price": 2.759999990463257,
+            "predicted_close": 3.0359999895095826,
+            "suggested_entry": 2.7362857103347777,
+            "suggested_exit": 3.071571409702301,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 2.759999990463257,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 67.94872762371511,
+                "CMF": 0.018861633683071904,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:13",
+            "symbol": "PRMH",
+            "current_price": 2.7300000190734863,
+            "predicted_close": 3.0030000209808354,
+            "suggested_entry": 2.7300000190734863,
+            "suggested_exit": 2.7300000190734863,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 2.7300000190734863,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 72.22223429931577,
+                "CMF": -0.2668414535094028,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:13",
+            "symbol": "AREH",
+            "current_price": 1.4600000381469727,
+            "predicted_close": 1.60600004196167,
+            "suggested_entry": 1.4600000381469727,
+            "suggested_exit": 1.4600000381469727,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 1.4600000381469727,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 41.17648284986304,
+                "CMF": -0.2693328631753194,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:13",
+            "symbol": "LUTS",
+            "current_price": 0.7379999756813049,
+            "predicted_close": 0.8117999732494355,
+            "suggested_entry": 0.7379999756813049,
+            "suggested_exit": 0.7379999756813049,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 0.7379999756813049,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 49.62404244313606,
+                "CMF": -0.4559462952847597,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:13",
+            "symbol": "ELNA",
+            "current_price": 38.33000183105469,
+            "predicted_close": 42.163002014160156,
+            "suggested_entry": 38.33000183105469,
+            "suggested_exit": 38.33000183105469,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 38.33000183105469,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 53.32480960933991,
+                "CMF": -0.11132367016344756,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:13",
+            "symbol": "EASB",
+            "current_price": 8.140000343322754,
+            "predicted_close": 8.95400037765503,
+            "suggested_entry": 8.140000343322754,
+            "suggested_exit": 8.140000343322754,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 8.140000343322754,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 68.69159019781623,
+                "CMF": -0.30228955728317053,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:13",
+            "symbol": "ICID",
+            "current_price": 8.100000381469727,
+            "predicted_close": 8.9100004196167,
+            "suggested_entry": 7.993000398363386,
+            "suggested_exit": 9.07050039427621,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 8.100000381469727,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 44.52830376450517,
+                "CMF": 0.26249039910731276,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:14",
+            "symbol": "EPCO",
+            "current_price": 10.75,
+            "predicted_close": 11.825000000000001,
+            "suggested_entry": 10.75,
+            "suggested_exit": 10.041785751070295,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 10.75,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 84.2809531631779,
+                "CMF": -0.22302961212712852,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:14",
+            "symbol": "GIHD",
+            "current_price": 57.31999969482422,
+            "predicted_close": 62.59507141228538,
+            "suggested_entry": 57.31999969482422,
+            "suggested_exit": 57.31999969482422,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 57.31999969482422,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 76.49110145376648,
+                "CMF": -0.0037128245723722173,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:14",
+            "symbol": "ELWA",
+            "current_price": 1.9299999475479126,
+            "predicted_close": 2.122999942302704,
+            "suggested_entry": 1.9299999475479126,
+            "suggested_exit": 1.9299999475479126,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 1.9299999475479126,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 44.736831208304864,
+                "CMF": -0.4121053400430985,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:14",
+            "symbol": "MMAT",
+            "current_price": 3.5299999713897705,
+            "predicted_close": 3.8829999685287477,
+            "suggested_entry": 3.5299999713897705,
+            "suggested_exit": 3.5299999713897705,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 3.5299999713897705,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 0.0,
+                "CMF": -3400001525.878903,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:14",
+            "symbol": "NEDA",
+            "current_price": 2.859999895095825,
+            "predicted_close": 3.145999884605408,
+            "suggested_entry": 2.859999895095825,
+            "suggested_exit": 2.859999895095825,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 2.859999895095825,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 66.66664433162143,
+                "CMF": -0.15368397145875576,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:14",
+            "symbol": "GRCA",
+            "current_price": 64.0999984741211,
+            "predicted_close": 63.25222711359685,
+            "suggested_entry": 64.0999984741211,
+            "suggested_exit": 58.42571285792759,
+            "direction": "خروج / تجنب السهم 🔴",
+            "actual_max_reached": 64.0999984741211,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 79.86294033581208,
+                "CMF": -0.30603334064415894,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:14",
+            "symbol": "CCRS",
+            "current_price": 2.609999895095825,
+            "predicted_close": 2.870999884605408,
+            "suggested_entry": 2.609999895095825,
+            "suggested_exit": 2.609999895095825,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 2.609999895095825,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 73.07690295999264,
+                "CMF": -0.09984233178327091,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:14",
+            "symbol": "EPPK",
+            "current_price": 14.470000267028809,
+            "predicted_close": 15.917000293731691,
+            "suggested_entry": 14.307285976409911,
+            "suggested_exit": 16.161071729660037,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 14.470000267028809,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 58.23045520183602,
+                "CMF": 0.44146386444145863,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:15",
+            "symbol": "GMCI",
+            "current_price": 2.059999942779541,
+            "predicted_close": 2.2659999370574955,
+            "suggested_entry": 2.036285662651062,
+            "suggested_exit": 2.301571357250214,
+            "direction": "شراء مضاربي لقطة 🟢 (+10.00%)",
+            "actual_max_reached": 2.059999942779541,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 66.27906998190724,
+                "CMF": 0.18086937046134374,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:15",
+            "symbol": "EOSB",
+            "current_price": 1.4800000190734863,
+            "predicted_close": 1.6280000209808352,
+            "suggested_entry": 1.4800000190734863,
+            "suggested_exit": 1.4800000190734863,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 1.4800000190734863,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 0.0,
+                "CMF": -92862232.22811657,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:15",
+            "symbol": "COPR",
+            "current_price": 0.3840000033378601,
+            "predicted_close": 0.42240000367164615,
+            "suggested_entry": 0.3840000033378601,
+            "suggested_exit": 0.3840000033378601,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 0.3840000033378601,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 74.99999812499985,
+                "CMF": -0.24106818139865901,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:35",
+            "symbol": "ELEC",
+            "current_price": 2.2300000190734863,
+            "predicted_close": 2.453000020980835,
+            "suggested_entry": 2.2300000190734863,
+            "suggested_exit": 2.2300000190734863,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 2.2300000190734863,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 68.29270113172313,
+                "CMF": -0.32901680644004433,
+                "News_Sentiment": 0.0
+            }
+        },
+        {
+            "date": "2026-07-22 23:36",
+            "symbol": "SKPC",
+            "current_price": 15.949999809265137,
+            "predicted_close": 17.544999790191653,
+            "suggested_entry": 15.949999809265137,
+            "suggested_exit": 15.949999809265137,
+            "direction": "مراقبة / انتظار إشارة السيولة ⏳",
+            "actual_max_reached": 15.949999809265137,
+            "status": "Pending ⏳",
+            "indicators_snapshot": {
+                "RSI": 51.002228480130114,
+                "CMF": -0.42366985281118696,
+                "News_Sentiment": 0.0
+            }
         }
     ],
-    "success_rate": 0.0
+    "success_rate": 1.0,
+    "failure_patterns": [],
+    "success_patterns": [
+        {
+            "symbol": "SWDY",
+            "indicators": {
+                "RSI": 74.20634919810405,
+                "CMF": 0.1126136158451835,
+                "News_Sentiment": 0.0
+            },
+            "profit": 0.0,
+            "entry_price": 93.6,
+            "target_price": 93.6,
+            "max_reached": 93.9
+        },
+        {
+            "symbol": "COMI",
+            "indicators": {
+                "RSI": 72.0180305096801,
+                "CMF": 0.11335863380746065,
+                "News_Sentiment": 0.0
+            },
+            "profit": 0.0,
+            "entry_price": 140.0,
+            "target_price": 140.0,
+            "max_reached": 145.01
+        },
+        {
+            "symbol": "ABUK",
+            "indicators": {
+                "RSI": 63.4723086441281,
+                "CMF": -0.013288609504968617,
+                "News_Sentiment": 0.0
+            },
+            "profit": 0.0,
+            "entry_price": 72.3,
+            "target_price": 72.3,
+            "max_reached": 95.0
+        },
+        {
+            "symbol": "MFPC",
+            "indicators": {
+                "RSI": 57.88113694043492,
+                "CMF": 0.02187339555704198,
+                "News_Sentiment": 0.0
+            },
+            "profit": 11.310867057820591,
+            "entry_price": 37.03328571428571,
+            "target_price": 41.22207142857143,
+            "max_reached": 52.0
+        },
+        {
+            "symbol": "TMGH",
+            "indicators": {
+                "RSI": 68.36055655803354,
+                "CMF": 0.05131732830627745,
+                "News_Sentiment": 0.0
+            },
+            "profit": -3.52878464818764,
+            "entry_price": 100.5,
+            "target_price": 96.95357142857142,
+            "max_reached": 103.87
+        },
+        {
+            "symbol": "EGAL",
+            "indicators": {
+                "RSI": 64.5586549466874,
+                "CMF": -0.014622643639342733,
+                "News_Sentiment": 0.0
+            },
+            "profit": -3.2204768862911766,
+            "entry_price": 301.12,
+            "target_price": 291.4225,
+            "max_reached": 344.99
+        },
+        {
+            "symbol": "ETEL",
+            "indicators": {
+                "RSI": 79.13708355484476,
+                "CMF": -0.06334304864523886,
+                "News_Sentiment": 0.0
+            },
+            "profit": -4.467052119066066,
+            "entry_price": 103.28,
+            "target_price": 98.66642857142857,
+            "max_reached": 112.98
+        },
+        {
+            "symbol": "EAST",
+            "indicators": {
+                "RSI": 51.23287669267784,
+                "CMF": 0.17515634196149735,
+                "News_Sentiment": -0.2
+            },
+            "profit": 0.0,
+            "entry_price": 37.49,
+            "target_price": 37.49,
+            "max_reached": 49.99
+        },
+        {
+            "symbol": "QNBE",
+            "indicators": {
+                "RSI": 73.65406642575996,
+                "CMF": -0.12386680323499416,
+                "News_Sentiment": 0.0
+            },
+            "profit": 0.0,
+            "entry_price": 56.71,
+            "target_price": 56.71,
+            "max_reached": 61.0
+        },
+        {
+            "symbol": "ALCN",
+            "indicators": {
+                "RSI": 69.39890707727915,
+                "CMF": -0.25262459379393126,
+                "News_Sentiment": 0.0
+            },
+            "profit": 0.0,
+            "entry_price": 29.76,
+            "target_price": 29.76,
+            "max_reached": 34.7
+        },
+        {
+            "symbol": "FWRY",
+            "indicators": {
+                "RSI": 65.84507039007642,
+                "CMF": 0.14303385101671695,
+                "News_Sentiment": 0.0
+            },
+            "profit": 11.154026304246024,
+            "entry_price": 19.214714285714287,
+            "target_price": 21.357928571428577,
+            "max_reached": 21.66
+        },
+        {
+            "symbol": "FERC",
+            "indicators": {
+                "RSI": 63.134411595739685,
+                "CMF": -0.10331326720905688,
+                "News_Sentiment": 0.0
+            },
+            "profit": -4.9080902486218045,
+            "entry_price": 78.26,
+            "target_price": 74.41892857142858,
+            "max_reached": 101.0
+        },
+        {
+            "symbol": "ORAS",
+            "indicators": {
+                "RSI": 41.8703192741563,
+                "CMF": -0.2779543843939462,
+                "News_Sentiment": 0.0
+            },
+            "profit": -3.064270697767539,
+            "entry_price": 713.5,
+            "target_price": 691.6364285714286,
+            "max_reached": 812.5
+        },
+        {
+            "symbol": "HRHO",
+            "indicators": {
+                "RSI": 52.38095235185186,
+                "CMF": -0.20343698812592018,
+                "News_Sentiment": 0.0
+            },
+            "profit": 0.0,
+            "entry_price": 26.95,
+            "target_price": 26.95,
+            "max_reached": 31.5
+        },
+        {
+            "symbol": "BTFH",
+            "indicators": {
+                "RSI": 63.043478068998084,
+                "CMF": -0.09891482249007034,
+                "News_Sentiment": 0.0
+            },
+            "profit": 0.0,
+            "entry_price": 3.09,
+            "target_price": 3.09,
+            "max_reached": 3.67
+        },
+        {
+            "symbol": "HDBK",
+            "indicators": {
+                "RSI": 8.882549675266233,
+                "CMF": 0.03080297190971256,
+                "News_Sentiment": 0.0
+            },
+            "profit": -15.740963855421683,
+            "entry_price": 83.0,
+            "target_price": 69.935,
+            "max_reached": 174.9
+        },
+        {
+            "symbol": "JUFO",
+            "indicators": {
+                "RSI": 39.851024198176646,
+                "CMF": -0.1256045415531781,
+                "News_Sentiment": 0.0
+            },
+            "profit": 0.0,
+            "entry_price": 28.9,
+            "target_price": 28.9,
+            "max_reached": 32.94
+        }
+    ],
+    "dynamic_weights": {
+        "expected_gain": 0.4,
+        "cmf": 0.3,
+        "news": 0.3
+    },
+    "profit_factor": 22.464893362066615
 }
