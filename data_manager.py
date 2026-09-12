@@ -268,7 +268,7 @@ class DataManager:
     # ============================================================
     # ✅ المحرك الرئيسي لجلب البيانات (الأكثر استخداماً)
     # ============================================================
-    def get_stock_data(self, symbol, force_update=False):
+    def get_stock_data(self, symbol, force_update=False, eod_symbol=None):
         """
         الحصول على بيانات السهم - محرك ذكي متعدد المصادر:
         1. تحميل من الملف المحلي إذا كان محدثاً
@@ -285,7 +285,7 @@ class DataManager:
         
         # ✅ 2. جلب من EODHD (المصدر الأساسي المستقر)
         print(f"🔄 جلب بيانات {symbol} من EODHD...")
-        df = self.fetch_from_eodhd(symbol)
+        df = self.fetch_from_eodhd(symbol, eod_symbol=eod_symbol)
         if not df.empty and len(df) > 30:
             self.save_historical_data(symbol, df)
             return df, "EODHD ✅"
@@ -426,11 +426,11 @@ data_manager = DataManager()
 # ============================================================
 # ✅ دوال مساعدة للاستخدام من خارج الملف
 # ============================================================
-def get_stock_data_with_cache(symbol):
+def get_stock_data_with_cache(symbol, eod_symbol=None):
     """
     دالة مساعدة لجلب البيانات باستخدام التخزين المؤقت
     """
-    return data_manager.get_stock_data(symbol)
+    return data_manager.get_stock_data(symbol, eod_symbol=eod_symbol)
 
 
 def update_all_stocks(symbols, max_stocks=10):
