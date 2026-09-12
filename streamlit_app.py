@@ -120,18 +120,17 @@ with tab_scan:
             total_symbols = len(symbols_list)
 
             def scan_single_stock(row):
-                try:
-                    news_score = fetch_company_news_sentiment(row['name'], row['symbol'])
-                    s_df, src = fetch_stock_data(row['symbol'], row.get('y_symbol'))
-
-                    if s_df.empty or len(s_df) < 30:
-                        return None
-
-                    s_df = add_all_indicators(s_df)
-                    s_df['News_Sentiment'] = news_score
-                    s_df.attrs['symbol'] = row['symbol']
-
-                    dir_out, pred_target, entry_out, exit_out, score_out = predictor.predict_next_price(s_df, strategy_mode)
+    try:
+        news_score = fetch_company_news_sentiment(row['name'], row['symbol'])
+        s_df, src = fetch_stock_data(row['symbol'], row.get('y_symbol'))
+        if s_df.empty or len(s_df) < 30:
+            return None
+        s_df = add_all_indicators(s_df)
+        s_df['News_Sentiment'] = news_score
+        s_df.attrs['symbol'] = row['symbol']
+        # ✅ Predictor مستقل لكل سهم - يتدرب على بياناته هو بس
+        stock_predictor = EnsemblePredictor()
+        dir_out, pred_target, entry_out, exit_out, score_out = stock_predictor.predict_next_price(s_df, strategy_mode)
 
                     current_price = s_df['Close'].iloc[-1]
 
