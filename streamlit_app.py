@@ -137,12 +137,12 @@ with tab_scan:
 
                     # التحقق من صحة التنبؤ
                     change_pct = abs((pred_target - current_price) / current_price) * 100
-                    if change_pct > 20:
-                        pred_target = current_price * (1 + np.random.uniform(-0.03, 0.03))
-                        dir_out = "مراقبة / انتظار إشارة السيولة ⏳"
-                        entry_out = current_price
-                        exit_out = current_price
-                        score_out = 30
+if change_pct > 20:
+    pred_target = current_price  # ✅ رجوع لسعر ثابت بدل رقم عشوائي
+    dir_out = "مراقبة / انتظار إشارة السيولة ⏳"
+    entry_out = current_price
+    exit_out = current_price
+    score_out = 30
 
                     # ✅ تسجيل التحليل في ملف JSON (مع تحويل إلى dict)
                     try:
@@ -325,14 +325,13 @@ with tab_analysis:
                     # التحقق من صحة التنبؤ
                     change_pct = abs((pred_target - current_price) / current_price) * 100
                     is_valid = change_pct <= 20
-
-                    if not is_valid:
-                        pred_target = current_price * (1 + np.random.uniform(-0.02, 0.02))
-                        dir_out = "مراقبة / انتظار إشارة السيولة ⏳"
-                        entry_out = current_price
-                        exit_out = current_price
-                        score_out = 30
-                        st.warning("⚠️ تنبؤ النموذج كان غير منطقي، تم تعديله.")
+if not is_valid:
+    pred_target = current_price  # ✅ رجوع لسعر ثابت بدل رقم عشوائي
+    dir_out = "مراقبة / انتظار إشارة السيولة ⏳"
+    entry_out = current_price
+    exit_out = current_price
+    score_out = 30
+    st.warning("⚠️ تنبؤ النموذج كان غير منطقي، تم تعديله.")
 
                     strat = generate_trading_strategy(s_df, pred_target, dir_out)
                     summary = get_market_summary(s_df)
