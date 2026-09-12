@@ -28,9 +28,7 @@ st.set_page_config(
 # ============================================================
 # ✅ تهيئة المحركات (مع Cache)
 # ============================================================
-@st.cache_resource
-def init_ai_engine():
-    return EnsemblePredictor()
+
 
 
 @st.cache_resource
@@ -38,7 +36,7 @@ def init_learning_analyst():
     return SelfLearningAIAnalyst()
 
 
-predictor = init_ai_engine()
+
 analyst = init_learning_analyst()
 
 
@@ -317,7 +315,8 @@ with tab_analysis:
                     s_df['News_Sentiment'] = news_score
                     s_df.attrs['symbol'] = row_choice['symbol']
 
-                    dir_out, pred_target, entry_out, exit_out, score_out = predictor.predict_next_price(s_df, strategy_mode)
+                    stock_predictor = EnsemblePredictor()
+dir_out, pred_target, entry_out, exit_out, score_out = stock_predictor.predict_next_price(s_df, strategy_mode)
 
                     current_price = s_df['Close'].iloc[-1]
 
