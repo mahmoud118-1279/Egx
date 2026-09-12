@@ -124,15 +124,19 @@ class DataManager:
     # ============================================================
     # ✅ الدالة المحسنة لجلب البيانات من EODHD
     # ============================================================
-    def fetch_from_eodhd(self, symbol, days=365):
+    def fetch_from_eodhd(self, symbol, days=365, eod_symbol=None):
         """
-        جلب البيانات التاريخية من EODHD (نسخة احتياطية)
+        جلب البيانات التاريخية من EODHD
+        ✅ يستخدم eod_symbol من ملف الأسهم لو متوفر، بدل تخمين الرمز
         """
         try:
-            clean_symbol = symbol.split('.')[0].strip().upper()
-            
+            if eod_symbol:
+                clean_symbol = eod_symbol.strip().upper()
+            else:
+                clean_symbol = f"{symbol.split('.')[0].strip().upper()}.EGX"
+
             # ✅ محاولة جلب البيانات التاريخية
-            url = f"https://eodhd.com/api/eod/{clean_symbol}.EGX?api_token={API_KEY}&fmt=json"
+            url = f"https://eodhd.com/api/eod/{clean_symbol}?api_token={API_KEY}&fmt=json"
             
             # إذا كان هناك تاريخ محدد، نضيفه
             if days:
