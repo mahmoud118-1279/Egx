@@ -84,24 +84,11 @@ def calculate_mfi(df, period=14):
 
 def calculate_vwap(df):
     """
-    حساب المتوسط المرجح بالحجم VWAP
+    حساب المتوسط المرجح بالحجم VWAP (تراكمي على مدار الفترة الزمنية بالكامل)
     يستخدم من قبل المؤسسات لتحديد متوسط سعر التداول العادل
     """
     typical_price = (df['High'] + df['Low'] + df['Close']) / 3
-    
-    try:
-        if hasattr(df.index, 'date') or isinstance(df.index, pd.DatetimeIndex):
-            df['day'] = df.index.date if hasattr(df.index, 'date') else pd.to_datetime(df.index).date
-            vwap_series = df.groupby('day').apply(
-                lambda x: (x['Volume'] * (x['High'] + x['Low'] + x['Close']) / 3).cumsum() / (x['Volume'].cumsum() + 1e-10)
-            )
-            df['VWAP'] = vwap_series.reset_index(level=0, drop=True)
-            df.drop('day', axis=1, inplace=True)
-        else:
-            df['VWAP'] = (df['Volume'] * typical_price).cumsum() / (df['Volume'].cumsum() + 1e-10)
-    except Exception:
-        df['VWAP'] = (df['Volume'] * typical_price).cumsum() / (df['Volume'].cumsum() + 1e-10)
-    
+    df['VWAP'] = (df['Volume'] * typical_price).cumsum() / (df['Volume'].cumsum() + 1e-10)
     df['Dist_From_VWAP'] = (df['Close'] - df['VWAP']) / (df['VWAP'] + 1e-10)
     return df
 
