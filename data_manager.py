@@ -4,6 +4,7 @@ import json
 from datetime import datetime, timedelta
 from pathlib import Path
 import time
+import threading
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -17,7 +18,8 @@ class DataManager:
     """مدير البيانات المحلية - يخزن ويحدث البيانات من مصادر متعددة"""
     
     def __init__(self):
-        self.data_dir = DATA_DIR
+    self._cache_lock = threading.Lock()
+    self.data_dir = DATA_DIR
         self.historical_dir = HISTORICAL_DIR
         self.daily_updates_dir = DAILY_UPDATES_DIR
         self.cache_file = CACHE_FILE
@@ -39,7 +41,8 @@ class DataManager:
         return {}
     
     def _save_cache(self):
-        """حفظ ذاكرة التخزين المؤقت"""
+    """حفظ ذاكرة التخزين المؤقت (Thread-Safe)"""
+    with self._cache_lock:
         try:
             with open(self.cache_file, 'w', encoding='utf-8') as f:
                 json.dump(self.cache, f, ensure_ascii=False, indent=2)
@@ -255,28 +258,24 @@ class DataManager:
     # ✅ الدالة المحسنة لحفظ البيانات
     # ============================================================
     def save_historical_data(self, symbol, df):
-        """حفظ البيانات التاريخية محلياً"""
-        if df.empty:
-            return False
-        
-        try:
-            file_path = self._get_historical_file(symbol)
-            df.to_csv(file_path)
-            print(f"💾 تم حفظ بيانات {symbol} في {file_path}")
-            
-            # تحديث الكاش
+    """حفظ البيانات التاريخية محلياً"""
+    if df.empty:
+        return False
+    try:
+        file_path = self._get_historical_file(symbol)
+        df.to_csv(file_path)
+        print(f"💾 تم حفظ بيانات {symbol} في {file_path}")
+
+        # تحديث الكاش (Thread-Safe)
+        with self._cache_lock:
             self.cache[symbol] = {
                 'last_updated': datetime.now().isoformat(),
                 'source': 'investing',
                 'rows': len(df),
                 'file': str(file_path)
             }
-            self._save_cache()
-            return True
-            
-        except Exception as e:
-            print(f"⚠️ فشل حفظ بيانات {symbol}: {e}")
-            return False
+        self._save_cache()
+        return True
     
     # ============================================================
     # ✅ الدالة المحسنة لتحميل البيانات
