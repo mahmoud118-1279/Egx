@@ -13,8 +13,10 @@ class EnsemblePredictor:
     """
     محرك ذكاء اصطناعي مزدوج (Dual-Core): يدعم فحص حركة الأسعار والسيولة بالتكامل مع مشاعر الأخبار
     """
+    def __init__(self, dynamic_weights=None):
+        # ✅ الأوزان الديناميكية القادمة من نظام التعلم الذاتي
+        self.weights = dynamic_weights or {"expected_gain": 0.4, "cmf": 0.3, "news": 0.3}
 
-    def __init__(self):
         # 1. نماذج المضاربة السريعة (توقع الجلسة القادمة)
         self.xgb_short = XGBRegressor(
             n_estimators=100, 
@@ -234,35 +236,48 @@ class EnsemblePredictor:
                 # حساب نسبة الربح المتوقعة
                 expected_gain_pct = ((predicted_target - current_price) / current_price) * 100
 
-                # شروط الشراء
+                # ✅ تطبيع الإشارات وحساب الدرجة المركبة الموزونة بأوزان التعلم الذاتي
+                gain_signal = max(min(expected_gain_pct / 5.0, 1.0), -1.0)
+                cmf_signal = max(min(cmf / 0.2, 1.0), -1.0)
+                news_signal = max(min(news_sentiment, 1.0), -1.0)
+
+                composite_score = (
+                    self.weights.get("expected_gain", 0.4) * gain_signal +
+                    self.weights.get("cmf", 0.3) * cmf_signal +
+                    self.weights.get("news", 0.3) * news_signal
+                )
+
+                # شروط الشراء (✅ بقى فيها شرط الأوزان المتعلمة)
                 buy_conditions = (
                     predicted_target > current_price * 1.002 and
                     cmf > -0.05 and
                     rsi < 72 and
                     news_sentiment >= -0.1 and
-                    expected_gain_pct > 0.5  # ربح متوقع على الأقل 0.5%
+                    expected_gain_pct > 0.5 and
+                    composite_score > 0.05
                 )
 
-                # شروط البيع
+                # شروط البيع (✅ بقى فيها شرط الأوزان المتعلمة)
                 sell_conditions = (
                     predicted_target < current_price * 0.998 or
                     rsi > 78 or
                     news_sentiment <= -0.4 or
-                    expected_gain_pct < -0.5
+                    expected_gain_pct < -0.5 or
+                    composite_score < -0.15
                 )
 
                 if buy_conditions:
                     direction = f"شراء مضاربي لقطة 🟢 (+{expected_gain_pct:.2f}%)"
                     best_entry = min(current_price, current_price - (0.2 * atr))
                     best_exit = predicted_target + (0.3 * atr)
-                    decision_score = 75 + min(20, abs(expected_gain_pct) * 2)
-
+                    # ✅ درجة الثقة بقت متأثرة كمان بالدرجة المركبة الموزونة
+                    decision_score = 75 + min(15, abs(expected_gain_pct) * 1.5) + min(10, max(0, composite_score * 10))
+                    decision_score = min(decision_score, 100)
                 elif sell_conditions:
                     direction = "خروج / تجنب السهم 🔴"
                     best_entry = current_price
                     best_exit = current_price - (1.5 * atr)
                     decision_score = 20
-
                 else:
                     direction = "مراقبة / انتظار إشارة السيولة ⏳"
                     best_entry = current_price
