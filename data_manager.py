@@ -282,13 +282,13 @@ class DataManager:
         # ✅ 2. جلب من EODHD (المصدر الأساسي المستقر)
         print(f"🔄 جلب بيانات {symbol} من EODHD...")
         df = self.fetch_from_eodhd(symbol)
-        if not df.empty and len(df) > 20:
+        if not df.empty and len(df) > 30:
             self.save_historical_data(symbol, df)
             return df, "EODHD ✅"
         
         # ✅ 4. محاولة تحميل حتى لو كانت قديمة
         df = self.load_historical_data(symbol)
-        if not df.empty and len(df) > 10:
+        if not df.empty and len(df) > 30:
             print(f"⚠️ {symbol}: بيانات قديمة من الملف المحلي ({len(df)} يوم)")
             return df, "Local Cache ⚠️ (قديم)"
         
