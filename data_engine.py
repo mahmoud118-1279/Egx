@@ -47,16 +47,15 @@ def send_telegram_alert(message):
 # ============================================================
 # ✅ دالة fetch_stock_data المعدلة - تستخدم data_manager أولاً
 # ============================================================
-def fetch_stock_data(symbol, yahoo_symbol=None):
+def fetch_stock_data(symbol, yahoo_symbol=None, eod_symbol=None):
     """
     المحرك المتطور لجلب البيانات:
-    1. data_manager (Investing.com + Local Cache) - الأولوية القصوى
+    1. data_manager (EODHD + Local Cache) - الأولوية القصوى
     2. Yahoo Finance (آخر حل - ضعيف)
     """
-    
-    # ✅ 1. المحاولة الأولى: data_manager (Investing.com + Local Cache)
+    # ✅ 1. المحاولة الأولى: data_manager (EODHD + Local Cache)
     try:
-        df, source = get_stock_data_with_cache(symbol)
+        df, source = get_stock_data_with_cache(symbol, eod_symbol=eod_symbol)
         if not df.empty and len(df) > 30:
             print(f"✅ {symbol}: {source}")
             return df, source
