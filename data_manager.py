@@ -65,58 +65,11 @@ class DataManager:
     # ✅ الدالة المحسنة لجلب البيانات من Investing.com
     # ============================================================
     def fetch_from_investing(self, symbol, days=365):
-        """
-        جلب البيانات التاريخية من Investing.com مع محاولات متعددة
-        """
-        try:
-            from_date = datetime.now() - timedelta(days=days)
-            
-            print(f"📡 جلب بيانات {symbol} من Investing.com...")
-            
-            # ✅ المحاولة الأولى: باستخدام investingpy
-            try:
-                import investingpy as ip
-                
-                # محاولة جلب البيانات
-                df = ip.get_stock_historical_data(
-                    symbol=symbol,
-                    country='egypt',
-                    from_date=from_date.strftime('%d/%m/%Y'),
-                    to_date=datetime.now().strftime('%d/%m/%Y')
-                )
-                
-                if not df.empty and len(df) > 10:
-                    return self._process_investing_data(df, symbol)
-                    
-            except ImportError:
-                print(f"⚠️ investingpy غير مثبت، جاري محاولة التثبيت...")
-                try:
-                    import subprocess
-                    subprocess.check_call(['pip', 'install', 'investingpy', '--quiet'])
-                    import investingpy as ip
-                    
-                    df = ip.get_stock_historical_data(
-                        symbol=symbol,
-                        country='egypt',
-                        from_date=from_date.strftime('%d/%m/%Y'),
-                        to_date=datetime.now().strftime('%d/%m/%Y')
-                    )
-                    
-                    if not df.empty and len(df) > 10:
-                        return self._process_investing_data(df, symbol)
-                except Exception as e:
-                    print(f"⚠️ فشل تثبيت investingpy: {e}")
-            
-            except Exception as e:
-                print(f"⚠️ فشل جلب {symbol} من Investing.com: {e}")
-            
-            # ✅ المحاولة الثانية: EODHD كبديل
-            print(f"🔄 محاولة EODHD كبديل لـ {symbol}...")
-            return self.fetch_from_eodhd(symbol)
-            
-        except Exception as e:
-            print(f"⚠️ فشل جلب {symbol}: {e}")
-            return pd.DataFrame()
+    """
+    ⚠️ ملاحظة: investingpy معطلة رسمياً منذ فترة بسبب تغييرات Investing.com
+    تم توجيه الاستدعاء مباشرة لـ EODHD كمصدر أساسي مستقر
+    """
+    return self.fetch_from_eodhd(symbol, days)
     
     def _process_investing_data(self, df, symbol):
         """معالجة بيانات Investing.com وتنسيقها"""
@@ -326,21 +279,12 @@ class DataManager:
                 print(f"✅ {symbol}: من التخزين المحلي (محدث)")
                 return df, "Local Cache ✅"
         
-        # ✅ 2. محاولة جلب من Investing.com
-        print(f"🔄 جلب بيانات {symbol} من Investing.com...")
-        df = self.fetch_from_investing(symbol)
-        
-        if not df.empty and len(df) > 20:
-            self.save_historical_data(symbol, df)
-            return df, "Investing.com ✅"
-        
-        # ✅ 3. محاولة جلب من EODHD (بديل)
+        # ✅ 2. جلب من EODHD (المصدر الأساسي المستقر)
         print(f"🔄 جلب بيانات {symbol} من EODHD...")
         df = self.fetch_from_eodhd(symbol)
-        
         if not df.empty and len(df) > 20:
             self.save_historical_data(symbol, df)
-            return df, "EODHD ✅ (نسخة احتياطية)"
+            return df, "EODHD ✅"
         
         # ✅ 4. محاولة تحميل حتى لو كانت قديمة
         df = self.load_historical_data(symbol)
