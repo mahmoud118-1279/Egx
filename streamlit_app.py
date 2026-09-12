@@ -127,7 +127,7 @@ with tab_scan:
         s_df['News_Sentiment'] = news_score
         s_df.attrs['symbol'] = row['symbol']
         # ✅ Predictor مستقل لكل سهم - يتدرب على بياناته هو بس
-        stock_predictor = EnsemblePredictor()
+        stock_predictor = EnsemblePredictor(dynamic_weights=analyst.get_dynamic_weights())
         dir_out, pred_target, entry_out, exit_out, score_out = stock_predictor.predict_next_price(s_df, strategy_mode)
 
                     current_price = s_df['Close'].iloc[-1]
@@ -315,7 +315,7 @@ with tab_analysis:
                     s_df['News_Sentiment'] = news_score
                     s_df.attrs['symbol'] = row_choice['symbol']
 
-                    stock_predictor = EnsemblePredictor()
+                    stock_predictor = EnsemblePredictor(dynamic_weights=analyst.get_dynamic_weights())
 dir_out, pred_target, entry_out, exit_out, score_out = stock_predictor.predict_next_price(s_df, strategy_mode)
 
                     current_price = s_df['Close'].iloc[-1]
